@@ -1,3 +1,5 @@
+import "server-cli-only";
+
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
@@ -5,9 +7,14 @@ import clsx from "clsx";
 
 import { Providers } from "./providers";
 
+import { getAuthenticatedAppForUser } from "@/lib/firebase/serverApp";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 // import { Navbar } from "@/components/navbar";
+
+// Force next.js to treat this route as server-side rendered
+// Without this line, during the build process, next.js will treat this route as static and build a static HTML file for it
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
@@ -29,11 +36,13 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { currentUser } = await getAuthenticatedAppForUser();
+
   return (
     <html suppressHydrationWarning lang="ja">
       <head />
@@ -46,6 +55,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex min-h-screen flex-col">
             {/* <Navbar /> */}
+            <p>{JSON.stringify(currentUser?.toJSON())}</p>
             <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
               {children}
             </main>

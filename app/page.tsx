@@ -1,16 +1,30 @@
-"use server";
+"use client";
 
 import React from "react";
 import { Link } from "@nextui-org/link";
 import { Snippet } from "@nextui-org/snippet";
 import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
+import { Button } from "@nextui-org/react";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import { signInWithGoogle, signOut } from "@/lib/firebase/auth";
+import { useUserSession } from "@/lib/firebase/userSession";
 
 export default async function Home() {
+  const user = useUserSession(null);
+  const handleSignIn = (event: Event) => {
+    // event.preventDefault();
+    signInWithGoogle();
+  };
+
+  const handleSignOut = (event: Event) => {
+    // event.preventDefault();
+    signOut();
+  };
+
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-lg justify-center text-center">
@@ -23,6 +37,22 @@ export default async function Home() {
         <h2 className={subtitle({ class: "mt-4" })}>
           Beautiful, fast and modern React UI library.
         </h2>
+      </div>
+
+      <div className="flex gap-3">
+        <Button
+          className={buttonStyles({ color: "primary", radius: "full" })}
+          onPress={handleSignIn}
+        >
+          Sign in with Google
+        </Button>
+        <Button
+          className={buttonStyles({ color: "success", radius: "full" })}
+          onPress={handleSignOut}
+        >
+          Sign out
+        </Button>
+        <p>{JSON.stringify(user, null, 2)}</p>
       </div>
 
       <div className="flex gap-3">
