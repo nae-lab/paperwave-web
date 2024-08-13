@@ -6,6 +6,7 @@ import { Snippet } from "@nextui-org/snippet";
 import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
 import { Button } from "@nextui-org/react";
+import { PressEvent } from "@react-types/shared/src/events";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
@@ -15,13 +16,12 @@ import { useUserSession } from "@/lib/firebase/userSession";
 
 export default async function Home() {
   const user = useUserSession(null);
-  const handleSignIn = (event: Event) => {
-    // event.preventDefault();
+
+  const handleSignIn = () => {
     signInWithGoogle();
   };
 
-  const handleSignOut = (event: Event) => {
-    // event.preventDefault();
+  const handleSignOut = () => {
     signOut();
   };
 

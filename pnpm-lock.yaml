@@ -20,6 +20,9 @@ importers:
       '@react-aria/visually-hidden':
         specifier: 3.8.12
         version: 3.8.12(react@18.3.1)
+      '@react-types/shared':
+        specifier: ^3.24.1
+        version: 3.24.1(react@18.3.1)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
