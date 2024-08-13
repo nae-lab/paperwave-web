@@ -1,3 +1,6 @@
+"use server";
+
+import React from "react";
 import { Link } from "@nextui-org/link";
 import { Snippet } from "@nextui-org/snippet";
 import { Code } from "@nextui-org/code";
@@ -7,10 +10,10 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 
-export default function Home() {
+export default async function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-lg text-center justify-center">
+      <div className="inline-block max-w-lg justify-center text-center">
         <h1 className={title()}>Make&nbsp;</h1>
         <h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
         <br />
@@ -45,7 +48,7 @@ export default function Home() {
       </div>
 
       <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
+        <Snippet hideCopyButton hideSymbol variant="flat">
           <span>
             Get started by editing <Code color="primary">app/page.tsx</Code>
           </span>

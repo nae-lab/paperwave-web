@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+// import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -21,6 +21,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -33,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="ja">
       <head />
       <body
         className={clsx(
@@ -42,12 +44,12 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+          <div className="relative flex min-h-screen flex-col">
+            {/* <Navbar /> */}
+            <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
+            <footer className="flex w-full items-center justify-center py-3">
               <Link
                 isExternal
                 className="flex items-center gap-1 text-current"
