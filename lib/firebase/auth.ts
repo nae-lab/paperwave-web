@@ -8,7 +8,6 @@ import {
 
 import { ActionResult } from "@/types";
 import { auth } from "@/lib/firebase/clientApp";
-import { consola } from "@/lib/logging";
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
@@ -23,7 +22,7 @@ export async function signInWithGoogle() {
 
     return user;
   } catch (error) {
-    consola.error("Error signing in with Google", error);
+    console.error("Error signing in with Google", error);
 
     return undefined;
   }
@@ -36,7 +35,7 @@ export async function signOut() {
 
     return result;
   } catch (error) {
-    consola.error("Error signing out with Google", error);
+    console.error("Error signing out with Google", error);
 
     const result: ActionResult = {
       errors: JSON.stringify(error),

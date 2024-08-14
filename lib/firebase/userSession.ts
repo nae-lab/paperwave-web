@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { User } from "firebase/auth";
 
-import { consola } from "../logging";
-
 import { firebaseConfig } from "./config";
 import { onAuthStateChanged } from "./auth";
 
@@ -28,7 +26,7 @@ export function useUserSession(initialUser: User | null) {
       navigator.serviceWorker
         .register(serviceWorkerUrl)
         .then((registration) => {
-          consola.info("scope is: ", registration.scope);
+          console.info("scope is: ", registration.scope);
         });
     }
   }, []);
