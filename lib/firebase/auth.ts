@@ -12,7 +12,7 @@ import { auth } from "@/lib/firebase/clientApp";
 import { consola } from "@/lib/logging";
 
 if (process.env.NODE_ENV === "development") {
-  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectAuthEmulator(auth, "http://127.0.0.1:19099");
 }
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {

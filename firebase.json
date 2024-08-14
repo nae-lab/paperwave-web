@@ -19,19 +19,19 @@
   },
   "emulators": {
     "auth": {
-      "port": 9099
+      "port": 19099
     },
     "firestore": {
-      "port": 8080
+      "port": 18080
     },
     "database": {
-      "port": 9000
+      "port": 19000
     },
     "hosting": {
-      "port": 5001
+      "port": 15002
     },
     "storage": {
-      "port": 9199
+      "port": 19199
     },
     "ui": {
       "enabled": true
