@@ -135,7 +135,7 @@ const Navbar = () => {
         orientation="horizontal"
       >
         <NavigationTabs />
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <AvatarGroup max={3} size="sm" total={10}>
             <Tooltip content="John" placement="bottom">
               <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
@@ -157,7 +157,7 @@ const Navbar = () => {
               />
             </Button>
           </Tooltip>
-        </div>
+        </div> */}
       </ScrollShadow>
     </>
   );

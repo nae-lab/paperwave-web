@@ -26,9 +26,6 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      consola:
-        specifier: ^3.2.3
-        version: 3.2.3
       firebase:
         specifier: ^10.12.5
         version: 10.12.5
@@ -2031,10 +2028,6 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
-
-  consola@3.2.3:
-    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
-    engines: {node: ^14.18.0 || >=16.10.0}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -6409,8 +6402,6 @@ snapshots:
   compute-scroll-into-view@3.1.0: {}
 
   concat-map@0.0.1: {}
-
-  consola@3.2.3: {}
 
   cross-spawn@7.0.3:
     dependencies:

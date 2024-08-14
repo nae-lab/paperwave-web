@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth, getIdToken } from "firebase/auth";
 import { getInstallations, getToken } from "firebase/installations";
 
-import { consola } from "./lib/logging";
-
 // this is set during install
 let firebaseConfig;
 
@@ -20,7 +18,7 @@ self.addEventListener("install", (_) => {
   }
 
   firebaseConfig = JSON.parse(serializedFirebaseConfig);
-  consola.debug(
+  console.debug(
     "Service worker installed with Firebase config",
     firebaseConfig,
   );

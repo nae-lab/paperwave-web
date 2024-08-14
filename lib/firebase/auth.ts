@@ -16,6 +16,10 @@ export function onAuthStateChanged(cb: NextOrObserver<User>) {
 export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
 
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
+
   try {
     const userCredential = await signInWithPopup(auth, provider);
     const user = userCredential.user;
