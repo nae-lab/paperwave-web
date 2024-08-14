@@ -32,10 +32,10 @@ import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
 const Navbar = React.forwardRef<React.JSX.Element, {}>(() => {
   return (
-    <div className="w-full">
+    <>
       <NextUiNavbar
         classNames={{
-          base: "pt-2 lg:pt-4 lg:bg-transparent lg:backdrop-filter-none",
+          base: "pt-2 lg:pt-4 bg-background lg:backdrop-filter-none",
           wrapper: "px-4 sm:px-6",
           item: "data-[active=true]:text-primary",
         }}
@@ -129,39 +129,37 @@ const Navbar = React.forwardRef<React.JSX.Element, {}>(() => {
         {/* Menu */}
         <NavbarMenu />
       </NextUiNavbar>
-      <main className="flex w-full justify-center lg:mt-6">
-        <ScrollShadow
-          hideScrollBar
-          className="flex w-full justify-between gap-8 border-b border-divider px-4 sm:px-8"
-          orientation="horizontal"
-        >
-          <NavigationTabs />
-          <div className="flex items-center gap-4">
-            <AvatarGroup max={3} size="sm" total={10}>
-              <Tooltip content="John" placement="bottom">
-                <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-              </Tooltip>
-              <Tooltip content="Mark" placement="bottom">
-                <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-              </Tooltip>
-              <Tooltip content="Jane" placement="bottom">
-                <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-              </Tooltip>
-            </AvatarGroup>
-            <Divider className="h-6" orientation="vertical" />
-            <Tooltip content="New deployment" placement="bottom">
-              <Button isIconOnly radius="full" size="sm" variant="faded">
-                <Icon
-                  className="text-default-500"
-                  icon="lucide:plus"
-                  width={16}
-                />
-              </Button>
+      <ScrollShadow
+        hideScrollBar
+        className="flex w-full justify-between gap-8 border-b border-divider px-4 sm:px-8"
+        orientation="horizontal"
+      >
+        <NavigationTabs />
+        <div className="flex items-center gap-4">
+          <AvatarGroup max={3} size="sm" total={10}>
+            <Tooltip content="John" placement="bottom">
+              <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             </Tooltip>
-          </div>
-        </ScrollShadow>
-      </main>
-    </div>
+            <Tooltip content="Mark" placement="bottom">
+              <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+            </Tooltip>
+            <Tooltip content="Jane" placement="bottom">
+              <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+            </Tooltip>
+          </AvatarGroup>
+          <Divider className="h-6" orientation="vertical" />
+          <Tooltip content="New deployment" placement="bottom">
+            <Button isIconOnly radius="full" size="sm" variant="faded">
+              <Icon
+                className="text-default-500"
+                icon="lucide:plus"
+                width={16}
+              />
+            </Button>
+          </Tooltip>
+        </div>
+      </ScrollShadow>
+    </>
   );
 });
 

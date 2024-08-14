@@ -9,6 +9,14 @@ export const routes: Route = {
     label: "Home",
     href: "/",
   },
+  recording: {
+    label: "収録",
+    href: "/recording",
+  },
+  programs: {
+    label: "番組一覧",
+    href: "/programs",
+  },
   about: {
     label: "About",
     href: "/about",
@@ -34,12 +42,12 @@ export const routes: Route = {
 export const siteConfig = {
   name: "PaperWave",
   description: "Voicing Papers, Bringing Research to Life.",
-  tabItems: [routes.home, routes.about],
-  navMenuItemsSignedOut: [routes.home, routes.login],
-  navMenuItemsSignedIn: [routes.home, routes.about, routes.settings],
-  userMenuItems: [routes.settings],
-  settingTabItems: [routes.settings.notification],
-  adminSettingTabItems: [routes.settings.notification, routes.settings.users],
+  tabItems: [routes.recording, routes.programs],
+  navMenuItemsSignedOut: [routes.home],
+  navMenuItemsSignedIn: [routes.home],
+  userMenuItems: [],
+  settingTabItems: [],
+  adminSettingTabItems: [],
   links: {
     github: "https://github.com/nextui-org/nextui",
     twitter: "https://twitter.com/getnextui",

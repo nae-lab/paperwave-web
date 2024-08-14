@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "build-service-worker": "esbuild auth-service-worker.js --bundle --outfile=public/auth-service-worker.js",
     "start": "next start",

@@ -57,6 +57,7 @@ const NavbarMenu = React.forwardRef<React.JSX.Element, {}>(() => {
     <NavbarMenuItem key="login">
       <form ref={signInFormRef} action={signInFormAction}>
         <Link
+          className="h-full w-full"
           color="primary"
           href="#"
           isDisabled={isSigningIn}
@@ -72,6 +73,7 @@ const NavbarMenu = React.forwardRef<React.JSX.Element, {}>(() => {
     <NavbarMenuItem key="signout">
       <form ref={signOutFormRef} action={signOutFormAction}>
         <Link
+          className="h-full w-full"
           color="danger"
           href="#"
           isDisabled={isSigningOut}
