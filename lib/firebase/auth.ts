@@ -2,7 +2,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged as _onAuthStateChanged,
-  connectAuthEmulator,
   NextOrObserver,
   User,
 } from "firebase/auth";
@@ -10,10 +9,6 @@ import {
 import { ActionResult } from "@/types";
 import { auth } from "@/lib/firebase/clientApp";
 import { consola } from "@/lib/logging";
-
-if (process.env.NODE_ENV === "development") {
-  connectAuthEmulator(auth, "http://127.0.0.1:19099");
-}
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
