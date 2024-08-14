@@ -1,64 +1,54 @@
 export type SiteConfig = typeof siteConfig;
 
+type Route = Record<string, any>;
+
+export const routes: Route = {
+  label: "Home",
+  href: "/",
+  home: {
+    label: "Home",
+    href: "/",
+  },
+  about: {
+    label: "About",
+    href: "/about",
+  },
+  settings: {
+    label: "設定",
+    href: "/settings",
+    notification: {
+      label: "通知",
+      href: "/settings/notification",
+    },
+    users: {
+      label: "ユーザー",
+      href: "/settings/users",
+    },
+  },
+  login: {
+    label: "ログイン",
+    href: "/login",
+  },
+  logout: {
+    label: "ログアウト",
+    href: "/logout",
+  },
+};
+
 export const siteConfig = {
   name: "PaperWave",
-  description: "Listen academic papers as podcast.",
-  navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
+  description: "Voicing Papers, Bringing Research to Life.",
+  tabItems: [routes.home, routes.about],
+  navMenuItemsSignedOut: [routes.home, routes.login],
+  navMenuItemsSignedIn: [
+    routes.home,
+    routes.about,
+    routes.settings,
+    routes.logout,
   ],
-  navMenuItems: [
-    {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
-  ],
+  userMenuItems: [routes.settings, routes.logout],
+  settingTabItems: [routes.settings.notification],
+  adminSettingTabItems: [routes.settings.notification, routes.settings.users],
   links: {
     github: "https://github.com/nextui-org/nextui",
     twitter: "https://twitter.com/getnextui",

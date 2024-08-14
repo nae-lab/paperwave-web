@@ -954,13 +954,13 @@
   // node_modules/.pnpm/@firebase+logger@0.4.2/node_modules/@firebase/logger/dist/esm/index.esm2017.js
   var instances = [];
   var LogLevel;
-  (function(LogLevel2) {
-    LogLevel2[LogLevel2["DEBUG"] = 0] = "DEBUG";
-    LogLevel2[LogLevel2["VERBOSE"] = 1] = "VERBOSE";
-    LogLevel2[LogLevel2["INFO"] = 2] = "INFO";
-    LogLevel2[LogLevel2["WARN"] = 3] = "WARN";
-    LogLevel2[LogLevel2["ERROR"] = 4] = "ERROR";
-    LogLevel2[LogLevel2["SILENT"] = 5] = "SILENT";
+  (function(LogLevel3) {
+    LogLevel3[LogLevel3["DEBUG"] = 0] = "DEBUG";
+    LogLevel3[LogLevel3["VERBOSE"] = 1] = "VERBOSE";
+    LogLevel3[LogLevel3["INFO"] = 2] = "INFO";
+    LogLevel3[LogLevel3["WARN"] = 3] = "WARN";
+    LogLevel3[LogLevel3["ERROR"] = 4] = "ERROR";
+    LogLevel3[LogLevel3["SILENT"] = 5] = "SILENT";
   })(LogLevel || (LogLevel = {}));
   var levelStringToEnum = {
     "debug": LogLevel.DEBUG,
@@ -8457,7 +8457,7 @@
     }
   };
   function createConsola2(options = {}) {
-    const consola2 = createConsola({
+    const consola22 = createConsola({
       reporters: options.reporters || [new BrowserReporter({})],
       prompt(message, options2 = {}) {
         if (options2.type === "confirm") {
@@ -8467,9 +8467,51 @@
       },
       ...options
     });
-    return consola2;
+    return consola22;
   }
   var consola = createConsola2();
+
+  // lib/logging.ts
+  var consola2 = createConsola2({
+    level: LogLevels.info,
+    formatOptions: {
+      colors: true
+    }
+  });
+  async function setupConsola() {
+    consola2.wrapConsole();
+    const logType = process.env.LOG_LEVEL;
+    if (logType) {
+      let logLevel;
+      switch (logType) {
+        case "silent":
+          logLevel = LogLevels.silent;
+          break;
+        case "trace":
+          logLevel = LogLevels.trace;
+          break;
+        case "debug":
+          logLevel = LogLevels.debug;
+          break;
+        case "info":
+          logLevel = LogLevels.info;
+          break;
+        case "warn":
+          logLevel = LogLevels.warn;
+          break;
+        case "error":
+          logLevel = LogLevels.error;
+          break;
+        case "fatal":
+          logLevel = LogLevels.fatal;
+          break;
+        default:
+          logLevel = LogLevels.info;
+      }
+      consola2.level = logLevel;
+    }
+  }
+  setupConsola();
 
   // auth-service-worker.js
   var firebaseConfig;
@@ -8483,7 +8525,10 @@
       );
     }
     firebaseConfig = JSON.parse(serializedFirebaseConfig);
-    consola.log("Service worker installed with Firebase config", firebaseConfig);
+    consola2.debug(
+      "Service worker installed with Firebase config",
+      firebaseConfig
+    );
   });
   self.addEventListener("fetch", (event) => {
     const { origin } = new URL(event.request.url);

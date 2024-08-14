@@ -51,7 +51,7 @@ export default function Home() {
         >
           Sign out
         </Button>
-        <p className="w-8">{JSON.stringify(user, null, 2)}</p>
+        <p className="w-8">{user?.displayName}</p>
       </div>
 
       <div className="flex gap-3">
