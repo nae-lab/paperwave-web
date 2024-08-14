@@ -1,8 +1,8 @@
-import { Dropdown, DropdownTrigger, Avatar, Link } from "@nextui-org/react";
-import { button as buttonStyle } from "@nextui-org/theme";
+import { Button, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
+import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
 export default function UserMenu() {
@@ -10,27 +10,27 @@ export default function UserMenu() {
 
   if (!user) {
     return (
-      <Link
-        className={buttonStyle({
-          color: "primary",
-          radius: "full",
-        })}
-        href="/login"
-      >
+      <Button color="primary" radius="full" onPress={signInWithGoogle}>
         Log In
-      </Link>
+      </Button>
     );
   } else {
+    const userAvatar = user?.photoURL ? (
+      <Avatar size="sm" src={user.photoURL} />
+    ) : (
+      <Avatar
+        isBordered
+        color="default"
+        name={user.displayName?.slice(0, 2).toUpperCase()}
+        size="sm"
+      />
+    );
+
     return (
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <button className="mt-1 h-8 w-8 outline-none transition-transform">
-            <Avatar
-              isBordered
-              color="default"
-              name={user?.displayName?.slice(0, 2).toUpperCase()}
-              size="sm"
-            />
+            {userAvatar}
           </button>
         </DropdownTrigger>
         <UserMenuDropdownMenu />

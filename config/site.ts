@@ -29,10 +29,6 @@ export const routes: Route = {
     label: "ログイン",
     href: "/login",
   },
-  logout: {
-    label: "ログアウト",
-    href: "/logout",
-  },
 };
 
 export const siteConfig = {
@@ -40,13 +36,8 @@ export const siteConfig = {
   description: "Voicing Papers, Bringing Research to Life.",
   tabItems: [routes.home, routes.about],
   navMenuItemsSignedOut: [routes.home, routes.login],
-  navMenuItemsSignedIn: [
-    routes.home,
-    routes.about,
-    routes.settings,
-    routes.logout,
-  ],
-  userMenuItems: [routes.settings, routes.logout],
+  navMenuItemsSignedIn: [routes.home, routes.about, routes.settings],
+  userMenuItems: [routes.settings],
   settingTabItems: [routes.settings.notification],
   adminSettingTabItems: [routes.settings.notification, routes.settings.users],
   links: {

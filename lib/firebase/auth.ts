@@ -7,6 +7,7 @@ import {
   User,
 } from "firebase/auth";
 
+import { ActionResult } from "@/types";
 import { auth } from "@/lib/firebase/clientApp";
 import { consola } from "@/lib/logging";
 
@@ -22,16 +23,30 @@ export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
 
   try {
-    await signInWithPopup(auth, provider);
+    const userCredential = await signInWithPopup(auth, provider);
+    const user = userCredential.user;
+
+    return user;
   } catch (error) {
     consola.error("Error signing in with Google", error);
+
+    return undefined;
   }
 }
 
 export async function signOut() {
   try {
-    return auth.signOut();
+    await auth.signOut();
+    const result: ActionResult = {};
+
+    return result;
   } catch (error) {
     consola.error("Error signing out with Google", error);
+
+    const result: ActionResult = {
+      errors: JSON.stringify(error),
+    };
+
+    return result;
   }
 }

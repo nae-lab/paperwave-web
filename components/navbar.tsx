@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   Navbar as NextUiNavbar,
   NavbarBrand,
@@ -21,6 +22,7 @@ import {
 } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 
+import { siteConfig } from "@/config/site";
 import NavigationTabs from "@/components/navbar/navigation-tabs";
 import NavbarMenu from "@/components/navbar/navbar-menu";
 import UserMenu from "@/components/navbar/usermenu";
@@ -28,7 +30,7 @@ import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
-export async function Navbar() {
+const Navbar = React.forwardRef<React.JSX.Element, {}>(() => {
   return (
     <div className="w-full">
       <NextUiNavbar
@@ -43,7 +45,7 @@ export async function Navbar() {
         <NavbarBrand>
           <NavbarMenuToggle className="mr-6 h-6" />
           <Link className="text-inherit" href="/">
-            <p className="font-bold text-inherit">RoTACS</p>
+            <p className="font-bold text-inherit">{siteConfig.name}</p>
           </Link>
         </NavbarBrand>
 
@@ -161,4 +163,8 @@ export async function Navbar() {
       </main>
     </div>
   );
-}
+});
+
+Navbar.displayName = "Navbar";
+
+export { Navbar };
