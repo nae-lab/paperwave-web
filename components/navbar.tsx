@@ -30,7 +30,7 @@ import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
-const Navbar = React.forwardRef<React.JSX.Element, {}>(() => {
+const Navbar = () => {
   return (
     <>
       <NextUiNavbar
@@ -161,7 +161,7 @@ const Navbar = React.forwardRef<React.JSX.Element, {}>(() => {
       </ScrollShadow>
     </>
   );
-});
+};
 
 Navbar.displayName = "Navbar";
 

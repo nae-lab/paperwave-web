@@ -45,7 +45,7 @@ export const siteConfig = {
   tabItems: [routes.recording, routes.programs],
   navMenuItemsSignedOut: [routes.home],
   navMenuItemsSignedIn: [routes.home],
-  userMenuItems: [],
+  userMenuItems: [routes.settings],
   settingTabItems: [],
   adminSettingTabItems: [],
   links: {

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProgramsPage = React.forwardRef<React.JSX.Element, {}>((_props, _ref) => {
+const ProgramsPage = () => {
   return (
     <>
       <div>
@@ -8,8 +8,6 @@ const ProgramsPage = React.forwardRef<React.JSX.Element, {}>((_props, _ref) => {
       </div>
     </>
   );
-});
-
-ProgramsPage.displayName = "ProgramsPage";
+};
 
 export default ProgramsPage;

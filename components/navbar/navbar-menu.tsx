@@ -15,7 +15,7 @@ import { siteConfig } from "@/config/site";
 import { useUserSession } from "@/lib/firebase/userSession";
 import { signInWithGoogle, signOut } from "@/lib/firebase/auth";
 
-const NavbarMenu = React.forwardRef<React.JSX.Element, {}>(() => {
+const NavbarMenu = () => {
   const pathname = usePathname();
 
   const [isSigningIn, setIsSigningIn] = React.useState(false);
@@ -101,7 +101,7 @@ const NavbarMenu = React.forwardRef<React.JSX.Element, {}>(() => {
       {user ? signOutItem : loginItem}
     </NextUiNavbarMenu>
   );
-});
+};
 
 NavbarMenu.displayName = "NavbarMenu";
 

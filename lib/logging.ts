@@ -1,10 +1,4 @@
-import {
-  createConsola,
-  LogLevels,
-  LogType,
-  ConsolaReporter,
-  LogLevel,
-} from "consola";
+import { createConsola, LogLevels } from "consola";
 
 export const consola = createConsola({
   level: LogLevels.info,
