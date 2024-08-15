@@ -8034,7 +8034,16 @@
     const newRequest = new Request(request, {
       headers
     });
-    return await fetch(newRequest);
+    const response = await fetch(newRequest);
+    const newHeaders = new Headers(response.headers);
+    newHeaders.append("Access-Control-Allow-Origin", "*");
+    newHeaders.append("Access-Control-Allow-Headers", "*");
+    newHeaders.append("Access-Control-Allow-Methods", "*");
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders
+    });
   }
   async function getAuthIdToken(auth) {
     await auth.authStateReady();
