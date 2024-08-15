@@ -20,10 +20,12 @@ import {
   Badge,
   Spacer,
 } from "@nextui-org/react";
+import { cookies } from "next/headers";
+import { getCookies, getCookie } from "cookies-next";
 import { Icon } from "@iconify/react";
+import { User } from "firebase/auth";
 
 import { siteConfig } from "@/config/site";
-import { getAuthenticatedAppForUser } from "@/lib/firebase/serverApp";
 import NavigationTabs from "@/components/navbar/navigation-tabs";
 import NavbarMenu from "@/components/navbar/navbar-menu";
 import UserMenu from "@/components/navbar/usermenu";
@@ -31,8 +33,8 @@ import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
-export default async function Navbar() {
-  const { currentUser } = await getAuthenticatedAppForUser();
+export default function Navbar() {
+  const userJSON = getCookie("user", { cookies })?.toString();
 
   return (
     <>
@@ -125,7 +127,7 @@ export default async function Navbar() {
           </NavbarItem>
           {/* User Menu */}
           <NavbarItem className="px-2">
-            <UserMenu currentUserJSON={JSON.stringify(currentUser)} />
+            <UserMenu initialUserJSON={userJSON} />
           </NavbarItem>
         </NavbarContent>
 

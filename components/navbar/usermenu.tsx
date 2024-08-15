@@ -3,19 +3,14 @@
 import "client-only";
 
 import { Button, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
-import { User } from "firebase/auth";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
-export default function UserMenu({
-  currentUserJSON,
-}: {
-  currentUserJSON: string;
-}) {
-  const user = useUserSession(JSON.parse(currentUserJSON) as User | null);
+export default function UserMenu({ initialUserJSON }: { initialUserJSON: string }) {
+  const user = useUserSession(initialUserJSON);
 
   if (!user) {
     return (
@@ -42,7 +37,7 @@ export default function UserMenu({
             {userAvatar}
           </button>
         </DropdownTrigger>
-        <UserMenuDropdownMenu currentUserJSON={JSON.stringify(user)} />
+        <UserMenuDropdownMenu initialUserJSON={initialUserJSON} />
       </Dropdown>
     );
   }

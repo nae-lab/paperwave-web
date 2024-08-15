@@ -17,7 +17,6 @@ import { signInWithGoogle, signOut } from "@/lib/firebase/auth";
 
 const NavbarMenu = () => {
   const pathname = usePathname();
-  const router = useRouter();
 
   const [isSigningIn, setIsSigningIn] = React.useState(false);
   const [signInState, signInFormAction] = useFormState(

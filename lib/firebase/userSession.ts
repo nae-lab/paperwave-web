@@ -2,38 +2,32 @@
 
 import "client-only";
 
-import { useRouter } from "next/navigation";
 import React from "react";
+import { useRouter } from "next/navigation";
+import { setCookie, deleteCookie } from "cookies-next";
 import { User } from "firebase/auth";
 
-import { firebaseConfig } from "./config";
 import { onAuthStateChanged } from "./auth";
 
-export function useUserSession(initialUser: User | null) {
+export function useUserSession(initialUser: User | string | null) {
   // The initialUser comes from the server via a server component
-  const [user, setUser] = React.useState<User | null>(initialUser);
-  const router = useRouter();
-
-  // Register the service worker that sends auth state back to server
-  // The service worker is built with npm run build-service-worker
-  React.useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      const serializedFirebaseConfig = encodeURIComponent(
-        JSON.stringify(firebaseConfig),
-      );
-      const serviceWorkerUrl = `/auth-service-worker.js?firebaseConfig=${serializedFirebaseConfig}`;
-
-      navigator.serviceWorker
-        .register(serviceWorkerUrl)
-        .then((registration) => {
-          console.info("scope is: ", registration.scope);
-        });
+  if (typeof initialUser === "string") {
+    try {
+      initialUser = JSON.parse(initialUser);
+    } catch (error) {
+      initialUser = null;
     }
-  }, []);
+  }
+
+  const [user, setUser] = React.useState<User | null>(
+    initialUser as User | null,
+  );
+  const router = useRouter();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged((authUser) => {
       setUser(authUser);
+      setCookie("user", JSON.stringify(authUser));
     });
 
     return () => unsubscribe();
@@ -41,7 +35,11 @@ export function useUserSession(initialUser: User | null) {
 
   React.useEffect(() => {
     onAuthStateChanged((authUser) => {
-      if (user === undefined) return;
+      if (user === undefined) {
+        deleteCookie("user");
+
+        return;
+      }
 
       // refresh when user changed to ease testing
       if (user?.email !== authUser?.email) {

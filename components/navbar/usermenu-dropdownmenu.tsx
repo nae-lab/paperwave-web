@@ -5,7 +5,6 @@ import "client-only";
 import React from "react";
 import { useFormState } from "react-dom";
 import { DropdownItem, DropdownMenu } from "@nextui-org/react";
-import { User } from "firebase/auth";
 
 import { siteConfig } from "@/config/site";
 import { ActionResult } from "@/types";
@@ -15,11 +14,11 @@ import { useUserSession } from "@/lib/firebase/userSession";
 const signOutInitialState: ActionResult = {};
 
 export default function UserMenuDropdownMenu({
-  currentUserJSON,
+  initialUserJSON,
 }: {
-  currentUserJSON: string;
+  initialUserJSON: string;
 }) {
-  const user = useUserSession(JSON.parse(currentUserJSON) as User | null);
+  const user = useUserSession(initialUserJSON);
   const formRef = React.useRef<HTMLFormElement>(null);
   const [isSigningOut, setIsSigningOut] = React.useState(false);
   const [signOutState, signOutFormAction] = useFormState(
