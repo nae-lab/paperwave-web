@@ -1,4 +1,4 @@
-"use client";
+import "server-cli-only";
 
 import React from "react";
 import {
@@ -23,6 +23,7 @@ import {
 import { Icon } from "@iconify/react";
 
 import { siteConfig } from "@/config/site";
+import { getAuthenticatedAppForUser } from "@/lib/firebase/serverApp";
 import NavigationTabs from "@/components/navbar/navigation-tabs";
 import NavbarMenu from "@/components/navbar/navbar-menu";
 import UserMenu from "@/components/navbar/usermenu";
@@ -30,7 +31,9 @@ import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
-const Navbar = () => {
+export default async function Navbar() {
+  const { currentUser } = await getAuthenticatedAppForUser();
+
   return (
     <>
       <NextUiNavbar
@@ -122,7 +125,7 @@ const Navbar = () => {
           </NavbarItem>
           {/* User Menu */}
           <NavbarItem className="px-2">
-            <UserMenu />
+            <UserMenu currentUserJSON={JSON.stringify(currentUser)} />
           </NavbarItem>
         </NavbarContent>
 
@@ -161,8 +164,4 @@ const Navbar = () => {
       </ScrollShadow>
     </>
   );
-};
-
-Navbar.displayName = "Navbar";
-
-export { Navbar };
+}

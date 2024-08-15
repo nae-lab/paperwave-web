@@ -1,12 +1,21 @@
+"use client";
+
+import "client-only";
+
 import { Button, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
+import { User } from "firebase/auth";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
-export default function UserMenu() {
-  const user = useUserSession(null);
+export default function UserMenu({
+  currentUserJSON,
+}: {
+  currentUserJSON: string;
+}) {
+  const user = useUserSession(JSON.parse(currentUserJSON) as User | null);
 
   if (!user) {
     return (
@@ -33,7 +42,7 @@ export default function UserMenu() {
             {userAvatar}
           </button>
         </DropdownTrigger>
-        <UserMenuDropdownMenu />
+        <UserMenuDropdownMenu currentUserJSON={JSON.stringify(user)} />
       </Dropdown>
     );
   }

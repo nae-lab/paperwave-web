@@ -4,7 +4,7 @@ import "client-only";
 
 import React from "react";
 import { useFormState } from "react-dom";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   NavbarMenu as NextUiNavbarMenu,
   NavbarMenuItem,
@@ -17,6 +17,7 @@ import { signInWithGoogle, signOut } from "@/lib/firebase/auth";
 
 const NavbarMenu = () => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const [isSigningIn, setIsSigningIn] = React.useState(false);
   const [signInState, signInFormAction] = useFormState(
@@ -42,6 +43,7 @@ const NavbarMenu = () => {
 
   const handleSignOut = () => {
     setIsSigningOut(true);
+
     signOutFormRef.current?.requestSubmit();
   };
 

@@ -58,6 +58,16 @@ async function fetchWithFirebaseHeaders(request) {
   newHeaders.append("Access-Control-Allow-Headers", "*");
   newHeaders.append("Access-Control-Allow-Methods", "*");
 
+  // Ensure the response is valid
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  // Make shure the response status is in the range 200-599
+  if (response.status < 200 || response.status >= 600) {
+    throw new Error(`Invalid status code: ${response.status}`);
+  }
+
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
