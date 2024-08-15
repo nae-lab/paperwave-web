@@ -34,7 +34,7 @@ import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
 export default function Navbar() {
-  const userJSON = getCookie("user", { cookies })?.toString();
+  const userJSON = getCookie("user", { cookies })?.toString() ?? "";
 
   return (
     <>
