@@ -16,8 +16,6 @@ import {
 } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 
-import { cn } from "@/lib/cn";
-
 interface PlayerProps extends CardProps {
   programId: string;
 }
