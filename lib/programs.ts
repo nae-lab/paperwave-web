@@ -71,6 +71,11 @@ export class Program implements DocumentSnapshotType {
     public coverImageUrl: string = "",
     public recordingOptions: RecordingOptions = new RecordingOptions([]),
     public recordingLogs: Object[] = [],
+    public isRecordingCompleted: boolean = false,
+    public isRecordingFailed: boolean = false,
+    public contentUrl: string = "",
+    public contentDurationSeconds: number = 0, // in seconds
+    public playCount: number = 0,
   ) {
     this.createdAt = Timestamp.now();
     this.updatedAt = Timestamp.now();
