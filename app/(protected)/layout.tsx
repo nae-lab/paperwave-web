@@ -20,7 +20,6 @@ export default async function ProtectedPageLayout({
       const currentUser = JSON.parse(currentUserJSON) as User;
 
       uid = currentUser.uid;
-      console.log(currentUser);
     } catch (error) {
       uid = null;
     }

@@ -37,12 +37,16 @@ export const routes: Route = {
     label: "ログイン",
     href: "/login",
   },
+  "not-found": {
+    label: "Not Found",
+    href: "/not-found",
+  },
 };
 
 export const siteConfig = {
   name: "PaperWave",
   description: "Voicing Papers, Bringing Research to Life.",
-  tabItems: [routes.recording, routes.programs],
+  tabItems: [routes.programs, routes.recording],
   navMenuItemsSignedOut: [routes.home],
   navMenuItemsSignedIn: [routes.home],
   userMenuItems: [routes.settings],

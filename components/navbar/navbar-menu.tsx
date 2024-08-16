@@ -4,7 +4,7 @@ import "client-only";
 
 import React from "react";
 import { useFormState } from "react-dom";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   NavbarMenu as NextUiNavbarMenu,
   NavbarMenuItem,
