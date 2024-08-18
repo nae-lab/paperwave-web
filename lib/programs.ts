@@ -101,7 +101,21 @@ export class Paper implements DocumentSnapshotType {
   }
 }
 
+export class Chapter implements DocumentSnapshotType {
+  title: string;
+  startTimeSeconds: number;
+  endTimeSeconds: number;
+
+  constructor(options: Partial<Chapter>) {
+    this.title = options.title ?? "";
+    this.startTimeSeconds = options.startTimeSeconds ?? 0;
+    this.endTimeSeconds = options.endTimeSeconds ?? 0;
+  }
+}
+
 export class Program implements DocumentSnapshotType {
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
   uid: string;
   userDisplayName: string;
   title: string;
@@ -115,15 +129,17 @@ export class Program implements DocumentSnapshotType {
   isRecordingFailed: boolean;
   contentUrl: string;
   contentDurationSeconds: number; // in seconds
+  chapters: Chapter[];
+  transcriptUrl: string;
   playCount: number;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
 
   constructor(
     options: { recordingOptions: RecordingOptions } & Partial<
       Omit<Program, "createdAt" | "updatedAt">
     >,
   ) {
+    this.createdAt = Timestamp.now();
+    this.updatedAt = Timestamp.now();
     this.uid = options.uid ?? "";
     this.userDisplayName = options.userDisplayName ?? "Anonymous";
     this.title = options.title ?? "Untitled";
@@ -137,9 +153,9 @@ export class Program implements DocumentSnapshotType {
     this.isRecordingFailed = options.isRecordingFailed ?? false;
     this.contentUrl = options.contentUrl ?? "";
     this.contentDurationSeconds = options.contentDurationSeconds ?? 0;
+    this.chapters = options.chapters ?? [];
+    this.transcriptUrl = options.transcriptUrl ?? "";
     this.playCount = options.playCount ?? 0;
-    this.createdAt = Timestamp.now();
-    this.updatedAt = Timestamp.now();
   }
 }
 
@@ -201,6 +217,19 @@ export async function getPrograms() {
   const programs = snapshot.docs.map((doc) => doc.data());
 
   return programs;
+}
+
+// 新しいプログラムを追加
+export async function setProgram(program: Program) {
+  const programsRef = collection(db, "programs").withConverter(
+    programsDataConverter(),
+  );
+
+  let docRef = doc(programsRef);
+
+  await setDoc(docRef, program);
+
+  console.debug("Document written with ID: ", docRef.id);
 }
 
 export async function setSeedData() {
