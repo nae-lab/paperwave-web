@@ -17,17 +17,17 @@ import { db } from "@/lib/firebase/clientApp";
 import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 
 export class RecordingOptions implements DocumentSnapshotType {
-  readonly paperUrls: string[];
-  readonly minute: number;
-  readonly bgm: string;
-  readonly bgmVolume: number;
-  readonly llmModel: string;
-  readonly chatConcurrency: number;
-  readonly assistantConcurrency: number;
-  readonly ttsModel: string;
-  readonly ttsConcurrency: number;
-  readonly retryCount: number;
-  readonly retryMaxDelay: number;
+  paperUrls: string[];
+  minute: number;
+  bgm: string;
+  bgmVolume: number;
+  llmModel: string;
+  chatConcurrency: number;
+  assistantConcurrency: number;
+  ttsModel: string;
+  ttsConcurrency: number;
+  retryCount: number;
+  retryMaxDelay: number;
 
   constructor(options: { paperUrls: string[] } & Partial<RecordingOptions>) {
     if (!options.paperUrls || options.paperUrls.length === 0) {
@@ -49,10 +49,10 @@ export class RecordingOptions implements DocumentSnapshotType {
 }
 
 export class Author implements DocumentSnapshotType {
-  readonly authorId: string;
-  readonly name: string;
-  readonly paperCount: number;
-  readonly citationCount: number;
+  authorId: string;
+  name: string;
+  paperCount: number;
+  citationCount: number;
 
   constructor(options?: Partial<Author>) {
     this.authorId = options?.authorId ?? "";
@@ -64,22 +64,22 @@ export class Author implements DocumentSnapshotType {
 
 // Reference https://api.semanticscholar.org/api-docs#tag/Paper-Data/operation/get_graph_get_paper
 export class Paper implements DocumentSnapshotType {
-  readonly doi: string;
-  readonly paperId: string;
-  readonly url: string;
-  readonly semanticScholarUrl: string;
-  readonly title: string;
-  readonly year: number;
-  readonly authors: Author[];
-  readonly abstract: string;
-  readonly fieldsOfStudy: string[];
-  readonly publication: string;
-  readonly publicationTypes: string[];
-  readonly publicationDate: string;
-  readonly tldr: string;
-  readonly references: Omit<Paper, "references">[];
-  readonly pdfUrl: string;
-  readonly numPages: number;
+  doi: string;
+  paperId: string;
+  url: string;
+  semanticScholarUrl: string;
+  title: string;
+  year: number;
+  authors: Author[];
+  abstract: string;
+  fieldsOfStudy: string[];
+  publication: string;
+  publicationTypes: string[];
+  publicationDate: string;
+  tldr: string;
+  references: Omit<Paper, "references">[];
+  pdfUrl: string;
+  numPages: number;
 
   constructor(options?: Partial<Paper>) {
     this.doi = options?.doi ?? "";
@@ -102,22 +102,22 @@ export class Paper implements DocumentSnapshotType {
 }
 
 export class Program implements DocumentSnapshotType {
-  public uid: string;
-  public userDisplayName: string;
-  public title: string;
-  public description: string;
-  public tags: string[];
-  public papers: Paper[];
-  public coverImageUrl: string;
-  public recordingOptions: RecordingOptions;
-  public recordingLogs: string[];
-  public isRecordingCompleted: boolean;
-  public isRecordingFailed: boolean;
-  public contentUrl: string;
-  public contentDurationSeconds: number; // in seconds
-  public playCount: number;
-  public createdAt: Timestamp;
-  public updatedAt: Timestamp;
+  uid: string;
+  userDisplayName: string;
+  title: string;
+  description: string;
+  tags: string[];
+  papers: Paper[];
+  coverImageUrl: string;
+  recordingOptions: RecordingOptions;
+  recordingLogs: string[];
+  isRecordingCompleted: boolean;
+  isRecordingFailed: boolean;
+  contentUrl: string;
+  contentDurationSeconds: number; // in seconds
+  playCount: number;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 
   constructor(
     options: { recordingOptions: RecordingOptions } & Partial<
