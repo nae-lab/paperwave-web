@@ -42,7 +42,13 @@ export function useUserSession(initialUser: User | string | null) {
       }
 
       // refresh when user changed to ease testing
-      if (user?.email !== authUser?.email) {
+      if (user && user?.email !== authUser?.email) {
+        console.warn(
+          "User changed, refreshing... user:",
+          user,
+          "authUser:",
+          authUser,
+        );
         router.refresh();
       }
     });
