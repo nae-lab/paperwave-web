@@ -1,6 +1,6 @@
 import "client-only";
 
-import { z } from "zod";
+// import { z } from "zod";
 import {
   DocumentData,
   FirestoreDataConverter,
@@ -14,183 +14,182 @@ import {
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase/clientApp";
-import { DocumentSnapshotType, dataConverter } from "@/lib/firebase/firestore";
+import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 
 export class RecordingOptions implements DocumentSnapshotType {
-  public paperUrls: string[];
-  public minute: number = 15;
-  public bgm: string = "";
-  public bgmVolume: number = 0.25;
-  public llmModel: string = "gpt-4o-mini";
-  public chatConcurrency: number = 10;
-  public assistantConcurrency: number = 10;
-  public ttsModel: string = "tts-1";
-  public ttsConcurrency: number = 20;
-  public retryCount: number = 5;
-  public retryMaxDelay: number = 150000;
+  readonly paperUrls: string[];
+  readonly minute: number;
+  readonly bgm: string;
+  readonly bgmVolume: number;
+  readonly llmModel: string;
+  readonly chatConcurrency: number;
+  readonly assistantConcurrency: number;
+  readonly ttsModel: string;
+  readonly ttsConcurrency: number;
+  readonly retryCount: number;
+  readonly retryMaxDelay: number;
 
   constructor(options: { paperUrls: string[] } & Partial<RecordingOptions>) {
-    const allowedOptions = {
-      ...options,
-    } as RecordingOptions;
+    if (!options.paperUrls || options.paperUrls.length === 0) {
+      throw new Error("At least one paper URL is required.");
+    }
 
-    Object.assign(this, allowedOptions);
-    this.paperUrls = options.paperUrls;
+    this.paperUrls = options.paperUrls ?? [];
+    this.minute = options.minute ?? 15;
+    this.bgm = options.bgm ?? "";
+    this.bgmVolume = options.bgmVolume ?? 0.25;
+    this.llmModel = options.llmModel ?? "gpt-4o-mini";
+    this.chatConcurrency = options.chatConcurrency ?? 10;
+    this.assistantConcurrency = options.assistantConcurrency ?? 10;
+    this.ttsModel = options.ttsModel ?? "tts-1";
+    this.ttsConcurrency = options.ttsConcurrency ?? 20;
+    this.retryCount = options.retryCount ?? 5;
+    this.retryMaxDelay = options.retryMaxDelay ?? 150000;
   }
 }
 
 export class Author implements DocumentSnapshotType {
-  public authorId: string = "";
-  public name: string = "";
-  public paperCount: number = 0;
-  public citationCount: number = 0;
+  readonly authorId: string;
+  readonly name: string;
+  readonly paperCount: number;
+  readonly citationCount: number;
 
-  constructor(options: Partial<Author>) {
-    const allowedOptions = {
-      ...options,
-    } as Author;
-
-    Object.assign(this, allowedOptions);
+  constructor(options?: Partial<Author>) {
+    this.authorId = options?.authorId ?? "";
+    this.name = options?.name ?? "";
+    this.paperCount = options?.paperCount ?? 0;
+    this.citationCount = options?.citationCount ?? 0;
   }
 }
 
 // Reference https://api.semanticscholar.org/api-docs#tag/Paper-Data/operation/get_graph_get_paper
 export class Paper implements DocumentSnapshotType {
-  public doi: string = "";
-  public paperId: string = "";
-  public url: string = "";
-  public semanticScholarUrl: string = "";
-  public title: string = "Untitled";
-  public year: number = 1000;
-  public authors: Author[] = [];
-  public abstract: string = "";
-  public fieldsOfStudy: string[] = [];
-  public publication: string = "";
-  public publicationTypes: string[] = [];
-  public publicationDate: string = "";
-  public tldr: string = "";
-  public references: Omit<Paper, "references">[] = [];
-  public pdfUrl: string = "";
-  public numPages: number = 1;
+  readonly doi: string;
+  readonly paperId: string;
+  readonly url: string;
+  readonly semanticScholarUrl: string;
+  readonly title: string;
+  readonly year: number;
+  readonly authors: Author[];
+  readonly abstract: string;
+  readonly fieldsOfStudy: string[];
+  readonly publication: string;
+  readonly publicationTypes: string[];
+  readonly publicationDate: string;
+  readonly tldr: string;
+  readonly references: Omit<Paper, "references">[];
+  readonly pdfUrl: string;
+  readonly numPages: number;
 
-  constructor(options: Partial<Paper>) {
-    const allowedOptions = {
-      ...options,
-    } as Paper;
-
-    Object.assign(this, allowedOptions);
+  constructor(options?: Partial<Paper>) {
+    this.doi = options?.doi ?? "";
+    this.paperId = options?.paperId ?? "";
+    this.url = options?.url ?? "";
+    this.semanticScholarUrl = options?.semanticScholarUrl ?? "";
+    this.title = options?.title ?? "Untitled";
+    this.year = options?.year ?? 1000;
+    this.authors = options?.authors ?? [];
+    this.abstract = options?.abstract ?? "";
+    this.fieldsOfStudy = options?.fieldsOfStudy ?? [];
+    this.publication = options?.publication ?? "";
+    this.publicationTypes = options?.publicationTypes ?? [];
+    this.publicationDate = options?.publicationDate ?? "";
+    this.tldr = options?.tldr ?? "";
+    this.references = options?.references ?? [];
+    this.pdfUrl = options?.pdfUrl ?? "";
+    this.numPages = options?.numPages ?? 1;
   }
 }
 
 export class Program implements DocumentSnapshotType {
-  public uid: string = "";
-  public userDisplayName: string = "Anonymous";
-  public title: string = "Untitled";
-  public description: string = "";
-  public tags: string[] = [];
-  public papers: Paper[] = [];
-  public coverImageUrl: string = "/default-cover.png";
-  public recordingOptions: RecordingOptions = new RecordingOptions({
-    paperUrls: [],
-  });
-  public recordingLogs: string[] = [];
-  public isRecordingCompleted: boolean = false;
-  public isRecordingFailed: boolean = false;
-  public contentUrl: string = "";
-  public contentDurationSeconds: number = 0; // in seconds
-  public playCount: number = 0;
-  public createdAt: Timestamp = Timestamp.now();
-  public updatedAt: Timestamp = Timestamp.now();
+  public uid: string;
+  public userDisplayName: string;
+  public title: string;
+  public description: string;
+  public tags: string[];
+  public papers: Paper[];
+  public coverImageUrl: string;
+  public recordingOptions: RecordingOptions;
+  public recordingLogs: string[];
+  public isRecordingCompleted: boolean;
+  public isRecordingFailed: boolean;
+  public contentUrl: string;
+  public contentDurationSeconds: number; // in seconds
+  public playCount: number;
+  public createdAt: Timestamp;
+  public updatedAt: Timestamp;
 
   constructor(
-    options: { recordingOptions: RecordingOptions } & Partial<Program>,
+    options: { recordingOptions: RecordingOptions } & Partial<
+      Omit<Program, "createdAt" | "updatedAt">
+    >,
   ) {
-    const allowedOptions = {
-      ...options,
-    } as Program;
-
-    Object.assign(this, allowedOptions);
+    this.uid = options.uid ?? "";
+    this.userDisplayName = options.userDisplayName ?? "Anonymous";
+    this.title = options.title ?? "Untitled";
+    this.description = options.description ?? "";
+    this.tags = options.tags ?? [];
+    this.papers = options.papers ?? [];
+    this.coverImageUrl = options.coverImageUrl ?? "/default-cover.png";
+    this.recordingOptions = options.recordingOptions;
+    this.recordingLogs = options.recordingLogs ?? [];
+    this.isRecordingCompleted = options.isRecordingCompleted ?? false;
+    this.isRecordingFailed = options.isRecordingFailed ?? false;
+    this.contentUrl = options.contentUrl ?? "";
+    this.contentDurationSeconds = options.contentDurationSeconds ?? 0;
+    this.playCount = options.playCount ?? 0;
+    this.createdAt = Timestamp.now();
+    this.updatedAt = Timestamp.now();
   }
+}
+
+function objectifyAuthors(authors: Author[]) {
+  return authors.map((author) => {
+    return { ...author };
+  });
+}
+
+function objectifyPapers(papers: Paper[]) {
+  return papers.map((paper) => {
+    const authors = objectifyAuthors(paper.authors);
+    const references = paper.references.map((reference) => {
+      const authors = objectifyAuthors(reference.authors);
+
+      return { ...reference, authors };
+    });
+
+    return { ...paper, authors, references };
+  });
+}
+
+function objectifyProgram(program: Program) {
+  const papers = objectifyPapers(program.papers);
+  const recordingOptions = { ...program.recordingOptions };
+
+  return { ...program, papers, recordingOptions };
 }
 
 const programsDataConverter = (): FirestoreDataConverter<Program> => ({
   toFirestore: (data: WithFieldValue<Program>) => {
-    const papersObj = (data.papers as Paper[]).map((paper) => {
-      const authors = paper.authors.map((author) => {
-        return { ...author };
-      });
-      const references = paper.references.map((reference) => {
-        const authors = reference.authors.map((author) => {
-          return { ...author };
-        });
-
-        return { ...reference, authors };
-      });
-
-      return { ...paper, authors, references };
-    });
-
-    const recordingOptionsObj = { ...data.recordingOptions };
-
-    return {
-      ...data,
-      papers: papersObj,
-      recordingOptions: recordingOptionsObj,
-    };
+    return objectifyProgram(data as Program);
   },
   fromFirestore: (snapshot: QueryDocumentSnapshot<Program>) => {
     const data = snapshot.data();
 
-    return data;
+    // なぜか必ず型検証に失敗するので検証はしない
+    // const ProgramSchema = z.instanceof(Program).catch((ctx) => {
+    //   console.warn(ctx.error, ctx.error.errors, ctx.input);
+    //   console.info("Repairing Program schema");
 
-    // dataに含まれるフィールドのうち，Program型に存在しないものはomitし，存在するものはdataの値通りにする型変換
-    // TODO いい感じに型変換する方法を考える
-    // const ProgramSchema = z.instanceof(Program);
+    //   // paperUrlsがない場合は例外が発生しうる
+    //   const repaired = new Program({ ...ctx.input });
 
-    // const dataKeys = Object.keys(data) as (keyof typeof data)[];
-    // const ProgramKeys = Object.keys(
-    //   new Program({
-    //     recordingOptions: new RecordingOptions({ paperUrls: [] }),
-    //   }),
-    // ) as (keyof Program)[];
-    // const validKeys = dataKeys.filter((key) => ProgramKeys.includes(key));
-
-    // let filteredData: Partial<Record<keyof Program, any>> = {};
-
-    // validKeys.forEach((key) => {
-    //   if (key in data) {
-    //     const typedKey = key as keyof Program;
-
-    //     filteredData[typedKey] = data[typedKey];
-    //   }
+    //   return repaired;
     // });
 
-    // try {
-    //   // Parse the filtered data to ensure it conforms to ProgramSchema
-    //   const result = ProgramSchema.safeParse({
-    //     ...new Program({
-    //       recordingOptions: new RecordingOptions({ paperUrls: [] }),
-    //     }),
-    //     ...filteredData,
-    //   });
+    // const program = ProgramSchema.parse(data);
 
-    //   if (result.error) {
-    //     console.error(result.error, result.error.errors);
-
-    //     return new Program({
-    //       recordingOptions: new RecordingOptions({ paperUrls: [] }),
-    //     });
-    //   }
-
-    //   return result.data;
-    // } catch (error) {
-    //   console.error(error);
-    //   console.info("Creating an empty Program instance");
-
-    //   return new Program({
-    //     recordingOptions: new RecordingOptions({ paperUrls: [] }),
-    //   });
-    // }
+    return new Program({ ...data });
   },
 });
 
@@ -250,75 +249,75 @@ export async function setSeedData() {
 
   console.log("Document written with ID: ", docRef.id);
 
-  // さらにいくつかのテストデータを追加
+  // // さらにいくつかのテストデータを追加
 
-  // Takenawa, M., Kikuchi, T., Yahagi, Y., Fukushima, S., & Naemura, T. (2022). ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users. ACM SIGGRAPH 2022 Emerging Technologies, 1–2. https://doi.org/10.1145/3532721.3535563
-  docRef = doc(programsRef).withConverter(programsDataConverter());
+  // // Takenawa, M., Kikuchi, T., Yahagi, Y., Fukushima, S., & Naemura, T. (2022). ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users. ACM SIGGRAPH 2022 Emerging Technologies, 1–2. https://doi.org/10.1145/3532721.3535563
+  // docRef = doc(programsRef).withConverter(programsDataConverter());
 
-  await setDoc(
-    docRef,
-    new Program({
-      uid: "uiduidyyyyy",
-      userDisplayName: "Yuchi Yahagi",
-      title:
-        "ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users",
-      tags: ["display", "mid-air image", "tabletop", "square"],
-      papers: [
-        new Paper({
-          doi: "10.1145/3532721.3535563",
-          authors: [
-            new Author({ name: "Mizuki Takenawa" }),
-            new Author({ name: "Tomoyo Kikuchi" }),
-            new Author({ name: "Yuchi Yahagi" }),
-            new Author({ name: "Shogo Fukushima" }),
-            new Author({ name: "Takeshi Naemura" }),
-          ],
-        }),
-      ],
-      coverImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
-      recordingOptions: new RecordingOptions({
-        paperUrls: [
-          "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FTakenawa_et_al_2022_ReQTable.pdf?alt=media&token=3dc8d8b8-b044-45c1-a277-701346687935",
-        ],
-      }),
-    }),
-  );
+  // await setDoc(
+  //   docRef,
+  //   new Program({
+  //     uid: "uiduidyyyyy",
+  //     userDisplayName: "Yuchi Yahagi",
+  //     title:
+  //       "ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users",
+  //     tags: ["display", "mid-air image", "tabletop", "square"],
+  //     papers: [
+  //       new Paper({
+  //         doi: "10.1145/3532721.3535563",
+  //         authors: [
+  //           new Author({ name: "Mizuki Takenawa" }),
+  //           new Author({ name: "Tomoyo Kikuchi" }),
+  //           new Author({ name: "Yuchi Yahagi" }),
+  //           new Author({ name: "Shogo Fukushima" }),
+  //           new Author({ name: "Takeshi Naemura" }),
+  //         ],
+  //       }),
+  //     ],
+  //     coverImageUrl:
+  //       "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
+  //     recordingOptions: new RecordingOptions({
+  //       paperUrls: [
+  //         "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FTakenawa_et_al_2022_ReQTable.pdf?alt=media&token=3dc8d8b8-b044-45c1-a277-701346687935",
+  //       ],
+  //     }),
+  //   }),
+  // );
 
-  console.log("Document written with ID: ", docRef.id);
+  // console.log("Document written with ID: ", docRef.id);
 
-  // Kikuchi, T., Yahagi, Y., Fukushima, S., Sakaguchi, S., & Naemura, T. (2023). AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop. ITE Transactions on Media Technology and Applications, 11(2), 75–87. https://doi.org/10.3169/mta.11.75
-  docRef = doc(programsRef).withConverter(programsDataConverter());
+  // // Kikuchi, T., Yahagi, Y., Fukushima, S., Sakaguchi, S., & Naemura, T. (2023). AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop. ITE Transactions on Media Technology and Applications, 11(2), 75–87. https://doi.org/10.3169/mta.11.75
+  // docRef = doc(programsRef).withConverter(programsDataConverter());
 
-  await setDoc(
-    docRef,
-    new Program({
-      uid: "uiduidzzzzz",
-      userDisplayName: "Yuchi Yahagi",
-      title:
-        "AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop",
-      tags: ["display", "mid-air image", "tabletop", "tall"],
-      papers: [
-        new Paper({
-          doi: "10.3169/mta.11.75",
-          authors: [
-            new Author({ name: "Tomoyo Kikuchi" }),
-            new Author({ name: "Yuchi Yahagi" }),
-            new Author({ name: "Shogo Fukushima" }),
-            new Author({ name: "Saki Sakaguchi" }),
-            new Author({ name: "Takeshi Naemura" }),
-          ],
-        }),
-      ],
-      coverImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
-      recordingOptions: new RecordingOptions({
-        paperUrls: [
-          "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FKikuchi_et_al_2023_AIR-range.pdf?alt=media&token=54302ef6-ca26-419e-a9c9-f7ed4ed6bce9",
-        ],
-      }),
-    }),
-  );
+  // await setDoc(
+  //   docRef,
+  //   new Program({
+  //     uid: "uiduidzzzzz",
+  //     userDisplayName: "Yuchi Yahagi",
+  //     title:
+  //       "AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop",
+  //     tags: ["display", "mid-air image", "tabletop", "tall"],
+  //     papers: [
+  //       new Paper({
+  //         doi: "10.3169/mta.11.75",
+  //         authors: [
+  //           new Author({ name: "Tomoyo Kikuchi" }),
+  //           new Author({ name: "Yuchi Yahagi" }),
+  //           new Author({ name: "Shogo Fukushima" }),
+  //           new Author({ name: "Saki Sakaguchi" }),
+  //           new Author({ name: "Takeshi Naemura" }),
+  //         ],
+  //       }),
+  //     ],
+  //     coverImageUrl:
+  //       "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
+  //     recordingOptions: new RecordingOptions({
+  //       paperUrls: [
+  //         "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FKikuchi_et_al_2023_AIR-range.pdf?alt=media&token=54302ef6-ca26-419e-a9c9-f7ed4ed6bce9",
+  //       ],
+  //     }),
+  //   }),
+  // );
 
-  console.log("Document written with ID: ", docRef.id);
+  // console.log("Document written with ID: ", docRef.id);
 }
