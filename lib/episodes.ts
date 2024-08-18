@@ -16,7 +16,7 @@ import {
 import { db } from "@/lib/firebase/clientApp";
 import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 
-const COLLECTION_ID = "episode";
+const COLLECTION_ID = "episode-test-yahagi";
 
 export class RecordingOptions implements DocumentSnapshotType {
   paperUrls: string[];
