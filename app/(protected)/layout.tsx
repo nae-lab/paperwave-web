@@ -8,8 +8,10 @@ import { User } from "firebase/auth";
 
 export default async function ProtectedPageLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { userJson: string };
 }) {
   const currentUserJSON = getCookie("user", { cookies });
 
@@ -20,6 +22,7 @@ export default async function ProtectedPageLayout({
       const currentUser = JSON.parse(currentUserJSON) as User;
 
       uid = currentUser.uid;
+      params.userJson = currentUserJSON;
     } catch (error) {
       uid = null;
     }

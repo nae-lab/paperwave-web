@@ -11,20 +11,77 @@ import {
   CardBody,
   Input,
   Spacer,
+  Spinner,
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
+import { useDropzone } from "react-dropzone";
 import { Icon } from "@iconify/react";
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { getCookie } from "cookies-next";
 
 import { cn } from "@/lib/cn";
+import { storage } from "@/lib/firebase/clientApp";
 import RowSteps from "@/components/row-steps";
+import { useUserSession } from "@/lib/firebase/userSession";
+
+interface UploadedFileInfo {
+  path: string;
+  url: string;
+}
 
 export default function RecordingPage() {
   const [step, setStep] = React.useState(0);
-  const [isFileUploaded, setIsFileUploaded] = React.useState(true);
+  const [isFileUploading, setIsFileUploading] = React.useState(false);
+  const [uploadedFiles, setUploadedFiles] = React.useState<UploadedFileInfo[]>(
+    [],
+  );
+  const userJson = getCookie("user");
+  const user = useUserSession(userJson ? JSON.parse(userJson) : null);
+
+  const onDrop = React.useCallback(async (acceptedFiles: File[]) => {
+    setIsFileUploading(true);
+    const promises = acceptedFiles.map((file) => {
+      const promise = async (file: File) => {
+        const filePath = `pdf/${user?.uid}_${file.name}`;
+        const fileRef = storageRef(storage, filePath);
+
+        const uploadTask = uploadBytes(fileRef, file);
+
+        console.debug(`Uploading file ${filePath}...`);
+        await uploadTask;
+        console.debug(`File ${filePath} uploaded.`);
+
+        const downloadURL = await getDownloadURL(fileRef);
+
+        setUploadedFiles((prev) => [
+          ...prev,
+          { path: filePath, url: downloadURL },
+        ]);
+      };
+
+      return promise(file);
+    });
+
+    await Promise.all(promises);
+    console.debug("All files uploaded.");
+    setIsFileUploading(false);
+  }, []);
+
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    open: openFilePicker,
+  } = useDropzone({ onDrop });
 
   const handleStepChange = (stepIndex: number) => {
-    if (!isFileUploaded && stepIndex >= 1) {
+    if (uploadedFiles.length === 0 && stepIndex >= 1) {
       return;
     }
 
@@ -34,6 +91,37 @@ export default function RecordingPage() {
     }
 
     setStep(stepIndex);
+  };
+
+  const handleDropzoneClick = () => {
+    openFilePicker();
+  };
+
+  const handleProceedToNextStep = () => {
+    if (uploadedFiles.length === 0) {
+      return;
+    }
+
+    setStep((prev) => prev + 1);
+  };
+
+  const handleBackToPreviousStep = () => {
+    setStep((prev) => prev - 1);
+  };
+
+  const handleFileDelete = async (filePath: string) => {
+    setUploadedFiles((prev) => prev.filter((f) => f.path !== filePath));
+    const fileRef = storageRef(storage, filePath);
+
+    // Delete the file
+    console.debug(`Deleting file ${filePath}...`);
+    await deleteObject(fileRef)
+      .then(() => {
+        console.debug(`File ${filePath} deleted.`);
+      })
+      .catch((error) => {
+        console.error(`Error deleting file ${filePath}: ${error}`);
+      });
   };
 
   return (
@@ -61,23 +149,60 @@ export default function RecordingPage() {
           step === 0 ? "visible" : "hidden",
         ])}
       >
-        <Card isPressable>
-          <CardBody className="flex flex-col items-center justify-center gap-2 bg-default-100 py-7">
-            <p className="text-center text-medium font-bold text-default-foreground">
-              論文PDFをアップロード
-            </p>
-            <p className="text-center text-medium text-default-500">
-              PDFをドラッグ&ドロップするか，クリックして選択してください．
-            </p>
-            <Icon
-              className="mt-5 text-7xl text-default-foreground"
-              icon="solar:file-send-linear"
-            />
-          </CardBody>
-        </Card>
+        <div
+          {...getRootProps()}
+          className="flex w-full flex-col items-stretch justify-stretch"
+        >
+          <input className="hidden h-0 w-0" {...getInputProps()} />
+          <Card
+            isPressable
+            className={cn([isDragActive ? "bg-default-300" : "bg-default-100"])}
+            isDisabled={isFileUploading}
+            onPress={handleDropzoneClick}
+          >
+            <CardBody className="flex flex-col items-center justify-center gap-2 py-7">
+              <p className="text-center text-medium font-bold text-default-foreground">
+                論文PDFをアップロード
+              </p>
+              <p className="text-center text-medium text-default-500">
+                PDFをドラッグ&ドロップするか，クリックして選択してください．
+              </p>
+              {isFileUploading ? (
+                <Spinner color="primary" />
+              ) : (
+                <Icon
+                  className="mt-5 text-7xl text-default-foreground"
+                  icon="solar:file-send-linear"
+                />
+              )}
+            </CardBody>
+          </Card>
+        </div>
+        <ul className="mt-5 flex flex-col items-stretch justify-start gap-2.5">
+          {uploadedFiles.map((file) => (
+            <li
+              key={file.path}
+              className="flex items-center justify-between gap-2.5"
+            >
+              <p className="text-default-foreground">{file.path}</p>
+              <Button
+                className="text-default-500"
+                onClick={() => handleFileDelete(file.path)}
+              >
+                削除
+              </Button>
+            </li>
+          ))}
+        </ul>
         <div className="mt-5 flex justify-end gap-2.5">
-          <Button>PDFをクリア</Button>
-          <Button color="primary">次へ</Button>
+          {/* <Button>PDFをクリア</Button> */}
+          <Button
+            color="primary"
+            isDisabled={uploadedFiles.length === 0}
+            onPress={handleProceedToNextStep}
+          >
+            次へ
+          </Button>
         </div>
       </div>
       <div
@@ -225,7 +350,7 @@ export default function RecordingPage() {
         </Accordion>
         <div className="mt-5 flex justify-start gap-2.5">
           <div className="flex flex-1 gap-2.5 self-stretch">
-            <Button>戻る</Button>
+            <Button onPress={handleBackToPreviousStep}>戻る</Button>
           </div>
           {/* <Button>キャンセル</Button> */}
           <Button color="primary">生成する</Button>
