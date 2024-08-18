@@ -29,7 +29,7 @@ import { siteConfig } from "@/config/site";
 import NavigationTabs from "@/components/navbar/navigation-tabs";
 import NavbarMenu from "@/components/navbar/navbar-menu";
 import UserMenu from "@/components/navbar/usermenu";
-import Breadcrumbs from "@/components/navbar/breadcrumbs";
+// import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 
@@ -60,7 +60,7 @@ export default function Navbar() {
           justify="end"
         >
           <NavbarItem className="hidden sm:flex">
-            <Breadcrumbs />
+            {/* <Breadcrumbs /> */}
           </NavbarItem>
           <Spacer x={6} />
           {/* Search */}

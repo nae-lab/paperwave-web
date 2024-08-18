@@ -6,13 +6,13 @@ import React from "react";
 import { Button } from "@nextui-org/react";
 
 import Player from "@/components/player";
-import { getPrograms, setSeedData } from "@/lib/programs";
+import { getEpisode, setSeedData } from "@/lib/episodes";
 
 const ProgramsPage = () => {
   const [docs, setDocs] = React.useState("");
 
   const handleGetDocs = async () => {
-    const data = await getPrograms();
+    const data = await getEpisode();
 
     setDocs(JSON.stringify(data));
   };
