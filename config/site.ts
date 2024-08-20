@@ -11,7 +11,7 @@ export const routes: Route = {
   },
   recording: {
     label: "収録",
-    href: "/recording",
+    href: "/episodes/new",
   },
   programs: {
     label: "番組一覧",

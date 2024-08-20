@@ -3,34 +3,48 @@
 import "client-only";
 
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+import { Button, Skeleton } from "@nextui-org/react";
 
 import Player from "@/components/player";
-import { getEpisode, setSeedData } from "@/lib/episodes";
+import { Episode, getEpisode, onEpisodeSnapshot } from "@/lib/episodes";
 
-const ProgramsPage = () => {
-  const [docs, setDocs] = React.useState("");
+const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
+  const router = useRouter();
 
-  const handleGetDocs = async () => {
-    const data = await getEpisode();
+  const [episode, setEpisode] = React.useState<Episode | null | undefined>(
+    undefined,
+  );
 
-    setDocs(JSON.stringify(data));
-  };
+  React.useEffect(() => {
+    getEpisode(params.episodeId).then((data) => {
+      setEpisode(data);
+    });
+
+    const unsubscribeSnapshot = onEpisodeSnapshot(params.episodeId, (data) => {
+      setEpisode(data);
+    });
+
+    return unsubscribeSnapshot;
+  }, [params.episodeId]);
+
+  React.useEffect(() => {
+    if (episode === null) {
+      router.push("/not-found");
+    }
+  }, [episode]);
 
   return (
     <div className="flex h-full w-full flex-col flex-nowrap items-stretch justify-start gap-3.5">
       <div className="flex justify-start">
-        <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
-          番組一覧
-        </h1>
+        <Skeleton isLoaded={episode !== null} className="rounded-lg">
+          <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
+            {episode?.title ?? "Loading..."}
+          </h1>
+        </Skeleton>
       </div>
-      <Button onPress={() => setSeedData()}>Set Seed Data</Button>
-      <Button onPress={handleGetDocs}>Get Docs</Button>
-      <p>{docs}</p>
       <div className="flex flex-col items-center justify-start gap-5">
-        <Player programId="hoge" />
-        <Player programId="hoge" />
-        <Player programId="hoge" />
+        <Player programId={params.episodeId} />
       </div>
     </div>
   );

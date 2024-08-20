@@ -9,7 +9,9 @@ import {
   WithFieldValue,
   collection,
   doc,
+  getDoc,
   getDocs,
+  onSnapshot,
   setDoc,
 } from "firebase/firestore";
 
@@ -211,14 +213,48 @@ const episodeDataConverter = (): FirestoreDataConverter<Episode> => ({
   },
 });
 
-export async function getEpisode() {
+export async function getEpisode(episodeId: string) {
+  const episodeRef = doc(db, COLLECTION_ID, episodeId).withConverter(
+    episodeDataConverter(),
+  );
+  const snapshot = await getDoc(episodeRef);
+
+  if (!snapshot.exists()) {
+    console.error(`No document with ID "${episodeId}"!`);
+
+    return null;
+  }
+
+  const episode = snapshot.data();
+
+  return episode;
+}
+
+export function onEpisodeSnapshot(
+  episodeId: string,
+  callback: (episode: Episode) => void,
+) {
+  const episodeRef = doc(db, COLLECTION_ID, episodeId).withConverter(
+    episodeDataConverter(),
+  );
+
+  return onSnapshot(episodeRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const episode = new Episode({ ...snapshot.data() });
+
+      callback(episode);
+    }
+  });
+}
+
+export async function getEpisodeIds(channelId?: string) {
   const episodeRef = collection(db, COLLECTION_ID).withConverter(
     episodeDataConverter(),
   );
   const snapshot = await getDocs(episodeRef);
-  const programs = snapshot.docs.map((doc) => doc.data());
+  const episodeIds = snapshot.docs.map((doc) => (doc.exists() ? doc.id : ""));
 
-  return programs;
+  return episodeIds;
 }
 
 // 新しいプログラムを追加
@@ -232,6 +268,8 @@ export async function setEpisode(episode: Episode) {
   await setDoc(docRef, episode);
 
   console.debug("Episode document written with ID: ", docRef.id);
+
+  return docRef.id;
 }
 
 export async function setSeedData() {

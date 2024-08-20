@@ -3,6 +3,7 @@
 import "client-only";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   Accordion,
   AccordionItem,
@@ -29,26 +30,41 @@ import { cn } from "@/lib/cn";
 import { storage } from "@/lib/firebase/clientApp";
 import RowSteps from "@/components/row-steps";
 import { useUserSession } from "@/lib/firebase/userSession";
+import { Episode, Paper, RecordingOptions, setEpisode } from "@/lib/episodes";
 
 interface UploadedFileInfo {
   path: string;
+  name: string;
   url: string;
 }
 
 export default function RecordingPage() {
+  const router = useRouter();
+
   const [step, setStep] = React.useState(0);
+  const userJson = getCookie("user");
+  const user = useUserSession(userJson ? JSON.parse(userJson) : null);
+
   const [isFileUploading, setIsFileUploading] = React.useState(false);
   const [uploadedFiles, setUploadedFiles] = React.useState<UploadedFileInfo[]>(
     [],
   );
-  const userJson = getCookie("user");
-  const user = useUserSession(userJson ? JSON.parse(userJson) : null);
+
+  const [isGenerateTaskSubmitting, setIsGenerateTaskSubmitting] =
+    React.useState(false);
+
+  const [episodeTitle, setEpisodeTitle] = React.useState("");
+  const [episodeDuration, setEpisodeDuration] = React.useState("15");
+  const [llmModel, setLLMModel] = React.useState("gpt-4o");
+  const [episodeDescription, setEpisodeDescription] = React.useState("");
+  const [episodeKeywords, setEpisodeKeywords] = React.useState("");
+  const [episodeCoverImageURL, setEpisodeCoverImageURL] = React.useState("");
 
   const onDrop = React.useCallback(async (acceptedFiles: File[]) => {
     setIsFileUploading(true);
     const promises = acceptedFiles.map((file) => {
       const promise = async (file: File) => {
-        const filePath = `pdf/${user?.uid}_${file.name}`;
+        const filePath = `pdf/${user?.email || "unknown-user"}/${file.name}`;
         const fileRef = storageRef(storage, filePath);
 
         const uploadTask = uploadBytes(fileRef, file);
@@ -61,7 +77,7 @@ export default function RecordingPage() {
 
         setUploadedFiles((prev) => [
           ...prev,
-          { path: filePath, url: downloadURL },
+          { path: filePath, url: downloadURL, name: file.name },
         ]);
       };
 
@@ -124,6 +140,39 @@ export default function RecordingPage() {
       });
   };
 
+  const handleGenerateEpisode = async () => {
+    setIsGenerateTaskSubmitting(true);
+
+    const recordingOptions = new RecordingOptions({
+      paperUrls: uploadedFiles.map((f) => f.url),
+      minute: parseInt(episodeDuration),
+      llmModel: llmModel,
+    });
+
+    const papers = uploadedFiles.map((f) => {
+      return new Paper({
+        pdfUrl: f.url,
+      });
+    });
+
+    const episode = new Episode({
+      uid: user?.uid || "",
+      userDisplayName: user?.displayName || "Unknown User",
+      title: episodeTitle,
+      description: episodeDescription,
+      tags: episodeKeywords.split(",").map((k) => k.trim()),
+      papers: papers,
+      coverImageUrl: episodeCoverImageURL,
+      recordingOptions: recordingOptions,
+    });
+
+    const episodeId = await setEpisode(episode);
+
+    setIsGenerateTaskSubmitting(false);
+
+    router.push(`/episodes/${episodeId}`);
+  };
+
   return (
     <div className="flex flex-col items-stretch gap-2.5">
       <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
@@ -181,12 +230,14 @@ export default function RecordingPage() {
         <ul className="mt-5 flex flex-col items-stretch justify-start gap-2.5">
           {uploadedFiles.map((file) => (
             <li
-              key={file.path}
-              className="flex items-center justify-between gap-2.5"
+              key={file.name}
+              className="flex max-w-full items-center justify-between gap-2.5"
             >
-              <p className="text-default-foreground">{file.path}</p>
+              <p className="text-ellipsis text-default-foreground">
+                {file.name}
+              </p>
               <Button
-                className="text-default-500"
+                color="danger"
                 onClick={() => handleFileDelete(file.path)}
               >
                 削除
@@ -233,6 +284,8 @@ export default function RecordingPage() {
           labelPlacement="outside"
           placeholder="例: 空中像をつくるワークショップにおいて参加者が直面する困難についての探索的検討"
           type="text"
+          value={episodeTitle}
+          onValueChange={setEpisodeTitle}
         />
         <Input
           defaultValue="15"
@@ -257,6 +310,8 @@ export default function RecordingPage() {
           labelPlacement="outside"
           placeholder="15"
           type="number"
+          value={episodeDuration}
+          onValueChange={setEpisodeDuration}
         />
         <Input
           defaultValue="gpt-4o"
@@ -281,6 +336,8 @@ export default function RecordingPage() {
           labelPlacement="outside"
           placeholder="gpt-4o"
           type="text"
+          value={llmModel}
+          onValueChange={setLLMModel}
         />
 
         <Accordion className="w-full">
@@ -298,6 +355,8 @@ export default function RecordingPage() {
                   </p>
                 }
                 labelPlacement="outside"
+                value={episodeDescription}
+                onValueChange={setEpisodeDescription}
               />
               <Input
                 label={
@@ -320,6 +379,8 @@ export default function RecordingPage() {
                 }
                 labelPlacement="outside"
                 placeholder="HCI, ワークショップ, 空中像, 構築主義, ティンカリング, 質的研究"
+                value={episodeKeywords}
+                onValueChange={setEpisodeKeywords}
               />
 
               <Input
@@ -344,6 +405,8 @@ export default function RecordingPage() {
                 labelPlacement="outside"
                 placeholder="https://example.com/image.jpg"
                 type="url"
+                value={episodeCoverImageURL}
+                onValueChange={setEpisodeCoverImageURL}
               />
             </div>
           </AccordionItem>
@@ -353,7 +416,13 @@ export default function RecordingPage() {
             <Button onPress={handleBackToPreviousStep}>戻る</Button>
           </div>
           {/* <Button>キャンセル</Button> */}
-          <Button color="primary">生成する</Button>
+          <Button
+            color="primary"
+            isLoading={isGenerateTaskSubmitting}
+            onPress={handleGenerateEpisode}
+          >
+            生成する
+          </Button>
         </div>
       </div>
     </div>
