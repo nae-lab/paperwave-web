@@ -164,62 +164,67 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
       <div className="flex flex-col items-center justify-start gap-5">
         <Player episodeId={params.episodeId} />
       </div>
-      <h2 className="text-lg font-bold text-default-foreground lg:text-2xl">
-        Informations
-      </h2>
-      <ScrollShadow
-        orientation="horizontal"
-        className="flex flex-col items-start justify-start overflow-x-scroll"
+      <Skeleton
+        className="rounded-lg"
+        isLoaded={episode !== null && episode !== undefined}
       >
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          PDFs
-        </h3>
-        <ol className="list-decimal gap-2">
-          {episode?.papers.map((paper, index) => (
-            <Link key={index} href={paper.pdfUrl}>
-              <li className="text-sm leading-4">{paper.title}</li>
-            </Link>
-          ))}
-        </ol>
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          Description
-        </h3>
-        <p className="text-sm leading-4">{episode?.description}</p>
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          Tags
-        </h3>
-        <p className="text-sm leading-4">{episode?.tags.join(", ")}</p>
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          User Name
-        </h3>
-        <p className="text-sm leading-4">{episode?.userDisplayName}</p>
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          Created At
-        </h3>
-        <p className="text-sm leading-4">
-          {episode?.createdAt.toDate().toLocaleString()}
-        </p>
-        <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
-          Updated At
-        </h3>
-        <p className="text-sm leading-4">
-          {episode?.updatedAt.toDate().toLocaleString()}
-        </p>
-        {papersInfo}
-      </ScrollShadow>
-      <h2 className="text-lg font-bold text-default-foreground lg:text-2xl">
-        Episode Info JSON
-      </h2>
-      <Accordion className="w-full">
-        <AccordionItem title="Expand to see JSON">
-          <ScrollShadow
-            orientation="horizontal"
-            className="flex flex-col items-start justify-start overflow-x-scroll"
-          >
-            {episodeInfo}
-          </ScrollShadow>
-        </AccordionItem>
-      </Accordion>
+        <h2 className="text-lg font-bold text-default-foreground lg:text-2xl">
+          Informations
+        </h2>
+        <ScrollShadow
+          orientation="horizontal"
+          className="flex flex-col items-start justify-start overflow-x-scroll"
+        >
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            PDFs
+          </h3>
+          <ol className="list-decimal gap-2">
+            {episode?.papers.map((paper, index) => (
+              <Link key={index} href={paper.pdfUrl}>
+                <li className="text-sm leading-4">{paper.title}</li>
+              </Link>
+            ))}
+          </ol>
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            Description
+          </h3>
+          <p className="text-sm leading-4">{episode?.description}</p>
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            Tags
+          </h3>
+          <p className="text-sm leading-4">{episode?.tags.join(", ")}</p>
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            User Name
+          </h3>
+          <p className="text-sm leading-4">{episode?.userDisplayName}</p>
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            Created At
+          </h3>
+          <p className="text-sm leading-4">
+            {episode?.createdAt.toDate().toLocaleString()}
+          </p>
+          <h3 className="text-medium font-bold text-default-foreground lg:text-lg">
+            Updated At
+          </h3>
+          <p className="text-sm leading-4">
+            {episode?.updatedAt.toDate().toLocaleString()}
+          </p>
+          {papersInfo}
+        </ScrollShadow>
+        <h2 className="text-lg font-bold text-default-foreground lg:text-2xl">
+          Episode Info JSON
+        </h2>
+        <Accordion className="w-full">
+          <AccordionItem title="Expand to see JSON">
+            <ScrollShadow
+              orientation="horizontal"
+              className="flex flex-col items-start justify-start overflow-x-scroll"
+            >
+              {episodeInfo}
+            </ScrollShadow>
+          </AccordionItem>
+        </Accordion>
+      </Skeleton>
     </div>
   );
 };
