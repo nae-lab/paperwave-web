@@ -26,37 +26,26 @@ export default function Home({ params }: { params: { userJson: string } }) {
         </h2>
       </div>
 
-      <Skeleton className="flex gap-3 rounded-xl" isLoaded={userLoaded}>
-        {!user ? (
-          <Button
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
-            onPress={handleSignIn}
-          >
-            Sign in with Google
-          </Button>
-        ) : (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <Link href="/channels/me">
-              <ActionCard
-                description="あなたが作成したエピソードの一覧を確認できます。"
-                icon="solar:playlist-bold"
-                title="エピソード一覧"
-              />
-            </Link>
-            <Link href="/episodes/new">
-              <ActionCard
-                description="論文PDFから新しいエピソードを収録します。"
-                icon="solar:microphone-3-bold"
-                title="収録"
-              />
-            </Link>
-          </div>
-        )}
-      </Skeleton>
+      {!user ? (
+        <></>
+      ) : (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Link href="/channels/me">
+            <ActionCard
+              description="あなたが作成したエピソードの一覧を確認できます。"
+              icon="solar:playlist-bold"
+              title="エピソード一覧"
+            />
+          </Link>
+          <Link href="/episodes/new">
+            <ActionCard
+              description="論文PDFから新しいエピソードを収録します。"
+              icon="solar:microphone-3-bold"
+              title="収録"
+            />
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
