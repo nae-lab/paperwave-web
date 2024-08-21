@@ -135,7 +135,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
           <h3 className="pt-2 text-sm font-bold text-default-600 lg:text-lg">
             PDF URL
           </h3>
-          <Link href={episode.papers[i].pdfUrl}>
+          <Link href={episode.papers[i].pdfUrl} target="_blank">
             <p className="truncate text-sm leading-4 sm:indent-6">
               {episode.papers[i].pdfUrl}
             </p>
@@ -180,7 +180,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
           </h3>
           <ol className="list-decimal gap-2">
             {episode?.papers.map((paper, index) => (
-              <Link key={index} href={paper.pdfUrl}>
+              <Link key={index} href={paper.pdfUrl} target="_blank">
                 <li className="text-sm leading-4">{paper.title}</li>
               </Link>
             ))}
