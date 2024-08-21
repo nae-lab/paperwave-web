@@ -104,7 +104,7 @@ export default function Navbar() {
             </Link>
           </NavbarItem>
           {/* Notifications */}
-          <NavbarItem className="flex">
+          {/* <NavbarItem className="flex">
             <Popover offset={12} placement="bottom-end">
               <PopoverTrigger>
                 <Button
@@ -132,7 +132,7 @@ export default function Navbar() {
                 <NotificationsCard className="w-full shadow-none" />
               </PopoverContent>
             </Popover>
-          </NavbarItem>
+          </NavbarItem> */}
           {/* User Menu */}
           <NavbarItem className="px-2">
             <UserMenu initialUserJSON={userJSON} />
