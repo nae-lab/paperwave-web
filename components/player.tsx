@@ -111,7 +111,7 @@ export default function Player(props: PlayerProps) {
 
         <CardBody className="relative before:inset-0 before:h-full before:w-full before:content-['']">
           <div className="flex flex-row flex-wrap items-center justify-around gap-5">
-            <div className="min-w-[120px] max-w-[200px] flex-auto">
+            <div className="min-w-[120px] max-w-[150px] flex-auto">
               <Image
                 alt="cover"
                 className="rounded-xl object-cover"

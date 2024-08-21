@@ -9,8 +9,9 @@ import { title, subtitle } from "@/components/primitives";
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
-export default function Home() {
-  const user = useUserSession(null);
+export default function Home({ params }: { params: { userJson: string } }) {
+  console.log("Home params", params);
+  const { user, userLoaded } = useUserSession(null);
 
   const handleSignIn = () => {
     signInWithGoogle();

@@ -43,7 +43,9 @@ export default function RecordingPage() {
 
   const [step, setStep] = React.useState(0);
   const userJson = getCookie("user");
-  const user = useUserSession(userJson ? JSON.parse(userJson) : null);
+  const { user, userLoaded } = useUserSession(
+    userJson ? JSON.parse(userJson) : null,
+  );
 
   const [isFileUploading, setIsFileUploading] = React.useState(false);
   const [uploadedFiles, setUploadedFiles] = React.useState<UploadedFileInfo[]>(

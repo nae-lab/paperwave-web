@@ -4,7 +4,7 @@ import "client-only";
 
 import React from "react";
 import { useFormState } from "react-dom";
-import { DropdownItem, DropdownMenu } from "@nextui-org/react";
+import { DropdownItem, DropdownMenu, Skeleton } from "@nextui-org/react";
 
 import { siteConfig } from "@/config/site";
 import { ActionResult } from "@/types";
@@ -18,7 +18,7 @@ export default function UserMenuDropdownMenu({
 }: {
   initialUserJSON: string;
 }) {
-  const user = useUserSession(initialUserJSON);
+  const { user, userLoaded } = useUserSession(initialUserJSON);
   const formRef = React.useRef<HTMLFormElement>(null);
   const [isSigningOut, setIsSigningOut] = React.useState(false);
   const [signOutState, signOutFormAction] = useFormState(
@@ -46,7 +46,9 @@ export default function UserMenuDropdownMenu({
 
   const items = [
     <DropdownItem key="profile" className="h-14 gap-2" textValue="プロフィール">
-      <p className="font-semibold">{user?.displayName}</p>
+      <Skeleton isLoaded={userLoaded}>
+        <p className="font-semibold">{user?.displayName}</p>
+      </Skeleton>
     </DropdownItem>,
   ];
 

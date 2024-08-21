@@ -12,7 +12,7 @@ import { useUserSession } from "@/lib/firebase/userSession";
 
 export default function Login() {
   const currentUserJSON = getCookie("user")?.toString() || null;
-  const user = useUserSession(currentUserJSON);
+  const { user, userLoaded } = useUserSession(currentUserJSON);
   const router = useRouter();
 
   if (user) {

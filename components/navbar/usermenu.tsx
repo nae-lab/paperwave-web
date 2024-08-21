@@ -2,7 +2,13 @@
 
 import "client-only";
 
-import { Button, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
+import {
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  Avatar,
+  Skeleton,
+} from "@nextui-org/react";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
@@ -10,7 +16,7 @@ import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
 export default function UserMenu({ initialUserJSON }: { initialUserJSON: string }) {
-  const user = useUserSession(initialUserJSON);
+  const { user, userLoaded } = useUserSession(initialUserJSON);
 
   if (!user) {
     return (
@@ -31,14 +37,16 @@ export default function UserMenu({ initialUserJSON }: { initialUserJSON: string 
     );
 
     return (
-      <Dropdown placement="bottom-end">
-        <DropdownTrigger>
-          <button className="mt-1 h-8 w-8 outline-none transition-transform">
-            {userAvatar}
-          </button>
-        </DropdownTrigger>
-        <UserMenuDropdownMenu initialUserJSON={initialUserJSON} />
-      </Dropdown>
+      <Skeleton isLoaded={userLoaded}>
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <button className="mt-1 h-8 w-8 outline-none transition-transform">
+              {userAvatar}
+            </button>
+          </DropdownTrigger>
+          <UserMenuDropdownMenu initialUserJSON={initialUserJSON} />
+        </Dropdown>
+      </Skeleton>
     );
   }
 }

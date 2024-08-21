@@ -22,12 +22,17 @@ export function useUserSession(initialUser: User | string | null) {
   const [user, setUser] = React.useState<User | null>(
     initialUser as User | null,
   );
+  const [userLoaded, setUserLoaded] = React.useState(user !== null);
   const router = useRouter();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged((authUser) => {
       setUser(authUser);
       setCookie("user", JSON.stringify(authUser));
+
+      if (authUser && !userLoaded) {
+        setUserLoaded(true);
+      }
     });
 
     return () => unsubscribe();
@@ -55,5 +60,5 @@ export function useUserSession(initialUser: User | string | null) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  return user;
+  return { user, userLoaded };
 }

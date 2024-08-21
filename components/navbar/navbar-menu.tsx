@@ -29,7 +29,7 @@ const NavbarMenu = () => {
   const [signOutState, signOutFormAction] = useFormState(signOut, undefined);
   const signOutFormRef = React.useRef<HTMLFormElement>(null);
 
-  const user = useUserSession(null);
+  const { user, userLoaded } = useUserSession(null);
 
   const handleSignIn = () => {
     setIsSigningIn(true);
