@@ -26,6 +26,7 @@ yarn-error.log*
 database-debug.log*
 firebase-debug.log*
 firestore-debug.log*
+ui-debug.log*
 
 # local env files
 .env*.local
