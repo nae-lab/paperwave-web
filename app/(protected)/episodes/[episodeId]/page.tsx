@@ -37,14 +37,17 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
   return (
     <div className="flex h-full w-full flex-col flex-nowrap items-stretch justify-start gap-3.5">
       <div className="flex justify-start">
-        <Skeleton isLoaded={episode !== null} className="rounded-lg">
+        <Skeleton
+          className="rounded-lg"
+          isLoaded={episode !== null && episode !== undefined}
+        >
           <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
             {episode?.title ?? "Loading..."}
           </h1>
         </Skeleton>
       </div>
       <div className="flex flex-col items-center justify-start gap-5">
-        <Player programId={params.episodeId} />
+        <Player episodeId={params.episodeId} />
       </div>
     </div>
   );

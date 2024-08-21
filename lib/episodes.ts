@@ -13,12 +13,15 @@ import {
   getDocs,
   onSnapshot,
   setDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase/clientApp";
 import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 
-const COLLECTION_ID = "episode-test-yahagi";
+const COLLECTION_ID =
+  process.env.NEXT_PUBLIC_FIRESTORE_COLLECTION_ID ?? "episodes-unknown-env";
 
 export class RecordingOptions implements DocumentSnapshotType {
   paperUrls: string[];
@@ -249,11 +252,12 @@ export function onEpisodeSnapshot(
   });
 }
 
-export async function getEpisodeIds(channelId?: string) {
-  const episodeRef = collection(db, COLLECTION_ID).withConverter(
-    episodeDataConverter(),
+export async function getEpisodeIds(channelId: string) {
+  const q = query(
+    collection(db, COLLECTION_ID).withConverter(episodeDataConverter()),
+    where("uid", "==", channelId),
   );
-  const snapshot = await getDocs(episodeRef);
+  const snapshot = await getDocs(q);
   const episodeIds = snapshot.docs.map((doc) => (doc.exists() ? doc.id : ""));
 
   return episodeIds;
@@ -274,121 +278,3 @@ export async function setEpisode(episode: Episode) {
   return docRef.id;
 }
 
-export async function setSeedData() {
-  const episodeCollectionRef = collection(db, COLLECTION_ID).withConverter(
-    episodeDataConverter(),
-  );
-
-  let docRef = doc(episodeCollectionRef);
-
-  // Yahagi, Y., Fukushima, S., Sakaguchi, S., & Naemura, T. (2020). Suppression of floating image degradation using a mechanical vibration of a dihedral corner reflector array. Optics Express, 28(22), 33145–33156. https://doi.org/10.1364/OE.406005
-  await setDoc(
-    docRef,
-    new Episode({
-      uid: "uiduidxxxxx",
-      userDisplayName: "Yuchi Yahagi",
-      title:
-        "Suppression of floating image degradation using a mechanical vibration of a dihedral corner reflector array",
-      tags: ["optics", "DCRA", "vibration", "floating image"],
-      papers: [
-        new Paper({
-          doi: "10.1364/OE.406005",
-          authors: [
-            new Author({ name: "Yuchi Yahagi" }),
-            new Author({ name: "Shogo Fukushima" }),
-            new Author({ name: "Saki Sakaguchi" }),
-            new Author({ name: "Takeshi Naemura" }),
-          ],
-          references: [
-            new Paper({
-              title:
-                "MARIO: Mid-Air Image Rendering with Interactive Optical System",
-              authors: [new Author({ name: "Takeshi Naemura" })],
-            }),
-          ],
-        }),
-      ],
-      coverImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
-      recordingOptions: new RecordingOptions({
-        paperUrls: [
-          "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FYahagi_et_al_2020_Suppression_of_floating_image_degradation_using_a_mechanical_vibration_of_a.pdf?alt=media&token=b6ffa98a-c4ae-4ae5-8e1c-2118ef679446",
-        ],
-      }),
-    }),
-  );
-
-  console.log("Document written with ID: ", docRef.id);
-
-  // // さらにいくつかのテストデータを追加
-
-  // Takenawa, M., Kikuchi, T., Yahagi, Y., Fukushima, S., & Naemura, T. (2022). ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users. ACM SIGGRAPH 2022 Emerging Technologies, 1–2. https://doi.org/10.1145/3532721.3535563
-  docRef = doc(episodeCollectionRef).withConverter(episodeDataConverter());
-
-  await setDoc(
-    docRef,
-    new Episode({
-      uid: "uiduidyyyyy",
-      userDisplayName: "Yuchi Yahagi",
-      title:
-        "ReQTable: Square tabletop display that provides dual-sided mid-air images to each of four users",
-      tags: ["display", "mid-air image", "tabletop", "square"],
-      papers: [
-        new Paper({
-          doi: "10.1145/3532721.3535563",
-          authors: [
-            new Author({ name: "Mizuki Takenawa" }),
-            new Author({ name: "Tomoyo Kikuchi" }),
-            new Author({ name: "Yuchi Yahagi" }),
-            new Author({ name: "Shogo Fukushima" }),
-            new Author({ name: "Takeshi Naemura" }),
-          ],
-        }),
-      ],
-      coverImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
-      recordingOptions: new RecordingOptions({
-        paperUrls: [
-          "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FTakenawa_et_al_2022_ReQTable.pdf?alt=media&token=3dc8d8b8-b044-45c1-a277-701346687935",
-        ],
-      }),
-    }),
-  );
-
-  console.log("Document written with ID: ", docRef.id);
-
-  // Kikuchi, T., Yahagi, Y., Fukushima, S., Sakaguchi, S., & Naemura, T. (2023). AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop. ITE Transactions on Media Technology and Applications, 11(2), 75–87. https://doi.org/10.3169/mta.11.75
-  docRef = doc(episodeCollectionRef).withConverter(episodeDataConverter());
-
-  await setDoc(
-    docRef,
-    new Episode({
-      uid: "uiduidzzzzz",
-      userDisplayName: "Yuchi Yahagi",
-      title:
-        "AIR-range: Designing optical systems to present a tall mid-AIR image with continuous luminance on and above a tabletop",
-      tags: ["display", "mid-air image", "tabletop", "tall"],
-      papers: [
-        new Paper({
-          doi: "10.3169/mta.11.75",
-          authors: [
-            new Author({ name: "Tomoyo Kikuchi" }),
-            new Author({ name: "Yuchi Yahagi" }),
-            new Author({ name: "Shogo Fukushima" }),
-            new Author({ name: "Saki Sakaguchi" }),
-            new Author({ name: "Takeshi Naemura" }),
-          ],
-        }),
-      ],
-      coverImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/coverImage%2Fdefault-cover.png?alt=media&token=1b6ccc06-5c65-4b19-bc09-886ed47e7d04",
-      recordingOptions: new RecordingOptions({
-        paperUrls: [
-          "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/pdf%2FKikuchi_et_al_2023_AIR-range.pdf?alt=media&token=54302ef6-ca26-419e-a9c9-f7ed4ed6bce9",
-        ],
-      }),
-    }),
-  );
-
-  console.log("Document written with ID: ", docRef.id);
-}

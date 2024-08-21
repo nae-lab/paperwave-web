@@ -20,6 +20,7 @@ import {
   Badge,
   Spacer,
 } from "@nextui-org/react";
+import { button as buttonStyles } from "@nextui-org/react";
 import { cookies } from "next/headers";
 import { getCookies, getCookie } from "cookies-next";
 import { Icon } from "@iconify/react";
@@ -87,13 +88,20 @@ export default function Navbar() {
           </NavbarItem>
           {/* Settings */}
           <NavbarItem className="hidden sm:flex">
-            <Button isIconOnly radius="full" variant="light">
+            <Link
+              className={buttonStyles({
+                isIconOnly: true,
+                radius: "full",
+                variant: "light",
+              })}
+              href="/settings"
+            >
               <Icon
                 className="text-default-500"
                 icon="solar:settings-linear"
                 width={24}
               />
-            </Button>
+            </Link>
           </NavbarItem>
           {/* Notifications */}
           <NavbarItem className="flex">

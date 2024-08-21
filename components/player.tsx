@@ -11,23 +11,23 @@ import {
   CardProps,
   Chip,
   Image,
+  Link,
   ScrollShadow,
   Skeleton,
   Spinner,
 } from "@nextui-org/react";
+import { button as buttonStyles } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 
-import { Episode, getEpisode } from "@/lib/episodes";
+import { Episode, getEpisode, onEpisodeSnapshot } from "@/lib/episodes";
+import { cn } from "@/lib/cn";
 
 interface PlayerProps extends CardProps {
-  programId: string;
+  episodeId: string;
 }
 
 export default function Player(props: PlayerProps) {
   const [episode, setEpisode] = React.useState<Episode | null>(null);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const isRecordingCompleted = true;
-  const isRecordingFailed = false;
 
   const authors = React.useMemo(() => {
     if (!episode) return "Unknown Authors";
@@ -51,10 +51,23 @@ export default function Player(props: PlayerProps) {
   }, []);
 
   React.useEffect(() => {
-    getEpisode(props.programId).then((data) => {
+    getEpisode(props.episodeId).then((data) => {
       setEpisode(data);
     });
-  }, [props.programId]);
+  }, [props.episodeId]);
+
+  React.useEffect(() => {
+    console.log("episodeId changed", props.episodeId);
+    getEpisode(props.episodeId).then((data) => {
+      setEpisode(data);
+    });
+
+    const unsubscribeSnapshot = onEpisodeSnapshot(props.episodeId, (data) => {
+      setEpisode(data);
+    });
+
+    return unsubscribeSnapshot;
+  }, [props.episodeId]);
 
   let playerContent = <></>;
 
@@ -81,34 +94,32 @@ export default function Player(props: PlayerProps) {
   }
 
   return (
-    <Skeleton isLoaded={episode !== null} className="rounded-lg">
+    <Skeleton
+      isLoaded={episode !== null}
+      className="flex w-full justify-center rounded-lg"
+    >
       <Card
         {...(props as CardProps)}
-        className="relative max-w-[800px] bg-default-50 p-5 dark:bg-default-100"
+        className="relative w-full max-w-[800px] bg-default-50 p-5 dark:bg-default-100"
       >
-        <Button
-          isIconOnly
-          className="absolute right-4 top-4 z-10 overflow-visible"
-          radius="full"
-          size="sm"
-          variant="light"
-          onPress={() => setIsOpen((prev) => !prev)}
+        <Link
+          className={cn([
+            buttonStyles({
+              isIconOnly: true,
+              radius: "full",
+              size: "sm",
+              variant: "light",
+            }),
+            "absolute right-4 top-4 z-10 overflow-visible",
+          ])}
+          href={`/episodes/${props.episodeId}`}
         >
-          {isOpen ? (
-            <Icon
-              className="text-default-500"
-              icon="solar:close-circle-linear"
-              width={24}
-            />
-          ) : (
-            <Icon
-              className="text-default-500"
-              icon="solar:info-circle-linear"
-              width={24}
-            />
-          )}
-        </Button>
-
+          <Icon
+            className="text-default-500"
+            icon="solar:info-circle-linear"
+            width={24}
+          />
+        </Link>
         <CardBody className="relative before:inset-0 before:h-full before:w-full before:content-['']">
           <div className="flex flex-row flex-wrap items-center justify-around gap-5">
             <div className="min-w-[120px] max-w-[150px] flex-auto">

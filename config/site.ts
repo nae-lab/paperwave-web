@@ -15,7 +15,7 @@ export const routes: Route = {
   },
   programs: {
     label: "番組一覧",
-    href: "/programs",
+    href: "/channels/me",
   },
   about: {
     label: "About",
