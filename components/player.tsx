@@ -14,6 +14,7 @@ import {
   Link,
   ScrollShadow,
   Skeleton,
+  Spacer,
   Spinner,
 } from "@nextui-org/react";
 import { button as buttonStyles } from "@nextui-org/react";
@@ -132,6 +133,21 @@ export default function Player(props: PlayerProps) {
             <div className="flex min-w-[214px] max-w-full flex-1 flex-col items-stretch justify-between gap-4">
               <div className="flex min-w-0 flex-1 items-stretch justify-start gap-3.5">
                 <div className="flex min-w-0 flex-1 flex-col items-stretch justify-start">
+                  <div className="flex flex-1 pb-2.5">
+                    <span className="line-clamp-2 text-ellipsis text-xs font-bold leading-normal text-default-400">
+                      {episode?.createdAt.toDate().toLocaleString([], {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }) || ""}
+                    </span>
+                    <Spacer className="inline" x={1} />
+                    <span className="line-clamp-2 text-ellipsis text-xs font-normal leading-normal text-default-400">
+                      - recorded by {episode?.userDisplayName || "Anonymous"}
+                    </span>
+                  </div>
                   {/* <ScrollShadow
                   hideScrollBar
                   className="w-full overflow-x-scroll pb-1"

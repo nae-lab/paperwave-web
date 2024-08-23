@@ -154,6 +154,7 @@ export default function RecordingPage() {
     const papers = uploadedFiles.map((f) => {
       return new Paper({
         pdfUrl: f.url,
+        title: f.name,
       });
     });
 
@@ -206,9 +207,9 @@ export default function RecordingPage() {
         >
           <input className="hidden h-0 w-0" {...getInputProps()} />
           <Card
-            isPressable
             className={cn([isDragActive ? "bg-default-300" : "bg-default-100"])}
             isDisabled={isFileUploading}
+            isPressable={!isFileUploading}
             onPress={handleDropzoneClick}
           >
             <CardBody className="flex flex-col items-center justify-center gap-2 py-7">
