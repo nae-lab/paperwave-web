@@ -15,6 +15,7 @@ import {
   setDoc,
   query,
   where,
+  orderBy,
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase/clientApp";
@@ -143,12 +144,10 @@ export class Episode implements DocumentSnapshotType {
   playCount: number;
 
   constructor(
-    options: { recordingOptions: RecordingOptions } & Partial<
-      Omit<Episode, "createdAt" | "updatedAt">
-    >,
+    options: { recordingOptions: RecordingOptions } & Partial<Episode>,
   ) {
-    this.createdAt = Timestamp.now();
-    this.updatedAt = Timestamp.now();
+    this.createdAt = options.createdAt ?? Timestamp.now();
+    this.updatedAt = options.updatedAt ?? Timestamp.now();
     this.uid = options.uid ?? "";
     this.userDisplayName = options.userDisplayName ?? "Anonymous";
     this.title = options.title ?? "Untitled";
@@ -256,6 +255,7 @@ export async function getEpisodeIds(channelId: string) {
   const q = query(
     collection(db, COLLECTION_ID).withConverter(episodeDataConverter()),
     where("uid", "==", channelId),
+    orderBy("createdAt", "desc"),
   );
   const snapshot = await getDocs(q);
   const episodeIds = snapshot.docs.map((doc) => (doc.exists() ? doc.id : ""));

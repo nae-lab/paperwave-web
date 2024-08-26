@@ -14,6 +14,7 @@ import {
   Link,
   ScrollShadow,
   Skeleton,
+  Spacer,
   Spinner,
 } from "@nextui-org/react";
 import { button as buttonStyles } from "@nextui-org/react";
@@ -94,68 +95,78 @@ export default function Player(props: PlayerProps) {
   }
 
   return (
-    <Skeleton
-      isLoaded={episode !== null}
-      className="flex w-full justify-center rounded-lg"
-    >
-      <Card
-        {...(props as CardProps)}
-        className="relative w-full max-w-[800px] bg-default-50 p-5 dark:bg-default-100"
+    <div className="relative w-full max-w-[800px] rounded-lg bg-default-50 p-5 shadow-lg dark:bg-default-100">
+      <Link
+        className={cn([
+          buttonStyles({
+            isIconOnly: true,
+            radius: "full",
+            size: "sm",
+            variant: "light",
+          }),
+          "absolute right-4 top-4 z-10 overflow-visible",
+        ])}
+        href={`/episodes/${props.episodeId}`}
       >
-        <Link
-          className={cn([
-            buttonStyles({
-              isIconOnly: true,
-              radius: "full",
-              size: "sm",
-              variant: "light",
-            }),
-            "absolute right-4 top-4 z-10 overflow-visible",
-          ])}
-          href={`/episodes/${props.episodeId}`}
-        >
-          <Icon
-            className="text-default-500"
-            icon="solar:info-circle-linear"
-            width={24}
-          />
-        </Link>
-        <CardBody className="relative before:inset-0 before:h-full before:w-full before:content-['']">
-          <div className="flex flex-row flex-wrap items-center justify-around gap-5">
-            <div className="min-w-[120px] max-w-[150px] flex-auto">
+        <Icon
+          className="text-default-500"
+          icon="solar:info-circle-linear"
+          width={24}
+        />
+      </Link>
+      <div className="relative before:inset-0 before:h-full before:w-full before:content-['']">
+        <div className="flex flex-row flex-wrap items-center justify-around gap-5">
+          <div className="min-w-[120px] max-w-[150px] flex-auto">
+            <Skeleton isLoaded={episode !== null}>
+              {" "}
               <Image
                 alt="cover"
                 className="rounded-xl object-cover"
-                src="/default-cover.png"
+                src={episode?.coverImageUrl}
               />
-            </div>
-            <div className="flex min-w-[214px] max-w-full flex-1 flex-col items-stretch justify-between gap-4">
-              <div className="flex min-w-0 flex-1 items-stretch justify-start gap-3.5">
-                <div className="flex min-w-0 flex-1 flex-col items-stretch justify-start">
-                  {/* <ScrollShadow
+            </Skeleton>
+          </div>
+          <div className="flex min-w-[214px] max-w-full flex-1 flex-col items-stretch justify-between gap-4">
+            <div className="flex min-w-0 flex-1 items-stretch justify-start gap-3.5">
+              <div className="flex min-w-0 flex-1 flex-col items-stretch justify-start">
+                <div className="flex flex-1 pb-2.5">
+                  <span className="line-clamp-2 text-ellipsis text-xs font-bold leading-normal text-default-400">
+                    {episode?.createdAt.toDate().toLocaleString([], {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }) || ""}
+                  </span>
+                  <Spacer className="inline" x={1} />
+                  <span className="line-clamp-2 text-ellipsis text-xs font-normal leading-normal text-default-400">
+                    - recorded by {episode?.userDisplayName || "Anonymous"}
+                  </span>
+                </div>
+                {/* <ScrollShadow
                   hideScrollBar
                   className="w-full overflow-x-scroll pb-1"
                   orientation="horizontal"
                 >
                   {tags}
                 </ScrollShadow> */}
-                  <div className="flex flex-1">
-                    <h2 className="line-clamp-2 text-ellipsis font-bold leading-normal">
-                      {episode?.title || "Loading..."}
-                    </h2>
-                  </div>
-                  <div className="flex flex-1">
-                    <p className="line-clamp-2 text-ellipsis font-normal leading-normal text-default-600">
-                      {authors ?? "Loading..."}
-                    </p>
-                  </div>
+                <div className="flex flex-1">
+                  <h2 className="line-clamp-2 text-ellipsis font-bold leading-normal">
+                    {episode?.title || "Loading..."}
+                  </h2>
+                </div>
+                <div className="flex flex-1">
+                  <p className="line-clamp-2 text-ellipsis font-normal leading-normal text-default-600">
+                    {authors ?? "Loading..."}
+                  </p>
                 </div>
               </div>
-              {playerContent}
             </div>
+            {playerContent}
           </div>
-        </CardBody>
-      </Card>
-    </Skeleton>
+        </div>
+      </div>
+    </div>
   );
 }

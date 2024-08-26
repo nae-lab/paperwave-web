@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentProps } from "react";
-import type { ButtonProps } from "@nextui-org/react";
+import { ScrollShadow, type ButtonProps } from "@nextui-org/react";
 
 import React from "react";
 import { useControlledState } from "@react-stately/utils";
@@ -160,116 +160,126 @@ const RowSteps = React.forwardRef<HTMLButtonElement, RowStepsProps>(
     }, [color, className]);
 
     return (
-      <nav
-        aria-label="Progress"
+      <ScrollShadow
         className="-my-4 max-w-fit overflow-x-scroll py-4"
+        orientation="horizontal"
+        hideScrollBar={true}
       >
-        <ol
-          className={cn("flex flex-row flex-nowrap gap-x-3", colors, className)}
+        <nav
+          aria-label="Progress"
+          // className="-my-4 max-w-fit overflow-x-scroll py-4"
         >
-          {steps?.map((step, stepIdx) => {
-            let status =
-              currentStep === stepIdx
-                ? "active"
-                : currentStep < stepIdx
-                  ? "inactive"
-                  : "complete";
+          <ol
+            className={cn(
+              "flex flex-row flex-nowrap gap-x-3",
+              colors,
+              className,
+            )}
+          >
+            {steps?.map((step, stepIdx) => {
+              let status =
+                currentStep === stepIdx
+                  ? "active"
+                  : currentStep < stepIdx
+                    ? "inactive"
+                    : "complete";
 
-            return (
-              <li
-                key={stepIdx}
-                className="relative flex w-full items-center pr-12"
-              >
-                <button
+              return (
+                <li
                   key={stepIdx}
-                  ref={ref}
-                  aria-current={status === "active" ? "step" : undefined}
-                  className={cn(
-                    "group flex w-full cursor-pointer flex-row items-center justify-center gap-x-3 rounded-large py-2.5",
-                    stepClassName,
-                  )}
-                  onClick={() => setCurrentStep(stepIdx)}
-                  {...props}
+                  className="relative flex w-full items-center pr-12"
                 >
-                  <div className="relative flex h-full items-center">
-                    <LazyMotion features={domAnimation}>
-                      <m.div animate={status} className="relative">
-                        <m.div
-                          className={cn(
-                            "relative flex h-[34px] w-[34px] items-center justify-center rounded-full border-medium text-large font-semibold text-default-foreground",
-                            {
-                              "shadow-lg": status === "complete",
-                            },
-                          )}
-                          initial={false}
-                          transition={{ duration: 0.25 }}
-                          variants={{
-                            inactive: {
-                              backgroundColor: "transparent",
-                              borderColor: "var(--inactive-border-color)",
-                              color: "var(--inactive-color)",
-                            },
-                            active: {
-                              backgroundColor: "transparent",
-                              borderColor: "var(--active-border-color)",
-                              color: "var(--active-color)",
-                            },
-                            complete: {
-                              backgroundColor:
-                                "var(--complete-background-color)",
-                              borderColor: "var(--complete-border-color)",
-                            },
-                          }}
-                        >
-                          <div className="flex items-center justify-center">
-                            {status === "complete" ? (
-                              <CheckIcon className="h-6 w-6 text-[var(--active-fg-color)]" />
-                            ) : (
-                              <span>{stepIdx + 1}</span>
+                  <button
+                    key={stepIdx}
+                    ref={ref}
+                    aria-current={status === "active" ? "step" : undefined}
+                    className={cn(
+                      "group flex w-full cursor-pointer flex-row items-center justify-center gap-x-3 rounded-large py-2.5",
+                      stepClassName,
+                    )}
+                    onClick={() => setCurrentStep(stepIdx)}
+                    {...props}
+                  >
+                    <div className="relative flex h-full items-center">
+                      <LazyMotion features={domAnimation}>
+                        <m.div animate={status} className="relative">
+                          <m.div
+                            className={cn(
+                              "relative flex h-[34px] w-[34px] items-center justify-center rounded-full border-medium text-large font-semibold text-default-foreground",
+                              {
+                                "shadow-lg": status === "complete",
+                              },
                             )}
-                          </div>
+                            initial={false}
+                            transition={{ duration: 0.25 }}
+                            variants={{
+                              inactive: {
+                                backgroundColor: "transparent",
+                                borderColor: "var(--inactive-border-color)",
+                                color: "var(--inactive-color)",
+                              },
+                              active: {
+                                backgroundColor: "transparent",
+                                borderColor: "var(--active-border-color)",
+                                color: "var(--active-color)",
+                              },
+                              complete: {
+                                backgroundColor:
+                                  "var(--complete-background-color)",
+                                borderColor: "var(--complete-border-color)",
+                              },
+                            }}
+                          >
+                            <div className="flex items-center justify-center">
+                              {status === "complete" ? (
+                                <CheckIcon className="h-6 w-6 text-[var(--active-fg-color)]" />
+                              ) : (
+                                <span>{stepIdx + 1}</span>
+                              )}
+                            </div>
+                          </m.div>
                         </m.div>
-                      </m.div>
-                    </LazyMotion>
-                  </div>
-                  <div className="max-w-full flex-1 text-start">
-                    <div
-                      className={cn(
-                        "break-keep text-small font-medium text-default-foreground transition-[color,opacity] duration-300 group-active:opacity-80 lg:text-medium",
-                        {
-                          "text-default-500": status === "inactive",
-                        },
-                      )}
-                    >
-                      {step.title}
+                      </LazyMotion>
                     </div>
-                  </div>
-                  {stepIdx < steps.length - 1 && !hideProgressBars && (
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute right-0 w-10 flex-none items-center"
-                      style={{
-                        // @ts-ignore
-                        "--idx": stepIdx,
-                      }}
-                    >
+                    <div className="max-w-full flex-1 text-start">
                       <div
                         className={cn(
-                          "relative h-0.5 w-full bg-[var(--inactive-bar-color)] transition-colors duration-300",
-                          "after:absolute after:block after:h-full after:w-0 after:bg-[var(--active-border-color)] after:transition-[width] after:duration-300 after:content-['']",
+                          "break-keep text-small font-medium text-default-foreground transition-[color,opacity] duration-300 group-active:opacity-80 lg:text-medium",
                           {
-                            "after:w-full": stepIdx < currentStep,
+                            "text-default-500": status === "inactive",
                           },
                         )}
-                      />
+                      >
+                        {step.title}
+                      </div>
                     </div>
-                  )}
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
+                    {stepIdx < steps.length - 1 && !hideProgressBars && (
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-0 w-10 flex-none items-center"
+                        style={{
+                          // @ts-ignore
+                          "--idx": stepIdx,
+                        }}
+                      >
+                        <div
+                          className={cn(
+                            "relative h-0.5 w-full bg-[var(--inactive-bar-color)] transition-colors duration-300",
+                            "after:absolute after:block after:h-full after:w-0 after:bg-[var(--active-border-color)] after:transition-[width] after:duration-300 after:content-['']",
+                            {
+                              "after:w-full": stepIdx < currentStep,
+                            },
+                          )}
+                        />
+                      </div>
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      </ScrollShadow>
     );
   },
 );

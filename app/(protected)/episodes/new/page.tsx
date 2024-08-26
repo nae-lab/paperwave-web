@@ -111,9 +111,13 @@ export default function RecordingPage() {
     setStep(stepIndex);
   };
 
-  const handleDropzoneClick = () => {
+  const handleDropzoneClick = React.useCallback(() => {
+    console.log("isFileUploading", isFileUploading);
+    // Prevent file picker from opening when uploading
+    if (isFileUploading) return;
+
     openFilePicker();
-  };
+  }, [isFileUploading]);
 
   const handleProceedToNextStep = () => {
     if (uploadedFiles.length === 0) {
@@ -154,6 +158,7 @@ export default function RecordingPage() {
     const papers = uploadedFiles.map((f) => {
       return new Paper({
         pdfUrl: f.url,
+        title: f.name,
       });
     });
 
@@ -164,7 +169,7 @@ export default function RecordingPage() {
       description: episodeDescription,
       tags: episodeKeywords.split(",").map((k) => k.trim()),
       papers: papers,
-      coverImageUrl: episodeCoverImageURL,
+      coverImageUrl: episodeCoverImageURL || "/default-cover.png",
       recordingOptions: recordingOptions,
     });
 
@@ -206,9 +211,12 @@ export default function RecordingPage() {
         >
           <input className="hidden h-0 w-0" {...getInputProps()} />
           <Card
-            isPressable
-            className={cn([isDragActive ? "bg-default-300" : "bg-default-100"])}
+            className={cn([
+              isDragActive ? "bg-default-300" : "bg-default-100",
+              "h-80",
+            ])}
             isDisabled={isFileUploading}
+            isPressable={!isFileUploading}
             onPress={handleDropzoneClick}
           >
             <CardBody className="flex flex-col items-center justify-center gap-2 py-7">
@@ -218,14 +226,16 @@ export default function RecordingPage() {
               <p className="text-center text-medium text-default-500">
                 PDFをドラッグ&ドロップするか，クリックして選択してください．
               </p>
-              {isFileUploading ? (
-                <Spinner color="primary" />
-              ) : (
-                <Icon
-                  className="mt-5 text-7xl text-default-foreground"
-                  icon="solar:file-send-linear"
-                />
-              )}
+              <div className="flex h-20 justify-center">
+                {isFileUploading ? (
+                  <Spinner color="primary" />
+                ) : (
+                  <Icon
+                    className="mt-5 text-7xl text-default-foreground"
+                    icon="solar:file-send-linear"
+                  />
+                )}
+              </div>
             </CardBody>
           </Card>
         </div>
