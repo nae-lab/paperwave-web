@@ -24,7 +24,7 @@ const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
   }, [user, userLoaded]);
 
   const contents = episodesReady ? (
-    <div className="flex flex-col items-stretch justify-start gap-5">
+    <div className="flex flex-col items-center justify-start gap-5">
       {episodeIds.map((episodeId) => {
         return <Player key={episodeId} episodeId={episodeId} />;
       })}
