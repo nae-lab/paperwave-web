@@ -169,7 +169,7 @@ export default function RecordingPage() {
       description: episodeDescription,
       tags: episodeKeywords.split(",").map((k) => k.trim()),
       papers: papers,
-      coverImageUrl: episodeCoverImageURL,
+      coverImageUrl: episodeCoverImageURL || "/default-cover.png",
       recordingOptions: recordingOptions,
     });
 
