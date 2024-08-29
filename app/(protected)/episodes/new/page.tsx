@@ -356,7 +356,8 @@ export default function RecordingPage() {
                 variant="bordered"
               >
                 <p className="block w-full text-left text-inherit">
-                  {LanguageLabels[episodeLanguage] || "Select Language..."}
+                  {LanguageLabels[episodeLanguage as LanguageOptions] ||
+                    "Select Language..."}
                 </p>
               </Button>
             </DropdownTrigger>
