@@ -29,7 +29,7 @@ export default async function ProtectedPageLayout({
   }
 
   if (!uid) {
-    redirect("/login");
+    redirect(`/login`);
   }
 
   return <>{children}</>;

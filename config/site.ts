@@ -10,19 +10,19 @@ export const routes: Route = {
     href: "/",
   },
   recording: {
-    label: "収録",
+    label: "Recording",
     href: "/episodes/new",
   },
-  programs: {
-    label: "番組一覧",
+  episodes: {
+    label: "Episodes",
     href: "/channels/me",
   },
-  about: {
-    label: "About",
-    href: "/about",
+  channels: {
+    label: "Channels",
+    href: "/channels",
   },
   settings: {
-    label: "設定",
+    label: "Settings",
     href: "/settings",
     notification: {
       label: "通知",
@@ -46,9 +46,14 @@ export const routes: Route = {
 export const siteConfig = {
   name: "PaperWave",
   description: "Voicing Papers, Bringing Research to Life.",
-  tabItems: [routes.programs, routes.recording],
+  tabItems: [routes.episodes, routes.channels, routes.recording],
   navMenuItemsSignedOut: [routes.home],
-  navMenuItemsSignedIn: [routes.home],
+  navMenuItemsSignedIn: [
+    routes.home,
+    routes.episodes,
+    routes.channels,
+    routes.recording,
+  ],
   userMenuItems: [routes.settings],
   settingTabItems: [],
   adminSettingTabItems: [],

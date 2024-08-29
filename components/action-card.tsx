@@ -9,10 +9,10 @@ import { Icon } from "@iconify/react";
 import { cn } from "@/lib/cn";
 
 export type ActionCardProps = CardProps & {
-  icon: string;
+  icon: string | React.ReactNode;
   title: string;
   color?: "primary" | "secondary" | "warning" | "danger";
-  description: string;
+  description: string | React.ReactNode;
 };
 
 const ActionCard = React.forwardRef<HTMLDivElement, ActionCardProps>(
@@ -64,11 +64,15 @@ const ActionCard = React.forwardRef<HTMLDivElement, ActionCardProps>(
         <CardBody className="flex h-full flex-row items-start gap-3 p-4">
           <div
             className={cn(
-              "item-center flex rounded-medium border p-2",
+              "item-center flex shrink-0 rounded-medium border p-2",
               colors?.iconWrapper,
             )}
           >
-            <Icon className={colors?.icon} icon={icon} width={24} />
+            {typeof icon === "string" ? (
+              <Icon className={colors?.icon} icon={icon} width={24} />
+            ) : (
+              <div className="flex h-full w-full items-center">{icon}</div>
+            )}
           </div>
           <div className="flex flex-col">
             <p className="text-medium">{title}</p>

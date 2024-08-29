@@ -2,17 +2,15 @@ import "server-cli-only";
 
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
+import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
-import { getCookie } from "cookies-next";
-import { cookies } from "next/headers";
-import { User } from "firebase/auth";
 
 // Force next.js to treat this route as server-side rendered
 // Without this line, during the build process, next.js will treat this route as static and build a static HTML file for it
