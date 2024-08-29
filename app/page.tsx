@@ -32,13 +32,23 @@ export default function Home({ params }: { params: { userJson: string } }) {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Link href="/channels/me">
             <ActionCard
+              className="w-full"
               description="あなたが作成したエピソードの一覧を確認できます。"
               icon="solar:playlist-bold"
               title="エピソード一覧"
             />
           </Link>
+          <Link href="/channels">
+            <ActionCard
+              className="w-full"
+              description="他のユーザーのチャンネル一覧を確認できます。"
+              icon="solar:radio-linear"
+              title="チャンネル一覧"
+            />
+          </Link>
           <Link href="/episodes/new">
             <ActionCard
+              className="w-full"
               description="論文PDFから新しいエピソードを収録します。"
               icon="solar:microphone-3-bold"
               title="収録"

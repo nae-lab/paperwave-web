@@ -24,9 +24,18 @@ import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 const COLLECTION_ID =
   process.env.NEXT_PUBLIC_FIRESTORE_COLLECTION_ID ?? "episodes-unknown-env";
 
+export type LanguageOptions = "en" | "ja" | "ko";
+
+export const LanguageLabels: { [key in LanguageOptions]: string } = {
+  en: "English",
+  ja: "日本語",
+  ko: "한국어",
+};
+
 export class RecordingOptions implements DocumentSnapshotType {
   paperUrls: string[];
   minute: number;
+  language: LanguageOptions;
   bgm: string;
   bgmVolume: number;
   llmModel: string;
@@ -44,6 +53,7 @@ export class RecordingOptions implements DocumentSnapshotType {
 
     this.paperUrls = options.paperUrls ?? [];
     this.minute = options.minute ?? 15;
+    this.language = options.language ?? "en";
     this.bgm =
       options.bgm ??
       "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/bgm%2Fpodcast-jazz-music.mp3?alt=media&token=0b890308-01aa-4f3c-b206-033f6f684d8e";
@@ -277,4 +287,3 @@ export async function setEpisode(episode: Episode) {
 
   return docRef.id;
 }
-
