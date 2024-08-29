@@ -10,6 +10,10 @@ import {
   Button,
   Card,
   CardBody,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Input,
   Spacer,
   Spinner,
@@ -30,7 +34,14 @@ import { cn } from "@/lib/cn";
 import { storage } from "@/lib/firebase/clientApp";
 import RowSteps from "@/components/row-steps";
 import { useUserSession } from "@/lib/firebase/userSession";
-import { Episode, Paper, RecordingOptions, setEpisode } from "@/lib/episodes";
+import {
+  Episode,
+  LanguageLabels,
+  LanguageOptions,
+  Paper,
+  RecordingOptions,
+  setEpisode,
+} from "@/lib/episodes";
 
 interface UploadedFileInfo {
   path: string;
@@ -57,6 +68,7 @@ export default function RecordingPage() {
 
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
+  const [episodeLanguage, setEpisodeLanguage] = React.useState("en");
   const [llmModel, setLLMModel] = React.useState("gpt-4o");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
@@ -149,9 +161,18 @@ export default function RecordingPage() {
   const handleGenerateEpisode = async () => {
     setIsGenerateTaskSubmitting(true);
 
+    let language: LanguageOptions;
+
+    if (Object.keys(LanguageLabels).includes(episodeLanguage) === false) {
+      language = "en";
+    } else {
+      language = episodeLanguage as LanguageOptions;
+    }
+
     const recordingOptions = new RecordingOptions({
       paperUrls: uploadedFiles.map((f) => f.url),
       minute: parseInt(episodeDuration),
+      language: language,
       llmModel: llmModel,
     });
 
@@ -325,6 +346,36 @@ export default function RecordingPage() {
           value={episodeDuration}
           onValueChange={setEpisodeDuration}
         />
+        <div className="flex flex-col items-stretch justify-start">
+          <p className="pb-2 text-small font-medium text-foreground">言語</p>
+          <Dropdown className="flex" type="listbox">
+            <DropdownTrigger>
+              <Button
+                className="w-full capitalize"
+                color="default"
+                variant="bordered"
+              >
+                <p className="block w-full text-left text-inherit">
+                  {LanguageLabels[episodeLanguage] || "Select Language..."}
+                </p>
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="Language"
+              selectedKeys={episodeLanguage}
+              selectionMode="single"
+              variant="flat"
+              onSelectionChange={(selected) => {
+                setEpisodeLanguage(selected.currentKey || "en");
+              }}
+            >
+              <DropdownItem key="en">{LanguageLabels["en"]}</DropdownItem>
+              <DropdownItem key="ja">{LanguageLabels["ja"]}</DropdownItem>
+              <DropdownItem key="ko">{LanguageLabels["ko"]}</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
         <Input
           defaultValue="gpt-4o"
           label={
