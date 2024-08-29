@@ -7,21 +7,17 @@ import { Spinner } from "@nextui-org/react";
 
 import Player from "@/components/player";
 import { getEpisodeIds } from "@/lib/episodes";
-import { useUserSession } from "@/lib/firebase/userSession";
 
 const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
-  const { user, userLoaded } = useUserSession(null);
   const [episodeIds, setEpisodeIds] = React.useState<string[]>([]);
   const [episodesReady, setEpisodesReady] = React.useState(false);
 
   React.useEffect(() => {
-    if (userLoaded && user) {
-      getEpisodeIds(params.channelId).then((_episodeIds) => {
-        setEpisodeIds(_episodeIds);
-        setEpisodesReady(true);
-      });
-    }
-  }, [user, userLoaded]);
+    getEpisodeIds(params.channelId).then((_episodeIds) => {
+      setEpisodeIds(_episodeIds);
+      setEpisodesReady(true);
+    });
+  }, []);
 
   const contents = episodesReady ? (
     <div className="flex flex-col items-center justify-start gap-5">
