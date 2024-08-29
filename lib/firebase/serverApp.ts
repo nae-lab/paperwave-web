@@ -17,9 +17,9 @@ export async function getFirebaseAdminApp() {
     ...firebaseAdminConfig,
   };
 
-  if (getApp()) {
+  try {
     return getApp();
-  } else {
+  } catch (e) {
     return initializeApp({
       credential: credential.cert(serviceAccount),
       storageBucket: firebaseConfig.storageBucket,
