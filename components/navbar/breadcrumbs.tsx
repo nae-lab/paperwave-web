@@ -6,9 +6,9 @@ import {
   BreadcrumbItem,
   Link,
 } from "@nextui-org/react";
+import { capitalize } from "@nextui-org/shared-utils";
 
 import { routes } from "@/config/site";
-import { capitalize } from "@/lib/utils";
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
