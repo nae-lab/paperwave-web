@@ -1,53 +1,57 @@
-# Next.js & NextUI Template
+# PaperWave Web
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+## Introduction
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+This repository contains the source code for the PaperWave Web.
+PaperWave Web works with [PaperWave CLI](https://github.com/nae-lab/paperwave-cli).
 
-## Technologies Used
+PaperWave was developed as research project.
+You can read the paper [here](https://arxiv.org/abs/2410.15023).
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Cite this work
+
+> Yuchi Yahagi, Rintaro Chujo, Yuga Harada, Changyo Han, Kohei Sugiyama, and Takeshi Naemura. 2024. PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM.  https://doi.org/10.48550/arXiv.2410.15023
+
+```bibtex
+@misc{Yahagi.2024.PaperWaveListeningResearchPapers,
+  title = {PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM},
+  author = {Yahagi, Yuchi and Chujo, Rintaro and Harada, Yuga and Han, Changyo and Sugiyama, Kohei and Naemura, Takeshi},
+  year = {2024},
+  number = {arXiv:2410.15023},
+  eprint = {2410.15023},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2410.15023},
+}
+```
 
 ## How to Use
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
-
 ### Install dependencies
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Recommended package manager is `pnpm`.
 
-```bash
-npm install
+```sh
+pnpm install
 ```
 
 ### Run the development server
 
-```bash
-npm run dev
+```sh
+pnpm dev
 ```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+Copyright 2024 Naemura Laboratory, the University of Tokyo
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
