@@ -29,6 +29,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { getCookie } from "cookies-next";
+import { useLocale, useTranslations } from "next-intl";
 
 import { cn } from "@/lib/cn";
 import { storage } from "@/lib/firebase/clientApp";
@@ -51,6 +52,8 @@ interface UploadedFileInfo {
 
 export default function RecordingPage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations("Recording");
 
   const [step, setStep] = React.useState(0);
   const userJson = getCookie("user");
@@ -68,7 +71,7 @@ export default function RecordingPage() {
 
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
-  const [episodeLanguage, setEpisodeLanguage] = React.useState("en");
+  const [episodeLanguage, setEpisodeLanguage] = React.useState(locale);
   const [llmModel, setLLMModel] = React.useState("gpt-4o");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
@@ -115,7 +118,7 @@ export default function RecordingPage() {
       return;
     }
 
-    // 2には遷移させない
+    // Prevent skipping to the last step without uploading files
     if (stepIndex === 2) {
       return;
     }
@@ -204,18 +207,18 @@ export default function RecordingPage() {
   return (
     <div className="flex flex-col items-stretch gap-2.5">
       <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
-        収録
+        {t("Recording")}
       </h1>
       <h2 className="text-small text-default-500">
-        論文のPDFから新規エピソードを生成します．
+        {t("Generate a new episode from research paper PDFs")}
       </h2>
       <div className="flex justify-center">
         <RowSteps
           currentStep={step}
           steps={[
-            { title: "論文PDFのアップロード" },
-            { title: "エピソードの生成" },
-            { title: "エピソードの確認" },
+            { title: t("Upload Research Paper PDFs") },
+            { title: t("Recording Settings") },
+            { title: t("Check the Result") },
           ]}
           onStepChange={handleStepChange}
         />
@@ -242,10 +245,10 @@ export default function RecordingPage() {
           >
             <CardBody className="flex flex-col items-center justify-center gap-2 py-7">
               <p className="text-center text-medium font-bold text-default-foreground">
-                論文PDFをアップロード
+                {t("Upload Research Paper PDFs")}
               </p>
               <p className="text-center text-medium text-default-500">
-                PDFをドラッグ&ドロップするか，クリックして選択してください．
+                {t("Drag and drop PDFs or click this box to select")}
               </p>
               <div className="flex h-20 justify-center">
                 {isFileUploading ? (
@@ -273,19 +276,18 @@ export default function RecordingPage() {
                 color="danger"
                 onClick={() => handleFileDelete(file.path)}
               >
-                削除
+                {t("Delete")}
               </Button>
             </li>
           ))}
         </ul>
         <div className="mt-5 flex justify-end gap-2.5">
-          {/* <Button>PDFをクリア</Button> */}
           <Button
             color="primary"
             isDisabled={uploadedFiles.length === 0}
             onPress={handleProceedToNextStep}
           >
-            次へ
+            {t("Next")}
           </Button>
         </div>
       </div>
@@ -299,13 +301,15 @@ export default function RecordingPage() {
           label={
             <Tooltip
               className="inline text-inherit"
-              content="生成するラジオ番組エピソードのタイトルです．一覧でタイトルとして表示されます．"
+              content={t(
+                "Title of the podcast to be generated Displayed as a title in the list",
+              )}
               delay={500}
               placement="right"
               showArrow={true}
             >
               <p className="text-inherit">
-                エピソードのタイトル
+                {t("Episode Title")}
                 <Spacer className="inline" x={1} />
                 <Icon
                   className="inline text-inherit"
@@ -315,7 +319,9 @@ export default function RecordingPage() {
             </Tooltip>
           }
           labelPlacement="outside"
-          placeholder="例: 空中像をつくるワークショップにおいて参加者が直面する困難についての探索的検討"
+          placeholder={t(
+            "eg PaperWave Listening to Research Papers as Conversational Podcasts Scripted by LLM",
+          )}
           type="text"
           value={episodeTitle}
           onValueChange={setEpisodeTitle}
@@ -325,13 +331,15 @@ export default function RecordingPage() {
           label={
             <Tooltip
               className="inline"
-              content="概ね指定された通りの分数で作ります．論文のコンテンツに対して指定時間が長すぎると同じ内容を繰り返し話す番組が生成されやすくなります．"
+              content={t(
+                "Podcasts are generated for an approximate specified length of time If the specified time is too long for the content of the paper programs that repeat the same content are likely to be generated",
+              )}
               delay={500}
               placement="right"
               showArrow={true}
             >
               <p className="text-inherit">
-                エピソードの長さ (分)
+                {t("Episode Duration (minutes)")}
                 <Spacer className="inline" x={1} />
                 <Icon
                   className="inline text-inherit"
@@ -347,7 +355,9 @@ export default function RecordingPage() {
           onValueChange={setEpisodeDuration}
         />
         <div className="flex flex-col items-stretch justify-start">
-          <p className="pb-2 text-small font-medium text-foreground">言語</p>
+          <p className="pb-2 text-small font-medium text-foreground">
+            {t("Language")}
+          </p>
           <Dropdown className="flex" type="listbox">
             <DropdownTrigger>
               <Button
@@ -379,24 +389,7 @@ export default function RecordingPage() {
         </div>
         <Input
           defaultValue="gpt-4o"
-          label={
-            <Tooltip
-              className="inline"
-              content="エピソードの生成に使用する生成AIのモデルを選択します．"
-              delay={500}
-              placement="right"
-              showArrow={true}
-            >
-              <p className="text-inherit">
-                使用する生成AIモデル
-                <Spacer className="inline" x={1} />
-                <Icon
-                  className="inline text-inherit"
-                  icon="solar:question-circle-linear"
-                />
-              </p>
-            </Tooltip>
-          }
+          label={<p className="text-inherit">{t("Generative AI Model")}</p>}
           labelPlacement="outside"
           placeholder="gpt-4o"
           type="text"
@@ -409,14 +402,12 @@ export default function RecordingPage() {
             key="1"
             aria-label="Accordion item 1"
             className="align-center border-t border-default-200"
-            title="詳細オプション"
+            title={t("Advanced Settings")}
           >
             <div className="flex flex-col items-stretch justify-start gap-5 self-stretch">
               <Textarea
                 label={
-                  <p className="text-default-foreground">
-                    エピソードの説明・概要
-                  </p>
+                  <p className="text-default-foreground">{t("Description")}</p>
                 }
                 labelPlacement="outside"
                 value={episodeDescription}
@@ -426,13 +417,15 @@ export default function RecordingPage() {
                 label={
                   <Tooltip
                     className="inline text-inherit"
-                    content="エピソードのキーワードをカンマ区切りで入力してください．一覧でキーワードとして表示されます．"
+                    content={t(
+                      "Enter keywords for the episode separated by commas",
+                    )}
                     delay={500}
                     placement="right"
                     showArrow={true}
                   >
                     <p className="text-inherit">
-                      キーワード
+                      {t("Keywords")}
                       <Spacer className="inline" x={1} />
                       <Icon
                         className="inline text-inherit"
@@ -442,30 +435,15 @@ export default function RecordingPage() {
                   </Tooltip>
                 }
                 labelPlacement="outside"
-                placeholder="HCI, ワークショップ, 空中像, 構築主義, ティンカリング, 質的研究"
+                placeholder={t(
+                  "Podcast, Research paper, Large language models, Autobiographical design, Field study",
+                )}
                 value={episodeKeywords}
                 onValueChange={setEpisodeKeywords}
               />
 
               <Input
-                label={
-                  <Tooltip
-                    className="inline text-inherit"
-                    content="エピソードのカバー画像のURLを入力してください．"
-                    delay={500}
-                    placement="right"
-                    showArrow={true}
-                  >
-                    <p className="text-inherit">
-                      カバー画像URL
-                      <Spacer className="inline" x={1} />
-                      <Icon
-                        className="inline text-inherit"
-                        icon="solar:question-circle-linear"
-                      />
-                    </p>
-                  </Tooltip>
-                }
+                label={<p className="text-inherit">{t("Cover Image URL")}</p>}
                 labelPlacement="outside"
                 placeholder="https://example.com/image.jpg"
                 type="url"
@@ -477,7 +455,7 @@ export default function RecordingPage() {
         </Accordion>
         <div className="mt-5 flex justify-start gap-2.5">
           <div className="flex flex-1 gap-2.5 self-stretch">
-            <Button onPress={handleBackToPreviousStep}>戻る</Button>
+            <Button onPress={handleBackToPreviousStep}>{t("Back")}</Button>
           </div>
           {/* <Button>キャンセル</Button> */}
           <Button
@@ -485,7 +463,7 @@ export default function RecordingPage() {
             isLoading={isGenerateTaskSubmitting}
             onPress={handleGenerateEpisode}
           >
-            生成する
+            {t("Generate")}
           </Button>
         </div>
       </div>

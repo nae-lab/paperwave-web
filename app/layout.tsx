@@ -2,15 +2,15 @@ import "server-cli-only";
 
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import clsx from "clsx";
-import { getCookie } from "cookies-next";
-import { cookies } from "next/headers";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
+import { cn } from "@/lib/cn";
 
 // Force next.js to treat this route as server-side rendered
 // Without this line, during the build process, next.js will treat this route as static and build a static HTML file for it
@@ -36,37 +36,32 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { userJson: string };
-}) {
-  const currentUserJSON = getCookie("user", { cookies });
-
-  if (currentUserJSON) {
-    params.userJson = currentUserJSON;
-  }
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   return (
-    <html suppressHydrationWarning lang="ja">
+    <html suppressHydrationWarning lang={locale}>
       <head />
       <body
-        className={clsx(
+        className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "system" }}>
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
-              {children}
-            </main>
-            <footer className="flex w-full items-center justify-center py-3" />
-          </div>
-        </Providers>
+        <NextIntlClientProvider messages={messages}>
+          <Providers
+            themeProps={{ attribute: "class", defaultTheme: "system" }}
+          >
+            <div className="relative flex min-h-screen flex-col">
+              <Navbar />
+              <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
+                {children}
+              </main>
+              <footer className="flex w-full items-center justify-center py-3" />
+            </div>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

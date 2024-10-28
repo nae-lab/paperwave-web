@@ -6,6 +6,7 @@ import React from "react";
 import { User } from "firebase/auth";
 import Link from "next/link";
 import { Image } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 import ActionCard from "./action-card";
 
@@ -16,6 +17,7 @@ export type ChannelCardProps = {
 };
 
 export default function ChannelCard({ userJson }: ChannelCardProps) {
+  const t = useTranslations("ChannelCard");
   const [episodeIds, setEpisodeIds] = React.useState<string[]>([]);
   const user = JSON.parse(userJson) as User;
 
@@ -29,11 +31,7 @@ export default function ChannelCard({ userJson }: ChannelCardProps) {
     <Link href={`/channels/${user.uid}`}>
       <ActionCard
         className="w-full"
-        description={
-          episodeIds.length > 0
-            ? `${episodeIds.length} episodes`
-            : "No episodes"
-        }
+        description={t("Episodes Number", { count: episodeIds.length })}
         icon={
           <Image
             alt={user.displayName ?? ""}
@@ -41,7 +39,7 @@ export default function ChannelCard({ userJson }: ChannelCardProps) {
             src={user.photoURL ?? ""}
           />
         }
-        title={`${user.displayName}'s Channel`}
+        title={t("Channel Name", { name: user.displayName })}
       />
     </Link>
   );

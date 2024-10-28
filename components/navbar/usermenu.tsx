@@ -9,19 +9,25 @@ import {
   Avatar,
   Skeleton,
 } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
-export default function UserMenu({ initialUserJSON }: { initialUserJSON: string }) {
+export default function UserMenu({
+  initialUserJSON,
+}: {
+  initialUserJSON: string;
+}) {
   const { user, userLoaded } = useUserSession(initialUserJSON);
+  const t = useTranslations("Navbar");
 
   if (!user) {
     return (
       <Button color="primary" radius="full" onPress={signInWithGoogle}>
-        Log In
+        {t("login")}
       </Button>
     );
   } else {

@@ -1,0 +1,71 @@
+{
+  "Navbar": {
+    "login": "ログイン",
+    "loggingIn": "ログイン中...",
+    "logout": "ログアウト",
+    "loggingOut": "ログアウト中...",
+    "Home": "ホーム",
+    "Recording": "収録",
+    "Episodes": "エピソード",
+    "Channels": "チャンネル",
+    "Settings": "設定"
+  },
+  "Home": {
+    "description": "論文に声を与え、研究に息を吹き込む。",
+    "Episodes": "エピソード一覧",
+    "EpisodesDescription": "あなたが作成したエピソードの一覧を確認できます。",
+    "Channels": "チャンネル一覧",
+    "ChannelsDescription": "他のユーザーのチャンネル一覧を確認できます。",
+    "Recording": "収録",
+    "RecordingDescription": "論文PDFから新しいエピソードを収録します。"
+  },
+  "Episodes": {
+    "Episodes List": "エピソード一覧"
+  },
+  "Player": {
+    "Recording": "収録中...",
+    "Recording failed": "収録に失敗しました",
+    "recorded by": "{name}"
+  },
+  "Channels": {
+    "Channels": "チャンネル一覧",
+    "Channels Page is disabled to protect copyright on the papers": "論文の著作権を保護するためにチャンネルページは無効化しています。"
+  },
+  "ChannelCard": {
+    "Episodes Number": "{count, plural, =0 {エピソードなし} other {# エピソード}}",
+    "Channel Name": "{name}のチャンネル"
+  },
+  "Recording": {
+    "Recording": "収録",
+    "Generate a new episode from research paper PDFs": "論文のPDFから新規エピソードを生成します．",
+    "Upload Research Paper PDFs": "論文PDFをアップロード",
+    "Recording Settings": "収録の設定",
+    "Check the Result": "エピソードの確認",
+    "Drag and drop PDFs or click this box to select": "PDFをドラッグ＆ドロップするか、クリックして選択してください。",
+    "Delete": "削除",
+    "Next": "次へ",
+    "Back": "戻る",
+    "Generate": "生成する",
+    "Episode Title": "エピソードのタイトル",
+    "Title of the podcast to be generated Displayed as a title in the list": "生成するポッドキャストのタイトルです。一覧でタイトルとして表示されます。",
+    "eg PaperWave Listening to Research Papers as Conversational Podcasts Scripted by LLM": "例: PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM",
+    "Episode Duration (minutes)": "エピソードの長さ（分）",
+    "Podcasts are generated for an approximate specified length of time If the specified time is too long for the content of the paper programs that repeat the same content are likely to be generated": "概ね指定された通りの分数で作ります。論文のコンテンツに対して指定時間が長すぎると同じ内容を繰り返し話す番組が生成されやすくなります。",
+    "Language": "言語",
+    "Generative AI Model": "使用する生成AIモデル",
+    "Advanced Settings": "詳細設定",
+    "Description": "エピソードの説明",
+    "Keywords": "キーワード",
+    "Enter keywords for the episode separated by commas": "エピソードのキーワードをカンマで区切って入力してください。",
+    "Podcast, Research paper, Large language models, Autobiographical design, Field study": "Podcast, Research paper, Large language models, Autobiographical design, Field study",
+    "Cover Image URL": "カバー画像のURL"
+  },
+  "Settings": {
+    "Settings": "設定",
+    "Currently, there are no settings available": "現在、利用可能な設定はありません。"
+  },
+  "Login": {
+    "Click the button below to sign in with Google": "以下のボタンをクリックしてGoogleでサインインしてください。",
+    "Login with Google": "Googleでログイン"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "Navbar": {
+    "login": "로그인",
+    "loggingIn": "로그인 중...",
+    "logout": "로그아웃",
+    "loggingOut": "로그아웃 중...",
+    "Home": "홈",
+    "Recording": "녹음",
+    "Episodes": "에피소드",
+    "Channels": "채널",
+    "Settings": "설정"
+  },
+  "Home": {
+    "description": "논문에 목소리를 불어넣어 연구에 생명을 불어넣습니다.",
+    "Episodes": "내 에피소드",
+    "EpisodesDescription": "녹음한 에피소드 목록을 확인할 수 있습니다.",
+    "Channels": "채널",
+    "ChannelsDescription": "다른 사용자의 채널 목록을 확인할 수 있습니다.",
+    "Recording": "녹음",
+    "RecordingDescription": "연구 논문 PDF에서 새로운 에피소드를 녹음할 수 있습니다."
+  },
+  "Episodes": {
+    "Episodes List": "에피소드 목록"
+  },
+  "Player": {
+    "Recording": "녹음 중...",
+    "Recording failed": "녹음 실패",
+    "recorded by": "{name}이(가) 녹음함"
+  },
+  "Channels": {
+    "Channels": "채널 목록",
+    "Channels Page is disabled to protect copyright on the papers": "채널 페이지는 논문의 저작권을 보호하기 위해 비활성화되어 있습니다."
+  },
+  "ChannelCard": {
+    "Episodes Number": "{count, plural, =0 {에피소드 없음} other {# 화}}",
+    "Channel Name": "{name}의 채널"
+  },
+  "Recording": {
+    "Recording": "녹음",
+    "Generate a new episode from research paper PDFs": "연구 논문 PDF에서 새로운 에피소드를 생성합니다.",
+    "Upload Research Paper PDFs": "연구 논문 PDF를 업로드",
+    "Recording Settings": "녹음 설정",
+    "Check the Result": "결과 확인",
+    "Drag and drop PDFs or click this box to select": "PDF를 드래그하여 놓거나 이 상자를 클릭하여 선택하세요.",
+    "Delete": "삭제",
+    "Next": "다음",
+    "Back": "이전",
+    "Generate": "생성하기",
+    "Episode Title": "에피소드 제목",
+    "Title of the podcast to be generated Displayed as a title in the list": "생성될 팟캐스트의 제목입니다. 목록에서 제목으로 표시됩니다.",
+    "eg PaperWave Listening to Research Papers as Conversational Podcasts Scripted by LLM": "예: PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM",
+    "Episode Duration (minutes)": "에피소드 길이 (분)",
+    "Podcasts are generated for an approximate specified length of time If the specified time is too long for the content of the paper programs that repeat the same content are likely to be generated": "팟캐스트는 대략 지정된 시간 동안 생성됩니다. 지정된 시간이 논문의 내용에 너무 길면 동일한 내용을 반복하는 프로그램이 생성될 수 있습니다.",
+    "Language": "언어",
+    "Generative AI Model": "생성 AI 모델",
+    "Advanced Settings": "고급 설정",
+    "Description": "설명",
+    "Keywords": "키워드",
+    "Enter keywords for the episode separated by commas": "쉼표로 구분된 에피소드 키워드를 입력하세요.",
+    "Podcast, Research paper, Large language models, Autobiographical design, Field study": "Podcast, Research paper, Large language models, Autobiographical design, Field study",
+    "Cover Image URL": "커버 이미지 URL"
+  },
+  "Settings": {
+    "Settings": "설정",
+    "Currently, there are no settings available": "현재 사용 가능한 설정이 없습니다."
+  },
+  "Login": {
+    "Click the button below to sign in with Google": "아래 버튼을 클릭하여 Google로 로그인하세요.",
+    "Login with Google": "Google로 로그인"
+  }
+}
