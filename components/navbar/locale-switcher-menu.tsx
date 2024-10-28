@@ -7,18 +7,14 @@ import { DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { setUserLocale } from "@/services/locale";
 import { Locale } from "@/i18n/config";
 
-type Props = {
-  defaultSelectedKeys: Locale;
-};
-
-export default function LocaleSwitcherMenu({ defaultSelectedKeys }: Props) {
+export default function LocaleSwitcherMenu() {
   async function handleLocaleChange(locale: Locale) {
     await setUserLocale(locale);
     window.location.reload();
   }
 
   return (
-    <DropdownMenu defaultSelectedKeys={defaultSelectedKeys}>
+    <DropdownMenu>
       <DropdownItem onPress={() => handleLocaleChange("en")}>
         English
       </DropdownItem>

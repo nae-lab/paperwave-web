@@ -1,16 +1,9 @@
-import "server-cli-only";
-
-import { getLocale } from "next-intl/server";
 import { Button, Dropdown, DropdownTrigger } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 
 import LocaleSwitcherMenu from "./locale-switcher-menu";
 
-import { Locale } from "@/i18n/config";
-
-export default async function LocaleSwitcher() {
-  const locale = (await getLocale()) as Locale;
-
+export default function LocaleSwitcher() {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -22,7 +15,7 @@ export default async function LocaleSwitcher() {
           />
         </Button>
       </DropdownTrigger>
-      <LocaleSwitcherMenu defaultSelectedKeys={locale} />
+      <LocaleSwitcherMenu />
     </Dropdown>
   );
 }
