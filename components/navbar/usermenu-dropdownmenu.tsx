@@ -5,6 +5,7 @@ import "client-only";
 import React from "react";
 import { useFormState } from "react-dom";
 import { DropdownItem, DropdownMenu, Skeleton } from "@nextui-org/react";
+import { useTranslations, useLocale } from "next-intl";
 
 import { siteConfig } from "@/config/site";
 import { ActionResult } from "@/types";
@@ -19,6 +20,7 @@ export default function UserMenuDropdownMenu({
   initialUserJSON: string;
 }) {
   const { user, userLoaded } = useUserSession(initialUserJSON);
+  const t = useTranslations("Navbar");
   const formRef = React.useRef<HTMLFormElement>(null);
   const [isSigningOut, setIsSigningOut] = React.useState(false);
   const [signOutState, signOutFormAction] = useFormState(
@@ -45,7 +47,7 @@ export default function UserMenuDropdownMenu({
   }, [isSigningOut]);
 
   const items = [
-    <DropdownItem key="profile" className="h-14 gap-2" textValue="プロフィール">
+    <DropdownItem key="profile" className="h-14 gap-2" textValue="profile">
       <Skeleton isLoaded={userLoaded}>
         <p className="font-semibold">{user?.displayName}</p>
       </Skeleton>
@@ -54,16 +56,16 @@ export default function UserMenuDropdownMenu({
 
   siteConfig.userMenuItems.forEach((item) => {
     items.push(
-      <DropdownItem key={item.href} href={item.href} textValue={item.label}>
-        {item.label}
+      <DropdownItem key={item.href} href={item.href} textValue={t(item.label)}>
+        {t(item.label)}
       </DropdownItem>,
     );
   });
 
   items.push(
-    <DropdownItem key="sign-out" textValue="ログアウト" onPress={handleSignOut}>
+    <DropdownItem key="sign-out" textValue="sign out" onPress={handleSignOut}>
       <form ref={formRef} action={signOutFormAction}>
-        <span className="text-danger-500">ログアウト</span>
+        <span className="text-danger-500">{t("logout")}</span>
       </form>
     </DropdownItem>,
   );

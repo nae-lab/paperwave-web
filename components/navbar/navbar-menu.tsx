@@ -9,7 +9,11 @@ import {
   NavbarMenu as NextUiNavbarMenu,
   NavbarMenuItem,
   Link,
+  Spacer,
 } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
+
+import { ThemeSwitch } from "./theme-switch";
 
 import { siteConfig } from "@/config/site";
 import { useUserSession } from "@/lib/firebase/userSession";
@@ -17,6 +21,7 @@ import { signInWithGoogle, signOut } from "@/lib/firebase/auth";
 
 const NavbarMenu = () => {
   const pathname = usePathname();
+  const t = useTranslations("Navbar");
 
   const [isSigningIn, setIsSigningIn] = React.useState(false);
   const [signInState, signInFormAction] = useFormState(
@@ -64,7 +69,7 @@ const NavbarMenu = () => {
           isDisabled={isSigningIn}
           onPress={handleSignIn}
         >
-          {isSigningIn ? "ログイン中..." : "ログイン"}
+          {isSigningIn ? t("loggingIn") : t("login")}
         </Link>
       </form>
     </NavbarMenuItem>
@@ -80,7 +85,7 @@ const NavbarMenu = () => {
           isDisabled={isSigningOut}
           onPress={handleSignOut}
         >
-          {isSigningOut ? "ログアウト中..." : "ログアウト"}
+          {isSigningOut ? t("loggingOut") : t("logout")}
         </Link>
       </form>
     </NavbarMenuItem>
@@ -95,11 +100,15 @@ const NavbarMenu = () => {
             color={item.href === pathname ? "primary" : "foreground"}
             href={item.href}
           >
-            {item.label}
+            {t(item.label)}
           </Link>
         </NavbarMenuItem>
       ))}
       {user ? signOutItem : loginItem}
+      <Spacer y={2} />
+      <NavbarMenuItem className="flex sm:hidden">
+        <ThemeSwitch className="text-default-500" size={24} />
+      </NavbarMenuItem>
     </NextUiNavbarMenu>
   );
 };

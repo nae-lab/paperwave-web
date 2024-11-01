@@ -1,10 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
-type Route = Record<string, any>;
+export type Route = Record<string, any>;
 
 export const routes: Route = {
-  label: "Home",
-  href: "/",
   home: {
     label: "Home",
     href: "/",
@@ -24,17 +22,9 @@ export const routes: Route = {
   settings: {
     label: "Settings",
     href: "/settings",
-    notification: {
-      label: "通知",
-      href: "/settings/notification",
-    },
-    users: {
-      label: "ユーザー",
-      href: "/settings/users",
-    },
   },
   login: {
-    label: "ログイン",
+    label: "login",
     href: "/login",
   },
   "not-found": {
@@ -57,11 +47,4 @@ export const siteConfig = {
   userMenuItems: [routes.settings],
   settingTabItems: [],
   adminSettingTabItems: [],
-  links: {
-    github: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
-    docs: "https://nextui.org",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
 };

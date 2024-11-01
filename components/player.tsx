@@ -19,6 +19,7 @@ import {
 } from "@nextui-org/react";
 import { button as buttonStyles } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
+import { useTranslations } from "next-intl";
 
 import { Episode, getEpisode, onEpisodeSnapshot } from "@/lib/episodes";
 import { cn } from "@/lib/cn";
@@ -28,6 +29,7 @@ interface PlayerProps extends CardProps {
 }
 
 export default function Player(props: PlayerProps) {
+  const t = useTranslations("Player");
   const [episode, setEpisode] = React.useState<Episode | null>(null);
 
   const authors = React.useMemo(() => {
@@ -80,7 +82,7 @@ export default function Player(props: PlayerProps) {
           icon="solar:danger-triangle-bold"
           width={24}
         />
-        <p className="text-default-800">生成に失敗しました</p>
+        <p className="text-default-800">{t("Recording failed")}</p>
       </div>
     );
   } else if (episode?.isRecordingCompleted) {
@@ -89,7 +91,7 @@ export default function Player(props: PlayerProps) {
   } else {
     playerContent = (
       <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1">
-        <Spinner label="生成中..." size="sm" />
+        <Spinner label={t("Recording")} size="sm" />
       </div>
     );
   }
@@ -118,7 +120,6 @@ export default function Player(props: PlayerProps) {
         <div className="flex flex-row flex-wrap items-center justify-around gap-5">
           <div className="min-w-[120px] max-w-[150px] flex-auto">
             <Skeleton isLoaded={episode !== null}>
-              {" "}
               <Image
                 alt="cover"
                 className="rounded-xl object-cover"
@@ -141,7 +142,10 @@ export default function Player(props: PlayerProps) {
                   </span>
                   <Spacer className="inline" x={1} />
                   <span className="line-clamp-2 text-ellipsis text-xs font-normal leading-normal text-default-400">
-                    - recorded by {episode?.userDisplayName || "Anonymous"}
+                    {episode?.userDisplayName
+                      ? "- " +
+                        t("recorded by", { name: episode.userDisplayName })
+                      : ""}
                   </span>
                 </div>
                 {/* <ScrollShadow

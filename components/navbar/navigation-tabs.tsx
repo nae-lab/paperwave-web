@@ -2,11 +2,13 @@
 
 import { Tabs, Tab } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { siteConfig } from "@/config/site";
 
 export default function NavigationTabs() {
   const pathname = usePathname();
+  const t = useTranslations("Navbar");
 
   const { tabItems } = siteConfig;
 
@@ -25,7 +27,7 @@ export default function NavigationTabs() {
       selectedKey={pathname}
       variant="underlined"
     >
-      {(item) => <Tab key={item.href} href={item.href} title={item.label} />}
+      {(item) => <Tab key={item.href} href={item.href} title={t(item.label)} />}
     </Tabs>
   );
 }

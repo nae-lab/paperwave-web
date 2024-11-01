@@ -1,0 +1,71 @@
+{
+  "Navbar": {
+    "login": "Login",
+    "loggingIn": "Logging In...",
+    "logout": "Logout",
+    "loggingOut": "Logging Out...",
+    "Home": "Home",
+    "Recording": "Recording",
+    "Episodes": "Episodes",
+    "Channels": "Channels",
+    "Settings": "Settings"
+  },
+  "Home": {
+    "description": "Voicing Papers, Bringing Research to Life.",
+    "Episodes": "My Episodes",
+    "EpisodesDescription": "You can check the list of episodes you have recorded.",
+    "Channels": "Channels",
+    "ChannelsDescription": "You can check the list of other users' channels.",
+    "Recording": "Recording",
+    "RecordingDescription": "You can record a new episode from research paper PDFs."
+  },
+  "Episodes": {
+    "Episodes List": "Episodes"
+  },
+  "Player": {
+    "Recording": "Recording...",
+    "Recording failed": "Recording failed",
+    "recorded by": "Recorded by {name}"
+  },
+  "Channels": {
+    "Channels": "Channels",
+    "Channels Page is disabled to protect copyright on the papers": "Channels Page is disabled to protect copyright on the papers."
+  },
+  "ChannelCard": {
+    "Episodes Number": "{count, plural, =0 {No episodes} one {# episode} other {# episodes}}",
+    "Channel Name": "{name}'s Channel"
+  },
+  "Recording": {
+    "Recording": "Recording",
+    "Generate a new episode from research paper PDFs": "Generate a new episode from research paper PDFs.",
+    "Upload Research Paper PDFs": "Upload Research Paper PDFs",
+    "Recording Settings": "Recording Settings",
+    "Check the Result": "Check the Result",
+    "Drag and drop PDFs or click this box to select": "Drag and drop PDFs or click this box to select.",
+    "Delete": "Delete",
+    "Next": "Next",
+    "Back": "Back",
+    "Generate": "Generate",
+    "Episode Title": "Episode Title",
+    "Title of the podcast to be generated Displayed as a title in the list": "Title of the podcast to be generated. Displayed as a title in the list.",
+    "eg PaperWave Listening to Research Papers as Conversational Podcasts Scripted by LLM": "e.g. PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM",
+    "Episode Duration (minutes)": "Episode Duration (minutes)",
+    "Podcasts are generated for an approximate specified length of time If the specified time is too long for the content of the paper programs that repeat the same content are likely to be generated": "Podcasts are generated for an approximate specified length of time. If the specified time is too long for the content of the paper, programs that repeat the same content are likely to be generated.",
+    "Language": "Language",
+    "Generative AI Model": "Generative AI Model",
+    "Advanced Settings": "Advanced Settings",
+    "Description": "Description",
+    "Keywords": "Keywords",
+    "Enter keywords for the episode separated by commas": "Enter keywords for the episode, separated by commas.",
+    "Podcast, Research paper, Large language models, Autobiographical design, Field study": "Podcast, Research paper, Large language models, Autobiographical design, Field study",
+    "Cover Image URL": "Cover Image URL"
+  },
+  "Settings": {
+    "Settings": "Settings",
+    "Currently, there are no settings available": "Currently, there are no settings available."
+  },
+  "Login": {
+    "Click the button below to sign in with Google": "Click the button below to sign in with Google.",
+    "Login with Google": "Login with Google"
+  }
+}

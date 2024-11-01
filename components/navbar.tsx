@@ -33,6 +33,8 @@ import UserMenu from "@/components/navbar/usermenu";
 // import Breadcrumbs from "@/components/navbar/breadcrumbs";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
+import LocaleSwitcher from "@/components/navbar/locale-switcher";
+import Breadcrumbs from "./navbar/breadcrumbs";
 
 export default function Navbar() {
   const userJSON = getCookie("user", { cookies })?.toString() ?? "";
@@ -86,8 +88,12 @@ export default function Navbar() {
           <NavbarItem className="hidden sm:flex">
             <ThemeSwitch className="text-default-500" size={24} />
           </NavbarItem>
+          {/* Locale */}
+          <NavbarItem>
+            <LocaleSwitcher />
+          </NavbarItem>
           {/* Settings */}
-          <NavbarItem className="hidden sm:flex">
+          {/* <NavbarItem className="hidden sm:flex">
             <Link
               className={buttonStyles({
                 isIconOnly: true,
@@ -102,7 +108,7 @@ export default function Navbar() {
                 width={24}
               />
             </Link>
-          </NavbarItem>
+          </NavbarItem> */}
           {/* Notifications */}
           {/* <NavbarItem className="flex">
             <Popover offset={12} placement="bottom-end">

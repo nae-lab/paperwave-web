@@ -4,11 +4,13 @@ import "client-only";
 
 import React from "react";
 import { Spinner } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 import Player from "@/components/player";
 import { getEpisodeIds } from "@/lib/episodes";
 
 const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
+  const t = useTranslations("Episodes");
   const [episodeIds, setEpisodeIds] = React.useState<string[]>([]);
   const [episodesReady, setEpisodesReady] = React.useState(false);
 
@@ -35,7 +37,7 @@ const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
     <div className="flex h-full w-full flex-col flex-nowrap items-stretch justify-start gap-3.5">
       <div className="flex justify-start">
         <h1 className="text-xl font-bold text-default-900 lg:text-3xl">
-          番組一覧
+          {t("Episodes List")}
         </h1>
       </div>
       {contents}
