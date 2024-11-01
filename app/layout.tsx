@@ -10,7 +10,6 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
-import ConsentManager from "@/components/consentmanager";
 import { cn } from "@/lib/cn";
 
 // Force next.js to treat this route as server-side rendered
@@ -37,11 +36,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
   const messages = await getMessages();
 
@@ -68,7 +63,6 @@ export default async function RootLayout({
           </Providers>
         </NextIntlClientProvider>
       </body>
-      <ConsentManager />
     </html>
   );
 }
