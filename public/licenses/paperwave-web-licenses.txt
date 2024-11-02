@@ -476,6 +476,12 @@
 │ @react-types/tooltip                 │ Apache-2.0                │ Spectrum UI components in React                                                                │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @swc/counter                         │ Apache-2.0                │ 강동윤                                                                                         │
+│                                      │                           │ Do                                                                                             │
+│                                      │                           │ nloade counter for the swc project                                                             │
+│                                      │                           │ ht                                                                                             │
+│                                      │                           │ ps://swc.rs                                                                                    │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @swc/helpers                         │ Apache-2.0                │ 강동윤                                                                                         │
 │                                      │                           │ Ex                                                                                             │
 │                                      │                           │ ernal helpers for the swc project.                                                             │
