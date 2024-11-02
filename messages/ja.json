@@ -10,6 +10,10 @@
     "Channels": "チャンネル",
     "Settings": "設定"
   },
+  "Footer": {
+    "Feedback": "フィードバック",
+    "FeedbackURL": "https://forms.gle/s1QCVwucM29nTHKw5"
+  },
   "Home": {
     "description": "論文に声を与え、研究に息を吹き込む。",
     "Episodes": "エピソード一覧",
@@ -21,6 +25,15 @@
   },
   "Episodes": {
     "Episodes List": "エピソード一覧"
+  },
+  "Episode Details": {
+    "Episode Information": "エピソード情報",
+    "Description": "説明",
+    "Tags": "タグ",
+    "Recorder": "収録者",
+    "Created At": "作成日時",
+    "Updated At": "更新日時",
+    "Source Papers": "生成元論文"
   },
   "Player": {
     "Recording": "収録中...",
@@ -67,5 +80,10 @@
   "Login": {
     "Click the button below to sign in with Google": "以下のボタンをクリックしてGoogleでサインインしてください。",
     "Login with Google": "Googleでログイン"
+  },
+  "Acknowledgements": {
+    "Acknowledgements": "謝辞",
+    "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback": "本研究はJSPS科研費 JP22KJ1010と中山未来ファクトリーの助成を受けた．フィールド調査で示唆に富むフィードバックを提供してくださった研究協力者の皆様に感謝する．",
+    "Open Source Libraries": "オープンソースライブラリ"
   }
 }

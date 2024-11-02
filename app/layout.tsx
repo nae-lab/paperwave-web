@@ -3,14 +3,14 @@ import "server-cli-only";
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
+import { Link } from "@nextui-org/react";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
-import ConsentManager from "@/components/consentmanager";
 import { cn } from "@/lib/cn";
 
 // Force next.js to treat this route as server-side rendered
@@ -44,6 +44,7 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const t = await getTranslations();
 
   return (
     <html suppressHydrationWarning lang={locale}>
@@ -63,12 +64,42 @@ export default async function RootLayout({
               <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
                 {children}
               </main>
-              <footer className="flex w-full items-center justify-center py-3" />
+              <footer className="w-full flex-col items-stretch justify-center py-3">
+                <div className="my-1 flex justify-center">
+                  <p className="mx-2 text-center text-xs text-default-500">
+                    &copy;{" "}
+                    <Link
+                      isExternal
+                      className="text-xs"
+                      href="https://nae-lab.org"
+                      size="sm"
+                    >
+                      Naemura Laboratory
+                    </Link>
+                    , the University of Tokyo - All Rights Reserved.
+                  </p>
+                </div>
+                <div className="my-1 flex justify-center gap-4">
+                  <Link href="/acknowledgements">
+                    <p className="text-xs text-default-500 text-inherit">
+                      {t("Acknowledgements.Acknowledgements")}
+                    </p>
+                  </Link>
+                  <Link
+                    isExternal
+                    showAnchorIcon
+                    href={t("Footer.FeedbackURL")}
+                  >
+                    <p className="text-xs text-default-500 text-inherit">
+                      {t("Footer.Feedback")}
+                    </p>
+                  </Link>
+                </div>
+              </footer>
             </div>
           </Providers>
         </NextIntlClientProvider>
       </body>
-      <ConsentManager />
     </html>
   );
 }

@@ -1,4 +1,2 @@
-# Block all crawlers for /
 User-agent: *
-Disallow: /
-Noindex: /
+Allow: /
