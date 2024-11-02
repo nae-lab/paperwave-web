@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
-import { Link, Spacer } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 
 import { Providers } from "./providers";
 
@@ -65,26 +65,31 @@ export default async function RootLayout({
                 {children}
               </main>
               <footer className="w-full flex-col items-stretch justify-center py-3">
-                <div className="flex justify-center my-1">
-                  <p className="text-xs text-default-500">&copy; </p>
-                  <Spacer x={0.5} />
-                  <Link isExternal href="https://nae-lab.org" size="sm">
-                    <p className="text-xs text-default-500 text-inherit">
+                <div className="my-1 flex justify-center">
+                  <p className="mx-2 text-center text-xs text-default-500">
+                    &copy;{" "}
+                    <Link
+                      isExternal
+                      className="text-xs"
+                      href="https://nae-lab.org"
+                      size="sm"
+                    >
                       Naemura Laboratory
-                    </p>
-                  </Link>
-                  <p className="text-xs text-default-500">
+                    </Link>
                     , the University of Tokyo - All Rights Reserved.
                   </p>
                 </div>
-                <div className="flex justify-center gap-4 my-1">
+                <div className="my-1 flex justify-center gap-4">
                   <Link href="/acknowledgements">
                     <p className="text-xs text-default-500 text-inherit">
                       {t("Acknowledgements.Acknowledgements")}
                     </p>
-
                   </Link>
-                  <Link href={t("Footer.FeedbackURL")} isExternal showAnchorIcon>
+                  <Link
+                    isExternal
+                    showAnchorIcon
+                    href={t("Footer.FeedbackURL")}
+                  >
                     <p className="text-xs text-default-500 text-inherit">
                       {t("Footer.Feedback")}
                     </p>
