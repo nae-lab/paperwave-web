@@ -1,25 +1,13 @@
-"use server";
-
-import "server-cli-only";
-
-import fs from "fs";
-
 import { Link, ScrollShadow } from "@nextui-org/react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 import { pageTitle, sectionTitle } from "@/components/primitives";
+import webLicenses from "@/public/licenses/paperwave-web-licenses.txt";
+import cliLicenses from "@/public/licenses/paperwave-cli-licenses.txt";
 
-export default async function Acknowledgements() {
-  const t = await getTranslations("Acknowledgements");
 
-  const webLicenses = fs.readFileSync(
-    "./public/licenses/paperwave-web-licenses.txt",
-    "utf-8",
-  );
-  const cliLicenses = fs.readFileSync(
-    "./public/licenses/paperwave-cli-licenses.txt",
-    "utf-8",
-  );
+export default function Acknowledgements() {
+  const t = useTranslations("Acknowledgements");
 
   return (
     <div className="flex h-full w-full flex-col flex-nowrap items-stretch justify-start gap-3.5">
