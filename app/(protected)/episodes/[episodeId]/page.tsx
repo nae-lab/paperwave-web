@@ -20,11 +20,11 @@ import { useTranslations } from "next-intl";
 import { TableHeader } from "react-stately";
 import { tv } from "tailwind-variants";
 
-import Player from "@/components/player";
 import { Episode, getEpisode, onEpisodeSnapshot } from "@/lib/episodes";
 import { auth } from "@/lib/firebase/clientApp";
-import { pageTitle, sectionTitle } from "@/components/primitives";
 import { isUserAdmin as _isUserAdmin } from "@/lib/userInfo";
+import Player from "@/components/player";
+import { pageTitle, sectionTitle } from "@/components/primitives";
 
 const infoTableStyle = tv({
   base: "w-[98%] px-0.5 py-2",
@@ -65,21 +65,6 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
       });
     }
   }, [user]);
-
-  const episodeInfo = React.useMemo(() => {
-    if (!episode) {
-      return null;
-    }
-
-    const episodeJson = JSON.stringify(episode, null, 4);
-    const episodeInfoElement = (
-      <p className="whitespace-pre text-sm leading-4">
-        <pre>{episodeJson}</pre>
-      </p>
-    );
-
-    return episodeInfoElement;
-  }, [episode]);
 
   const papersInfo = React.useMemo(() => {
     if (!episode) {
@@ -168,7 +153,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                     </ul>
                   </TableCell>
                 </TableRow>
-                <TableRow>
+                {/* <TableRow>
                   <TableCell>PDF URL</TableCell>
                   <TableCell>
                     <Link
@@ -181,7 +166,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                       </p>
                     </Link>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
               </TableBody>
             </Table>
           </AccordionItem>
@@ -192,6 +177,19 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
     }
 
     return papersInfo;
+  }, [episode]);
+
+  const episodeInfo = React.useMemo(() => {
+    if (!episode) {
+      return null;
+    }
+
+    const episodeJson = JSON.stringify(episode, null, 4);
+    const episodeInfoElement = (
+      <pre className="whitespace-pre text-sm leading-4">{episodeJson}</pre>
+    );
+
+    return episodeInfoElement;
   }, [episode]);
 
   const debugInfo = React.useMemo(() => {

@@ -22,7 +22,7 @@ import {
 } from "@nextui-org/react";
 import { button as buttonStyles } from "@nextui-org/react";
 import { cookies } from "next/headers";
-import { getCookies, getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { Icon } from "@iconify/react";
 import { User } from "firebase/auth";
 
