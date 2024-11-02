@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import {
   Accordion,
   AccordionItem,
-  Link,
   ScrollShadow,
   Skeleton,
   Table,
@@ -27,7 +26,7 @@ import Player from "@/components/player";
 import { pageTitle, sectionTitle } from "@/components/primitives";
 
 const infoTableStyle = tv({
-  base: "w-[98%] px-0.5 py-2",
+  base: "w-[99%] px-0.5 py-2",
 });
 
 const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
@@ -75,85 +74,76 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
 
     for (let i = 0; i < episode.papers.length; i++) {
       const paperInfoElement = (
-        <Accordion isCompact className="w-full">
-          <AccordionItem
-            key="1"
+        <>
+          <h3 className="block w-full truncate text-lg font-semibold text-default-700">
+            {episode.papers[i].title}
+          </h3>
+          <Table
+            key={episode.papers[i].paperId}
+            hideHeader
             aria-label={episode.papers[i].title}
-            title={
-              <h3 className="block w-full truncate text-lg font-semibold text-default-700">
-                {episode.papers[i].title.length > 30
-                  ? `${episode.papers[i].title.substring(0, 30)}...`
-                  : episode.papers[i].title}
-              </h3>
-            }
+            className={infoTableStyle()}
           >
-            <Table
-              hideHeader
-              aria-label={episode.papers[i].title}
-              className={infoTableStyle()}
-            >
-              <TableHeader>
-                <TableColumn>Key</TableColumn>
-                <TableColumn>Value</TableColumn>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Authors</TableCell>
-                  <TableCell>
-                    {episode.papers[i].authors.join(", ") || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Year</TableCell>
-                  <TableCell>
-                    {(episode.papers[i].year !== 1000
-                      ? episode.papers[i].year
-                      : "N/A") || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Abstract</TableCell>
-                  <TableCell>{episode.papers[i].abstract || "N/A"}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Fields of Study</TableCell>
-                  <TableCell>
-                    {episode.papers[i].fieldsOfStudy.join(", ") || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Publication</TableCell>
-                  <TableCell>
-                    {episode.papers[i].publication || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Publication Types</TableCell>
-                  <TableCell>
-                    {episode.papers[i].publicationTypes.join(", ") || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Publication Date</TableCell>
-                  <TableCell>
-                    {episode.papers[i].publicationDate || "N/A"}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>TLDR</TableCell>
-                  <TableCell>{episode.papers[i].tldr || "N/A"}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>References</TableCell>
-                  <TableCell>
-                    <ul className="text-sm leading-4 sm:indent-6">
-                      {episode.papers[i].references.map((reference) => (
-                        <li key={reference.paperId}>{reference.title}</li>
-                      ))}
-                    </ul>
-                  </TableCell>
-                </TableRow>
-                {/* <TableRow>
+            <TableHeader>
+              <TableColumn>Key</TableColumn>
+              <TableColumn>Value</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Authors</TableCell>
+                <TableCell>
+                  {episode.papers[i].authors.join(", ") || "N/A"}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Year</TableCell>
+                <TableCell>
+                  {(episode.papers[i].year !== 1000
+                    ? episode.papers[i].year
+                    : "N/A") || "N/A"}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Abstract</TableCell>
+                <TableCell>{episode.papers[i].abstract || "N/A"}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Fields of Study</TableCell>
+                <TableCell>
+                  {episode.papers[i].fieldsOfStudy.join(", ") || "N/A"}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Publication</TableCell>
+                <TableCell>{episode.papers[i].publication || "N/A"}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Publication Types</TableCell>
+                <TableCell>
+                  {episode.papers[i].publicationTypes.join(", ") || "N/A"}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Publication Date</TableCell>
+                <TableCell>
+                  {episode.papers[i].publicationDate || "N/A"}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>TLDR</TableCell>
+                <TableCell>{episode.papers[i].tldr || "N/A"}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>References</TableCell>
+                <TableCell>
+                  <ul className="text-sm leading-4 sm:indent-6">
+                    {episode.papers[i].references.map((reference) => (
+                      <li key={reference.paperId}>{reference.title}</li>
+                    ))}
+                  </ul>
+                </TableCell>
+              </TableRow>
+              {/* <TableRow>
                   <TableCell>PDF URL</TableCell>
                   <TableCell>
                     <Link
@@ -167,10 +157,9 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                     </Link>
                   </TableCell>
                 </TableRow> */}
-              </TableBody>
-            </Table>
-          </AccordionItem>
-        </Accordion>
+            </TableBody>
+          </Table>
+        </>
       );
 
       papersInfo.push(paperInfoElement);
@@ -256,16 +245,16 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                 {episode?.createdAt.toDate().toLocaleString() || "N/A"}
               </TableCell>
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
               <TableCell>{t("Updated At")}</TableCell>
               <TableCell>
                 {episode?.updatedAt.toDate().toLocaleString() || "N/A"}
               </TableCell>
-            </TableRow>
+            </TableRow> */}
           </TableBody>
         </Table>
-        <h2 className={sectionTitle()}>{t("Source Papers")}</h2>
-        {papersInfo}
+        {/* <h2 className={sectionTitle()}>{t("Source Papers")}</h2> */}
+        {/* {papersInfo} */}
         {isUserAdmin === true ? debugInfo : null}
       </Skeleton>
     </div>
