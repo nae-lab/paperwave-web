@@ -16,6 +16,7 @@ import { button as buttonStyles } from "@nextui-org/react";
 
 import Player from "@/components/player";
 import { Episode, getEpisode, onEpisodeSnapshot } from "@/lib/episodes";
+import { pageTitle } from "@/components/primitives";
 
 const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
   const router = useRouter();
@@ -156,9 +157,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
           className="rounded-lg"
           isLoaded={episode !== null && episode !== undefined}
         >
-          <h1 className="text-xl font-bold text-default-foreground lg:text-3xl">
-            {episode?.title ?? "Loading..."}
-          </h1>
+          <h1 className={pageTitle()}>{episode?.title ?? "Loading..."}</h1>
         </Skeleton>
       </div>
       <div className="flex flex-col items-center justify-start gap-5">

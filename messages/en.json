@@ -67,5 +67,10 @@
   "Login": {
     "Click the button below to sign in with Google": "Click the button below to sign in with Google.",
     "Login with Google": "Login with Google"
+  },
+  "Acknowledgements": {
+    "Acknowledgements": "Acknowledgements",
+    "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback": "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory. We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback.",
+    "Open Source Libraries": "Open Source Libraries"
   }
 }

@@ -52,3 +52,11 @@ export const subtitle = tv({
     fullWidth: true,
   },
 });
+
+export const pageTitle = tv({
+  base: "text-xl font-bold text-default-900 lg:text-3xl",
+});
+
+export const sectionTitle = tv({
+  base: "text-lg font-bold text-default-900 lg:text-xl",
+});

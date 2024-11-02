@@ -70,6 +70,9 @@
 │                                      │                           │ Firebase Component Platform                                                                    │
 │                                      │                           │ https://github.com/firebase/firebase-js-sdk#readme                                             │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @firebase/data-connect               │ Apache-2.0                │ Firebase                                                                                       │
+│                                      │                           │ https://github.com/firebase/firebase-js-sdk#readme                                             │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @firebase/database                   │ Apache-2.0                │ Firebase                                                                                       │
 │                                      │                           │ https://github.com/firebase/firebase-js-sdk#readme                                             │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -214,6 +217,10 @@
 │ @internationalized/string            │ Apache-2.0                │ Internationalized string formatting and locale negotiation                                     │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @opentelemetry/api                   │ Apache-2.0                │ OpenTelemetry Authors                                                                          │
+│                                      │                           │ Public API for OpenTelemetry                                                                   │
+│                                      │                           │ https://github.com/open-telemetry/opentelemetry-js/tree/main/api                               │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @react-aria/breadcrumbs              │ Apache-2.0                │ Spectrum UI components in React                                                                │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -319,6 +326,9 @@
 │ @react-stately/collections           │ Apache-2.0                │ Spectrum UI components in React                                                                │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @react-stately/color                 │ Apache-2.0                │ Spectrum UI components in React                                                                │
+│                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @react-stately/combobox              │ Apache-2.0                │ Spectrum UI components in React                                                                │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -401,6 +411,9 @@
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @react-types/checkbox                │ Apache-2.0                │ Spectrum UI components in React                                                                │
+│                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @react-types/color                   │ Apache-2.0                │ Spectrum UI components in React                                                                │
 │                                      │                           │ https://github.com/adobe/react-spectrum#readme                                                 │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @react-types/combobox                │ Apache-2.0                │ Spectrum UI components in React                                                                │
