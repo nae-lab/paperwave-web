@@ -22,7 +22,8 @@ import { db } from "@/lib/firebase/clientApp";
 import { DocumentSnapshotType } from "@/lib/firebase/firestore";
 
 const COLLECTION_ID =
-  process.env.NEXT_PUBLIC_FIRESTORE_COLLECTION_ID ?? "episodes-unknown-env";
+  process.env.NEXT_PUBLIC_FIRESTORE_EPISODES_COLLECTION_ID ??
+  "episodes-unknown-env";
 
 export type LanguageOptions = "en" | "ja" | "ko";
 

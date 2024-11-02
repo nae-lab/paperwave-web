@@ -26,6 +26,15 @@
   "Episodes": {
     "Episodes List": "エピソード一覧"
   },
+  "Episode Details": {
+    "Episode Information": "エピソード情報",
+    "Description": "説明",
+    "Tags": "タグ",
+    "Recorder": "収録者",
+    "Created At": "作成日時",
+    "Updated At": "更新日時",
+    "Source Papers": "生成元論文"
+  },
   "Player": {
     "Recording": "収録中...",
     "Recording failed": "収録に失敗しました",

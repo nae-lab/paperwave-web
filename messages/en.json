@@ -26,6 +26,15 @@
   "Episodes": {
     "Episodes List": "Episodes"
   },
+  "Episode Details": {
+    "Episode Information": "Episode Information",
+    "Description": "Description",
+    "Tags": "Tags",
+    "Recorder": "Recorder",
+    "Created At": "Created At",
+    "Updated At": "Updated At",
+    "Source Papers": "Source Papers"
+  },
   "Player": {
     "Recording": "Recording...",
     "Recording failed": "Recording failed",
