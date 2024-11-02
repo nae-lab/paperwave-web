@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { button as buttonStyles } from "@nextui-org/theme";
 import { Button } from "@nextui-org/react";
 import { getCookie } from "cookies-next";
@@ -10,19 +10,25 @@ import { useTranslations } from "next-intl";
 import { title } from "@/components/primitives";
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
+import { set } from "zod";
 
 export default function Login() {
   const t = useTranslations();
   const currentUserJSON = getCookie("user")?.toString() || null;
   const { user, userLoaded } = useUserSession(currentUserJSON);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [redirect, setRedirect] = React.useState<string | null>(null);
 
-  if (user) {
-    router.push("/");
-  }
+  React.useEffect(() => {
+    if (user && redirect) {
+      router.push(redirect);
+    }
+  }, [user, redirect, router]);
 
-  const handleSignIn = () => {
-    signInWithGoogle();
+  const handleSignIn = async () => {
+    await signInWithGoogle();
+    setRedirect(searchParams.get("redirect") || "/");
   };
 
   return (

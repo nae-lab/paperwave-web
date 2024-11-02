@@ -2,7 +2,7 @@ import "server-cli-only";
 
 import React from "react";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { getCookie } from "cookies-next";
 import { User } from "firebase/auth";
 
@@ -14,6 +14,7 @@ export default async function ProtectedPageLayout({
   params: { userJson: string };
 }) {
   const currentUserJSON = getCookie("user", { cookies });
+  const pathname = headers().get("x-pathname");
 
   let uid = null;
 
@@ -29,7 +30,7 @@ export default async function ProtectedPageLayout({
   }
 
   if (!uid) {
-    redirect(`/login`);
+    redirect(`/login?redirect=${pathname}`);
   }
 
   return <>{children}</>;
