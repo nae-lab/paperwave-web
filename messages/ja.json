@@ -10,6 +10,10 @@
     "Channels": "チャンネル",
     "Settings": "設定"
   },
+  "Footer": {
+    "Feedback": "フィードバック",
+    "FeedbackURL": "https://forms.gle/s1QCVwucM29nTHKw5"
+  },
   "Home": {
     "description": "論文に声を与え、研究に息を吹き込む。",
     "Episodes": "エピソード一覧",

@@ -10,6 +10,10 @@
     "Channels": "채널",
     "Settings": "설정"
   },
+  "Footer": {
+    "Feedback": "피드백",
+    "FeedbackURL": "https://forms.gle/oU3rVN6K7nRRrm1k9"
+  },
   "Home": {
     "description": "논문에 목소리를 불어넣어 연구에 생명을 불어넣습니다.",
     "Episodes": "내 에피소드",

@@ -10,6 +10,10 @@
     "Channels": "Channels",
     "Settings": "Settings"
   },
+  "Footer": {
+    "Feedback": "Feedback",
+    "FeedbackURL": "https://forms.gle/Ac9g2b8BPaCdqPEi6"
+  },
   "Home": {
     "description": "Voicing Papers, Bringing Research to Life.",
     "Episodes": "My Episodes",

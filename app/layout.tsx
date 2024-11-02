@@ -65,7 +65,7 @@ export default async function RootLayout({
                 {children}
               </main>
               <footer className="w-full flex-col items-stretch justify-center py-3">
-                <div className="flex justify-center">
+                <div className="flex justify-center my-1">
                   <p className="text-xs text-default-500">&copy; </p>
                   <Spacer x={0.5} />
                   <Link isExternal href="https://nae-lab.org" size="sm">
@@ -77,10 +77,16 @@ export default async function RootLayout({
                     , the University of Tokyo - All Rights Reserved.
                   </p>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-4 my-1">
                   <Link href="/acknowledgements">
                     <p className="text-xs text-default-500 text-inherit">
                       {t("Acknowledgements.Acknowledgements")}
+                    </p>
+
+                  </Link>
+                  <Link href={t("Footer.FeedbackURL")} isExternal showAnchorIcon>
+                    <p className="text-xs text-default-500 text-inherit">
+                      {t("Footer.Feedback")}
                     </p>
                   </Link>
                 </div>
