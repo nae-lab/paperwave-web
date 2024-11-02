@@ -39,7 +39,7 @@ export default async function Acknowledgements() {
       >
         https://github.com/nae-lab/paperwave-web
       </Link>
-      <div className="h-[50vh] w-full bg-default-100 p-4">
+      <div className="h-[50vh] w-full bg-default-100 p-4 rounded-lg">
         <ScrollShadow className="h-full w-full">
           <pre className="w-full overflow-y-scroll text-xs">{webLicenses}</pre>
         </ScrollShadow>
@@ -54,7 +54,7 @@ export default async function Acknowledgements() {
       >
         https://github.com/nae-lab/paperwave-cli
       </Link>
-      <div className="h-[50vh] w-full bg-default-100 p-4">
+      <div className="h-[50vh] w-full bg-default-100 p-4 rounded-lg">
         <ScrollShadow className="h-full w-full">
           <pre className="w-full overflow-y-scroll text-xs">{cliLicenses}</pre>
         </ScrollShadow>
