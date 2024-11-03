@@ -72,7 +72,7 @@ export default function RecordingPage() {
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
   const [episodeLanguage, setEpisodeLanguage] = React.useState(locale);
-  const [llmModel, setLLMModel] = React.useState("gpt-4o");
+  const [llmModel, setLLMModel] = React.useState("gpt-4o-2024-05-13");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
   const [episodeCoverImageURL, setEpisodeCoverImageURL] = React.useState("");
@@ -387,7 +387,36 @@ export default function RecordingPage() {
             </DropdownMenu>
           </Dropdown>
         </div>
-        <Input
+        <div className="flex flex-col items-stretch justify-start">
+          <p className="pb-2 text-small font-medium text-foreground">
+            {t("Generative AI Model")}
+          </p>
+          <Dropdown className="flex" type="listbox">
+            <DropdownTrigger>
+              <Button className="w-full" color="default" variant="bordered">
+                <p className="block w-full text-left text-inherit">
+                  {llmModel}
+                </p>
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="Generative AI Model"
+              selectedKeys={llmModel}
+              selectionMode="single"
+              variant="flat"
+              onSelectionChange={(selected) => {
+                setLLMModel(selected.currentKey || "gpt-4o-mini");
+              }}
+            >
+              <DropdownItem key="gpt-4o-2024-05-13">
+                {"gpt-4o-2024-05-13"}
+              </DropdownItem>
+              <DropdownItem key="gpt-4o-mini">{"gpt-4o-mini"}</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+        {/* <Input
           defaultValue="gpt-4o"
           label={<p className="text-inherit">{t("Generative AI Model")}</p>}
           labelPlacement="outside"
@@ -395,7 +424,7 @@ export default function RecordingPage() {
           type="text"
           value={llmModel}
           onValueChange={setLLMModel}
-        />
+        /> */}
 
         <Accordion className="w-full">
           <AccordionItem
