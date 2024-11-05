@@ -5,6 +5,7 @@ import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { Link } from "@nextui-org/react";
+import { tv } from "tailwind-variants";
 
 import { Providers } from "./providers";
 
@@ -12,6 +13,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 import { cn } from "@/lib/cn";
+import { inherits } from "util";
 
 // Force next.js to treat this route as server-side rendered
 // Without this line, during the build process, next.js will treat this route as static and build a static HTML file for it
@@ -42,6 +44,18 @@ export const viewport: Viewport = {
   ],
 };
 
+const footerTextStyle = tv({
+  base: "text-xs text-default-500",
+  variants: {
+    inherit: {
+      true: "text-inherit",
+    },
+    center: {
+      true: "text-center",
+    },
+  },
+});
+
 export default async function RootLayout({
   children,
 }: {
@@ -71,7 +85,7 @@ export default async function RootLayout({
               </main>
               <footer className="w-full flex-col items-stretch justify-center py-3">
                 <div className="my-1 flex justify-center">
-                  <p className="mx-2 text-center text-xs text-default-500">
+                  <p className={footerTextStyle({ center: true })}>
                     &copy;{" "}
                     <Link
                       isExternal
@@ -86,18 +100,20 @@ export default async function RootLayout({
                 </div>
                 <div className="my-1 flex justify-center gap-4">
                   <Link href="/acknowledgements">
-                    <p className="text-xs text-default-500 text-inherit">
+                    <p className={footerTextStyle({ inherit: true })}>
                       {t("Acknowledgements.Acknowledgements")}
+                    </p>
+                  </Link>
+                  <Link isExternal href={t("Footer.FeedbackURL")}>
+                    <p className={footerTextStyle({ inherit: true })}>
+                      {t("Footer.Feedback")}
                     </p>
                   </Link>
                   <Link
                     isExternal
-                    showAnchorIcon
-                    href={t("Footer.FeedbackURL")}
+                    href="https://github.com/nae-lab/paperwave-web"
                   >
-                    <p className="text-xs text-default-500 text-inherit">
-                      {t("Footer.Feedback")}
-                    </p>
+                    <p className={footerTextStyle({ inherit: true })}>GitHub</p>
                   </Link>
                 </div>
               </footer>
