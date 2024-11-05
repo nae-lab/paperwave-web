@@ -44,7 +44,7 @@ export default function Login() {
         </p>
         <p className="mt-1">
           {t(
-            "Please log in with your Google account PaperWave will show you a list of your podcasts",
+            "Please log in with your Google account PaperWave uses Google services, so you need to log in",
           )}
         </p>
       </div>

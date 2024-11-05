@@ -81,7 +81,7 @@
   "Login": {
     "Login Signup": "로그인 / 가입",
     "You can try PaperWave for free as a demonstration of our research output": "당사의 연구 결과물을 데모로 무료로 사용해 볼 수 있습니다.",
-    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Google 계정으로 로그인해 주세요. PaperWave는 당신의 팟캐스트 목록을 보여줄 것입니다.",
+    "Please log in with your Google account PaperWave uses Google services, so you need to log in": "PaperWave는 구글 서비스를 이용하고 있기 때문에 구글 계정으로 로그인해야 합니다.",
     "Login with Google": "Google 계정으로 로그인"
   },
   "Acknowledgements": {
