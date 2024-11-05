@@ -24,7 +24,8 @@
     "RecordingDescription": "논문 PDF에서 새로운 에피소드를 녹음할 수 있습니다."
   },
   "Episodes": {
-    "Episodes List": "에피소드 목록"
+    "Episodes List": "에피소드 목록",
+    "Failed to load episodes": "에피소드를 로드하지 못함"
   },
   "Episode Details": {
     "Episode Information": "에피소드 정보",

@@ -24,7 +24,8 @@
     "RecordingDescription": "You can record a new episode from research paper PDFs."
   },
   "Episodes": {
-    "Episodes List": "Episodes"
+    "Episodes List": "Episodes",
+    "Failed to load episodes": "Failed to load episodes"
   },
   "Episode Details": {
     "Episode Information": "Episode Information",

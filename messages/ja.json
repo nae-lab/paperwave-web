@@ -24,7 +24,8 @@
     "RecordingDescription": "論文PDFから新しいエピソードを収録します。"
   },
   "Episodes": {
-    "Episodes List": "エピソード一覧"
+    "Episodes List": "エピソード一覧",
+    "Failed to load episodes": "エピソードの読み込みに失敗しました"
   },
   "Episode Details": {
     "Episode Information": "エピソード情報",
