@@ -1186,6 +1186,10 @@
 │                                      │                           │ An implementation of WHATWG AbortController interface.                                         │
 │                                      │                           │ https://github.com/mysticatea/abort-controller#readme                                          │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ accept-language                      │ MIT                       │ Tingan Ho                                                                                      │
+│                                      │                           │ Accept-Language parser for nodejs                                                              │
+│                                      │                           │ https://github.com/tinganho/node-accept-language                                               │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ acorn                                │ MIT                       │ ECMAScript parser                                                                              │
 │                                      │                           │ https://github.com/acornjs/acorn                                                               │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -1234,6 +1238,10 @@
 │ base64-js                            │ MIT                       │ T. Jameson Little                                                                              │
 │                                      │                           │ Base64 encoding/decoding in pure JS                                                            │
 │                                      │                           │ https://github.com/beatgammit/base64-js                                                        │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ bcp47                                │ MIT                       │ Gabriel Llamas                                                                                 │
+│                                      │                           │ Parser for the BCP 47 language tag specification                                               │
+│                                      │                           │ https://github.com/gagle/node-bcp47#readme                                                     │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ bignumber.js                         │ MIT                       │ Michael Mclaughlin                                                                             │
 │                                      │                           │ A library for arbitrary-precision decimal and non-decimal arithmetic                           │
