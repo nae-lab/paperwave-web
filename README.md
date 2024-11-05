@@ -1,5 +1,7 @@
 # PaperWave Web
 
+Try the demo at https://paperwave.app
+
 ## Introduction
 
 This repository contains the source code for the PaperWave Web.
