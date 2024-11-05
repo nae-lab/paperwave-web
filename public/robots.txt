@@ -1,3 +1,7 @@
+user-agent: AdsBot-Google-Mobile
+User-agent: AdsBot-Google
+user-agent: Mediapartners-Google
+Disallow: /
+
 User-agent: *
-Disallow: /channels/
-Disallow: /episodes/
+Disallow: /

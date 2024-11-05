@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  // Deny all crawlers
+  robots: {
+    follow: false,
+    index: false,
+  },
 };
 
 export const viewport: Viewport = {
