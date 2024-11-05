@@ -37,7 +37,11 @@ export default function Login() {
         <h1 className={title({ color: "foreground", size: "lg" })}>
           {t("Login Signup")}
         </h1>
-        <p className="mt-4">{t("You can try PaperWave for free")}</p>
+        <p className="mt-4">
+          {t(
+            "You can try PaperWave for free as a demonstration of our research output",
+          )}
+        </p>
         <p className="mt-1">
           {t(
             "Please log in with your Google account PaperWave will show you a list of your podcasts",
