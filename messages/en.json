@@ -79,7 +79,9 @@
     "Currently, there are no settings available": "Currently, there are no settings available."
   },
   "Login": {
-    "Click the button below to sign in with Google": "Click the button below to sign in with Google.",
+    "Login Signup": "Login / Signup",
+    "You can try PaperWave for free": "You can try PaperWave for free.",
+    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Please log in with your Google account. PaperWave will show you a list of your podcasts.",
     "Login with Google": "Login with Google"
   },
   "Acknowledgements": {

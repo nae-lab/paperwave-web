@@ -79,7 +79,9 @@
     "Currently, there are no settings available": "현재 사용 가능한 설정이 없습니다."
   },
   "Login": {
-    "Click the button below to sign in with Google": "아래 버튼을 클릭하여 Google 계정으로 로그인하세요.",
+    "Login Signup": "로그인 / 가입",
+    "You can try PaperWave for free": "PaperWave는 무료로 체험할 수 있습니다.",
+    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Google 계정으로 로그인해 주세요. PaperWave는 당신의 팟캐스트 목록을 보여줄 것입니다.",
     "Login with Google": "Google 계정으로 로그인"
   },
   "Acknowledgements": {

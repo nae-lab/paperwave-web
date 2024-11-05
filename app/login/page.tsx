@@ -13,7 +13,7 @@ import { useUserSession } from "@/lib/firebase/userSession";
 import { set } from "zod";
 
 export default function Login() {
-  const t = useTranslations();
+  const t = useTranslations("Login");
   const currentUserJSON = getCookie("user")?.toString() || null;
   const { user, userLoaded } = useUserSession(currentUserJSON);
   const router = useRouter();
@@ -35,10 +35,13 @@ export default function Login() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-lg justify-center text-center">
         <h1 className={title({ color: "foreground", size: "lg" })}>
-          {t("Navbar.login")}
+          {t("Login Signup")}
         </h1>
-        <p className="mt-4">
-          {t("Login.Click the button below to sign in with Google")}
+        <p className="mt-4">{t("You can try PaperWave for free")}</p>
+        <p className="mt-1">
+          {t(
+            "Please log in with your Google account PaperWave will show you a list of your podcasts",
+          )}
         </p>
       </div>
 
@@ -51,7 +54,7 @@ export default function Login() {
           })}
           onPress={handleSignIn}
         >
-          {t("Login.Login with Google")}
+          {t("Login with Google")}
         </Button>
       </div>
     </section>
