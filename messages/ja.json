@@ -24,7 +24,8 @@
     "RecordingDescription": "論文PDFから新しいエピソードを収録します。"
   },
   "Episodes": {
-    "Episodes List": "エピソード一覧"
+    "Episodes List": "エピソード一覧",
+    "Failed to load episodes": "エピソードの読み込みに失敗しました"
   },
   "Episode Details": {
     "Episode Information": "エピソード情報",
@@ -78,7 +79,9 @@
     "Currently, there are no settings available": "現在、利用可能な設定はありません。"
   },
   "Login": {
-    "Click the button below to sign in with Google": "以下のボタンをクリックしてGoogleでサインインしてください。",
+    "Login Signup": "ログイン・登録",
+    "You can try PaperWave for free as a demonstration of our research output": "PaperWaveは研究成果のデモとして，無料でお試しいただけます．",
+    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Googleアカウントでのログインをお願いします．あなたが作成したポッドキャスト一覧を表示するためにログインが必要です．",
     "Login with Google": "Googleでログイン"
   },
   "Acknowledgements": {

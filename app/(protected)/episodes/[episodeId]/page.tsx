@@ -14,6 +14,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Link,
 } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { TableHeader } from "react-stately";
@@ -53,7 +54,7 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
 
   React.useEffect(() => {
     if (episode === null) {
-      router.push("/not-found");
+      // router.push("/not-found");
     }
   }, [episode]);
 
@@ -143,8 +144,9 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                   </ul>
                 </TableCell>
               </TableRow>
-              {/* <TableRow>
-                  <TableCell>PDF URL</TableCell>
+              {episode.uid === user?.uid ? (
+                <TableRow>
+                  <TableCell>PDF</TableCell>
                   <TableCell>
                     <Link
                       isExternal
@@ -156,7 +158,10 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
                       </p>
                     </Link>
                   </TableCell>
-                </TableRow> */}
+                </TableRow>
+              ) : (
+                <></>
+              )}
             </TableBody>
           </Table>
         </>
@@ -253,8 +258,8 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
             </TableRow> */}
           </TableBody>
         </Table>
-        {/* <h2 className={sectionTitle()}>{t("Source Papers")}</h2> */}
-        {/* {papersInfo} */}
+        <h2 className={sectionTitle()}>{t("Source Papers")}</h2>
+        {papersInfo}
         {isUserAdmin === true ? debugInfo : null}
       </Skeleton>
     </div>

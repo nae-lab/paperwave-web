@@ -3,17 +3,18 @@
 import "client-only";
 
 import {
+  Avatar,
   Button,
+  button as buttonStyles,
   Dropdown,
   DropdownTrigger,
-  Avatar,
+  Link,
   Skeleton,
 } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 
 import UserMenuDropdownMenu from "./usermenu-dropdownmenu";
 
-import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
 
 export default function UserMenu({
@@ -26,9 +27,12 @@ export default function UserMenu({
 
   if (!user) {
     return (
-      <Button color="primary" radius="full" onPress={signInWithGoogle}>
+      <Link
+        className={buttonStyles({ color: "primary", radius: "full" })}
+        href="/login"
+      >
         {t("login")}
-      </Button>
+      </Link>
     );
   } else {
     const userAvatar = user?.photoURL ? (

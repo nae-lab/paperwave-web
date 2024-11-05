@@ -24,7 +24,8 @@
     "RecordingDescription": "논문 PDF에서 새로운 에피소드를 녹음할 수 있습니다."
   },
   "Episodes": {
-    "Episodes List": "에피소드 목록"
+    "Episodes List": "에피소드 목록",
+    "Failed to load episodes": "에피소드를 로드하지 못함"
   },
   "Episode Details": {
     "Episode Information": "에피소드 정보",
@@ -78,7 +79,9 @@
     "Currently, there are no settings available": "현재 사용 가능한 설정이 없습니다."
   },
   "Login": {
-    "Click the button below to sign in with Google": "아래 버튼을 클릭하여 Google 계정으로 로그인하세요.",
+    "Login Signup": "로그인 / 가입",
+    "You can try PaperWave for free as a demonstration of our research output": "당사의 연구 결과물을 데모로 무료로 사용해 볼 수 있습니다.",
+    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Google 계정으로 로그인해 주세요. PaperWave는 당신의 팟캐스트 목록을 보여줄 것입니다.",
     "Login with Google": "Google 계정으로 로그인"
   },
   "Acknowledgements": {

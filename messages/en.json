@@ -24,7 +24,8 @@
     "RecordingDescription": "You can record a new episode from research paper PDFs."
   },
   "Episodes": {
-    "Episodes List": "Episodes"
+    "Episodes List": "Episodes",
+    "Failed to load episodes": "Failed to load episodes"
   },
   "Episode Details": {
     "Episode Information": "Episode Information",
@@ -78,7 +79,9 @@
     "Currently, there are no settings available": "Currently, there are no settings available."
   },
   "Login": {
-    "Click the button below to sign in with Google": "Click the button below to sign in with Google.",
+    "Login Signup": "Login / Signup",
+    "You can try PaperWave for free as a demonstration of our research output": "You can try PaperWave for free as a demonstration of our research output.",
+    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Please log in with your Google account. PaperWave will show you a list of your podcasts.",
     "Login with Google": "Login with Google"
   },
   "Acknowledgements": {
