@@ -1,23 +1,15 @@
 "use client";
 
 import React from "react";
-import { button as buttonStyles } from "@nextui-org/theme";
-import { Button, Link, Skeleton } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { signInWithGoogle } from "@/lib/firebase/auth";
-import { useUserSession } from "@/lib/firebase/userSession";
 import ActionCard from "@/components/action-card";
 
 export default function Home() {
-  const { user, userLoaded } = useUserSession(null);
   const t = useTranslations("Home");
-
-  const handleSignIn = () => {
-    signInWithGoogle();
-  };
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -27,6 +19,14 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+        <Link href="/episodes/new">
+          <ActionCard
+            className="h-full w-full"
+            description={t("RecordingDescription")}
+            icon="solar:microphone-3-bold"
+            title={t("Recording")}
+          />
+        </Link>
         <Link href="/channels/me">
           <ActionCard
             className="h-full w-full"
@@ -41,14 +41,6 @@ export default function Home() {
             description={t("ChannelsDescription")}
             icon="solar:radio-linear"
             title={t("Channels")}
-          />
-        </Link>
-        <Link href="/episodes/new">
-          <ActionCard
-            className="h-full w-full"
-            description={t("RecordingDescription")}
-            icon="solar:microphone-3-bold"
-            title={t("Recording")}
           />
         </Link>
       </div>

@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { title } from "@/components/primitives";
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
-import { set } from "zod";
 
 export default function Login() {
   const t = useTranslations("Login");
