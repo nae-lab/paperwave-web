@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import { Link } from "@nextui-org/react";
+import { Link, Spacer } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
+import { YouTubeEmbed } from "@next/third-parties/google";
 
 import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
+import { title, subtitle, pageTitle } from "@/components/primitives";
 import ActionCard from "@/components/action-card";
+import { cn } from "@/lib/cn";
+import Player from "@/components/player";
 
 export default function Home() {
   const t = useTranslations("Home");
@@ -43,6 +46,41 @@ export default function Home() {
             title={t("Channels")}
           />
         </Link>
+      </div>
+      <Spacer y={16} />
+      <div className="flex flex-col items-stretch justify-center gap-4 py-8">
+        <h1 className={cn(pageTitle(), "text-center")}>
+          {t("Example Result")}
+        </h1>
+        <Player episodeId={t("ExampleEpisodeId")} />
+      </div>
+      <div className="flex flex-col items-stretch justify-center gap-4 py-8">
+        <h1 className={cn(pageTitle(), "text-center")}>{t("Publications")}</h1>
+        <YouTubeEmbed
+          params="si=vkpzax5vEB3598LK&start=31"
+          style="width: 100%; height: 100%; display: block; margin: 0 auto; max-width: 480px;"
+          videoid="5vmOaMdfNP8"
+        />
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <Link href="http://arxiv.org/abs/2410.15023">
+            <ActionCard
+              className="h-full w-full"
+              description="PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM"
+              icon="academicons:arxiv"
+              title="arXiv"
+            />
+          </Link>
+          <Link href="https://yuchi.jp/doc/hcgsympo2024-paperwave.pdf">
+            <ActionCard
+              className="h-full w-full"
+              description={t(
+                "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs",
+              )}
+              icon="hugeicons:presentation-online"
+              title={t("HCG Symposium 2024")}
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );

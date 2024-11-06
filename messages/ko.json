@@ -21,7 +21,12 @@
     "Channels": "채널",
     "ChannelsDescription": "다른 사용자의 채널 목록을 확인할 수 있습니다.",
     "Recording": "녹음하기",
-    "RecordingDescription": "논문 PDF에서 새로운 에피소드를 녹음할 수 있습니다."
+    "RecordingDescription": "논문 PDF에서 새로운 에피소드를 녹음할 수 있습니다.",
+    "Example Result": "예시 결과",
+    "ExampleEpisodeId": "eSZ78fCXLjauBNfpkPat",
+    "Publications": "발표 자료",
+    "HCG Symposium 2024": "HCG Symposium 2024",
+    "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs": "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs (일본어)"
   },
   "Episodes": {
     "Episodes List": "에피소드 목록",

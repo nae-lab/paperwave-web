@@ -10,6 +10,7 @@
     "cli:dumpLicenses": "sh scripts/dump-cli-licenses.sh"
   },
   "dependencies": {
+    "@next/third-parties": "^15.0.2",
     "@nextui-org/react": "^2.4.8",
     "@nextui-org/theme": "^2.2.11",
     "@react-aria/ssr": "^3.9.4",
