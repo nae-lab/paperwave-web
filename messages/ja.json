@@ -21,7 +21,12 @@
     "Channels": "チャンネル一覧",
     "ChannelsDescription": "他のユーザーのチャンネル一覧を確認できます。",
     "Recording": "収録",
-    "RecordingDescription": "論文PDFから新しいエピソードを収録します。"
+    "RecordingDescription": "論文PDFから新しいエピソードを収録します。",
+    "Example Result": "生成サンプル",
+    "ExampleEpisodeId": "dii6hMevoRiKOLvlVp65",
+    "Publications": "研究発表",
+    "HCG Symposium 2024": "HCGシンポジウム2024",
+    "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs": "LLMを用いた研究論文の対話形式ポッドキャストへの変換システムPaperWaveの開発"
   },
   "Episodes": {
     "Episodes List": "エピソード一覧",
@@ -81,7 +86,7 @@
   "Login": {
     "Login Signup": "ログイン・登録",
     "You can try PaperWave for free as a demonstration of our research output": "PaperWaveは研究成果のデモとして，無料でお試しいただけます．",
-    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Googleアカウントでのログインをお願いします．あなたが作成したポッドキャスト一覧を表示するためにログインが必要です．",
+    "Please log in with your Google account PaperWave uses Google services, so you need to log in": "Googleアカウントでのログインをお願いします．PaperWaveはGoogleのサービスを利用しているため，ログインが必要です．",
     "Login with Google": "Googleでログイン"
   },
   "Acknowledgements": {

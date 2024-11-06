@@ -715,6 +715,8 @@
 │                                      │                           │ when you want to fire an event no matter how a process exits.                                  │
 │                                      │                           │ https://github.com/tapjs/signal-exit#readme                                                    │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ third-party-capital                  │ ISC                       │ https://github.com/housseindjirdeh/third-party-capital#readme                                  │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ which                                │ ISC                       │ Isaac Z. Schlueter                                                                             │
 │                                      │                           │ Like which(1) unix command. Find the first instance of an executable in the PATH.              │
 │                                      │                           │ https://github.com/isaacs/node-which#readme                                                    │
@@ -799,6 +801,8 @@
 │                                      │                           │ https://github.com/vercel/next.js#readme                                                       │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @next/swc-darwin-arm64               │ MIT                       │ https://github.com/vercel/next.js#readme                                                       │
+├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @next/third-parties                  │ MIT                       │ https://github.com/vercel/next.js#readme                                                       │
 ├──────────────────────────────────────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @nextui-org/accordion                │ MIT                       │ Junior Garcia                                                                                  │
 │                                      │                           │ Collapse display a list of high-level options that can expand/collapse to reveal more          │

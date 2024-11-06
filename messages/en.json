@@ -21,7 +21,12 @@
     "Channels": "Channels",
     "ChannelsDescription": "You can check the list of other users' channels.",
     "Recording": "Recording",
-    "RecordingDescription": "You can record a new episode from research paper PDFs."
+    "RecordingDescription": "You can record a new episode from research paper PDFs.",
+    "Example Result": "Example Result",
+    "ExampleEpisodeId": "d8yRwQmcVht0CT5wnEFX",
+    "Publications": "Publications",
+    "HCG Symposium 2024": "HCG Symposium 2024",
+    "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs": "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs (in Japanese)"
   },
   "Episodes": {
     "Episodes List": "Episodes",
@@ -81,7 +86,7 @@
   "Login": {
     "Login Signup": "Login / Signup",
     "You can try PaperWave for free as a demonstration of our research output": "You can try PaperWave for free as a demonstration of our research output.",
-    "Please log in with your Google account PaperWave will show you a list of your podcasts": "Please log in with your Google account. PaperWave will show you a list of your podcasts.",
+    "Please log in with your Google account PaperWave uses Google services, so you need to log in": "Please log in with your Google account. PaperWave uses Google services, so you need to log in.",
     "Login with Google": "Login with Google"
   },
   "Acknowledgements": {

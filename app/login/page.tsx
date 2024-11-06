@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { title } from "@/components/primitives";
 import { signInWithGoogle } from "@/lib/firebase/auth";
 import { useUserSession } from "@/lib/firebase/userSession";
-import { set } from "zod";
 
 export default function Login() {
   const t = useTranslations("Login");
@@ -44,7 +43,7 @@ export default function Login() {
         </p>
         <p className="mt-1">
           {t(
-            "Please log in with your Google account PaperWave will show you a list of your podcasts",
+            "Please log in with your Google account PaperWave uses Google services, so you need to log in",
           )}
         </p>
       </div>

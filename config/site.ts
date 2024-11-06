@@ -36,13 +36,13 @@ export const routes: Route = {
 export const siteConfig = {
   name: "PaperWave",
   description: "Voicing Papers, Bringing Research to Life.",
-  tabItems: [routes.episodes, routes.channels, routes.recording],
+  tabItems: [routes.recording, routes.episodes, routes.channels],
   navMenuItemsSignedOut: [routes.home],
   navMenuItemsSignedIn: [
     routes.home,
+    routes.recording,
     routes.episodes,
     routes.channels,
-    routes.recording,
   ],
   userMenuItems: [routes.settings],
   settingTabItems: [],
