@@ -2,6 +2,7 @@
 
 import "client-only";
 
+import { createHash } from "crypto";
 import React from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -81,7 +82,10 @@ export default function RecordingPage() {
     setIsFileUploading(true);
     const promises = acceptedFiles.map((file) => {
       const promise = async (file: File) => {
-        const filePath = `pdf/${user?.email || "unknown-user"}/${file.name}`;
+        const userHash = createHash("sha256")
+          .update(user?.uid || "unknown-user")
+          .digest("hex");
+        const filePath = `pdf/${userHash}/${file.name}`;
         const fileRef = storageRef(storage, filePath);
 
         const uploadTask = uploadBytes(fileRef, file);
