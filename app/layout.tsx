@@ -14,6 +14,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 import { cn } from "@/lib/cn";
+import { isExternal } from "util/types";
 
 // Force next.js to treat this route as server-side rendered
 // Without this line, during the build process, next.js will treat this route as static and build a static HTML file for it
@@ -85,6 +86,7 @@ export default async function RootLayout({
               </main>
               <Tooltip content={t("Footer.Feedback")} placement="left">
                 <Link
+                  isExternal
                   className={cn([
                     buttonStyles({
                       isIconOnly: true,
