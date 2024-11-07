@@ -10,7 +10,7 @@ export async function GET() {
   const user = userJson ? (JSON.parse(userJson) as User) : null;
 
   if (!user) {
-    redirect("/login");
+    redirect("/login?redirect=/channels/me");
   } else {
     redirect(`/channels/${user.uid}`);
   }
