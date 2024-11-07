@@ -4,7 +4,8 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
-import { Link } from "@nextui-org/react";
+import { Link, Tooltip, button as buttonStyles } from "@nextui-org/react";
+import { Icon } from "@iconify/react";
 import { tv } from "tailwind-variants";
 
 import { Providers } from "./providers";
@@ -82,6 +83,22 @@ export default async function RootLayout({
               <main className="container mx-auto h-full max-w-7xl flex-grow flex-col px-2 pt-6 md:px-8">
                 {children}
               </main>
+              <Tooltip content={t("Footer.Feedback")} placement="left">
+                <Link
+                  className={cn([
+                    buttonStyles({
+                      isIconOnly: true,
+                      radius: "full",
+                      size: "md",
+                      variant: "ghost",
+                    }),
+                    "fixed bottom-4 right-4 z-10 overflow-visible shadow-md md:bottom-8 md:right-8",
+                  ])}
+                  href={t("Footer.FeedbackURL")}
+                >
+                  <Icon icon="fluent:person-feedback-24-regular" width={28} />
+                </Link>
+              </Tooltip>
               <footer className="w-full flex-col items-stretch justify-center py-3">
                 <div className="my-1 flex justify-center">
                   <p className={footerTextStyle({ center: true })}>
