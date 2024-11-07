@@ -92,7 +92,7 @@ export default async function RootLayout({
                       isIconOnly: true,
                       radius: "full",
                       size: "md",
-                      variant: "ghost",
+                      variant: "faded",
                     }),
                     "fixed bottom-4 right-4 z-10 overflow-visible shadow-md md:bottom-8 md:right-8",
                   ])}
