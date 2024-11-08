@@ -43,7 +43,7 @@
   },
   "Player": {
     "Recording": "녹음 중...",
-    "Recording failed": "녹음 실패",
+    "Recording failed": "녹음 실패. 다시 시도하세요.",
     "recorded by": "{name}이(가) 녹음함"
   },
   "Channels": {

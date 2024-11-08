@@ -43,7 +43,7 @@
   },
   "Player": {
     "Recording": "Recording...",
-    "Recording failed": "Recording failed",
+    "Recording failed": "Recording failed. Please try again.",
     "recorded by": "Recorded by {name}"
   },
   "Channels": {

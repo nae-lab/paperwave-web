@@ -43,7 +43,7 @@
   },
   "Player": {
     "Recording": "収録中...",
-    "Recording failed": "収録に失敗しました",
+    "Recording failed": "収録失敗，もう一度お試しください🙇",
     "recorded by": "{name}"
   },
   "Channels": {
