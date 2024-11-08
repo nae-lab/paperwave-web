@@ -64,7 +64,7 @@ export class RecordingOptions implements DocumentSnapshotType {
     this.assistantConcurrency = options.assistantConcurrency ?? 10;
     this.ttsModel = options.ttsModel ?? "tts-1";
     this.ttsConcurrency = options.ttsConcurrency ?? 20;
-    this.retryCount = options.retryCount ?? 5;
+    this.retryCount = options.retryCount ?? 10;
     this.retryMaxDelay = options.retryMaxDelay ?? 150000;
   }
 }
