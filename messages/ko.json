@@ -17,6 +17,7 @@
   "Home": {
     "description": "논문에 목소리를 불어넣어 연구에 생명을 불어넣습니다.",
     "Episodes": "내 에피소드",
+    "error message": "많은 접속을 받아 10/17 20시경~10/18 8시 30분경까지 녹화 처리에 장애가 발생했습니다. 현재는 복구되었습니다.",
     "EpisodesDescription": "녹음한 에피소드 목록을 확인할 수 있습니다.",
     "Channels": "채널",
     "ChannelsDescription": "다른 사용자의 채널 목록을 확인할 수 있습니다.",
