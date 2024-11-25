@@ -42,6 +42,14 @@ pnpm install
 pnpm dev
 ```
 
+## Development
+
+### Git Hooks
+
+```sh
+git config --local core.hooksPath .githooks
+```
+
 ## License
 
 Copyright 2024 Naemura Laboratory, the University of Tokyo

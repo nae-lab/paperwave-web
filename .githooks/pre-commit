@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Check if pnpm is available
+if ! command -v pnpm &> /dev/null
+then
+		echo "pnpm could not be found"
+		exit 0
+fi
+
+# Dump version info
+pnpm --silent version:webOnly > public/version.txt
+
+# Make licenses files
+pnpm licenses list -P --long > public/licenses/paperwave-web-licenses.txt
+pnpm cli:dumpLicenses
+
+# Include the generated files in the commit
+git add public/version.txt
+git add public/licenses/paperwave-web-licenses.txt
+git add public/licenses/paperwave-cli-licenses.txt
+
+# Check if build succeeded
+if ! pnpm build
+then
+		echo "Build failed"
+		exit 1
+fi
+
+exit 0

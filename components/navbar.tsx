@@ -19,6 +19,7 @@ import {
   Divider,
   Badge,
   Spacer,
+  Chip,
 } from "@nextui-org/react";
 import { button as buttonStyles } from "@nextui-org/react";
 import { cookies } from "next/headers";
@@ -34,7 +35,9 @@ import UserMenu from "@/components/navbar/usermenu";
 import NotificationsCard from "@/components/navbar/notifications-card";
 import { ThemeSwitch } from "@/components/navbar/theme-switch";
 import LocaleSwitcher from "@/components/navbar/locale-switcher";
-import Breadcrumbs from "./navbar/breadcrumbs";
+import Breadcrumbs from "@/components/navbar/breadcrumbs";
+
+import webVersion from "@/public/version.txt";
 
 export default function Navbar() {
   const userJSON = getCookie("user", { cookies })?.toString() ?? "";
@@ -55,6 +58,10 @@ export default function Navbar() {
           <Link className="text-inherit" href="/">
             <p className="font-bold text-inherit">{siteConfig.name}</p>
           </Link>
+          <Spacer x={2} />
+          <Chip size="sm" variant="bordered">
+            v{webVersion}
+          </Chip>
         </NavbarBrand>
 
         {/* Right Menu */}
