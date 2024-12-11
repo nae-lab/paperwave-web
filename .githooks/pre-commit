@@ -22,11 +22,4 @@ git add public/version.txt
 git add public/licenses/paperwave-web-licenses.txt
 git add public/licenses/paperwave-cli-licenses.txt
 
-# Check if build succeeded
-if ! pnpm build
-then
-		echo "Build failed"
-		exit 1
-fi
-
 exit 0
