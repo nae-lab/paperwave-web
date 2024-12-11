@@ -73,7 +73,7 @@ export default function RecordingPage() {
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
   const [episodeLanguage, setEpisodeLanguage] = React.useState(locale);
-  const [llmModel, setLLMModel] = React.useState("gpt-4o-2024-05-13");
+  const [llmModel, setLLMModel] = React.useState("gpt-4o-2024-11-20");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
   const [episodeCoverImageURL, setEpisodeCoverImageURL] = React.useState("");
@@ -413,6 +413,9 @@ export default function RecordingPage() {
                 setLLMModel(selected.currentKey || "gpt-4o-mini");
               }}
             >
+              <DropdownItem key="gpt-4o-2024-11-20">
+                {"gpt-4o-2024-11-20"}
+              </DropdownItem>
               <DropdownItem key="gpt-4o-2024-05-13">
                 {"gpt-4o-2024-05-13"}
               </DropdownItem>
