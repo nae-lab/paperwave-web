@@ -72,7 +72,7 @@ export default function Home() {
               className="h-full w-full"
               description="PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM"
               icon="academicons:arxiv"
-              title="arXiv"
+              title={t("arXiv (accepted to CHI2025 Case Studies)")}
             />
           </Link>
           <Link href="https://yuchi.jp/doc/hcgsympo2024-paperwave.pdf">

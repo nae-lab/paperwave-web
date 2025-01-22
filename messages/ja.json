@@ -26,6 +26,7 @@
     "Example Result": "生成サンプル",
     "ExampleEpisodeId": "dii6hMevoRiKOLvlVp65",
     "Publications": "研究発表",
+    "arXiv (accepted to CHI2025 Case Studies)": "arXiv (CHI2025 Case Studiesで発表予定)",
     "HCG Symposium 2024": "HCGシンポジウム2024",
     "Developing PaperWave: A System for Adapting Research Papers into Conversational Podcasts with LLMs": "LLMを用いた研究論文の対話形式ポッドキャストへの変換システムPaperWaveの開発"
   },
