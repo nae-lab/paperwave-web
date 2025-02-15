@@ -181,7 +181,7 @@ export default function RecordingPage() {
       minute: parseInt(episodeDuration),
       language: language,
       llmModel: llmModel,
-      ttsConcurrency: 5,
+      ttsConcurrency: 10,
     });
 
     const papers = uploadedFiles.map((f) => {

@@ -926,6 +926,10 @@
 │                                       │                                                                      │ Tiny queue data structure                                                                      │
 │                                       │                                                                      │ https://github.com/sindresorhus/yocto-queue#readme                                             │
 ├───────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ zod                                   │ MIT                                                                  │ Colin McDonnell                                                                                │
+│                                       │                                                                      │ TypeScript-first schema declaration and validation library with static type inference          │
+│                                       │                                                                      │ https://zod.dev                                                                                │
+├───────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ truncate-utf8-bytes                   │ WTFPL                                                                │ Carl Xiong                                                                                     │
 │                                       │                                                                      │ Truncate string to given length in bytes                                                       │
 │                                       │                                                                      │ https://github.com/parshap/truncate-utf8-bytes#readme                                          │
