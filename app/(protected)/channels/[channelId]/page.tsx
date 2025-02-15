@@ -3,7 +3,7 @@
 import "client-only";
 
 import React from "react";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, Pagination } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 
 import Player from "@/components/player";
@@ -16,6 +16,8 @@ const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
   const [episodeIds, setEpisodeIds] = React.useState<string[]>([]);
   const [episodesReady, setEpisodesReady] = React.useState(false);
   const [getError, setGetError] = React.useState<string | null>(null);
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const episodesPerPage = 5;
 
   React.useEffect(() => {
     getEpisodeIds(params.channelId)
@@ -28,11 +30,28 @@ const ProgramsPage = ({ params }: { params: { channelId: string } }) => {
       });
   }, [params.channelId]);
 
+  const totalPages = Math.ceil(episodeIds.length / episodesPerPage);
+  const displayedEpisodeIds = episodeIds.slice(
+    (currentPage - 1) * episodesPerPage,
+    currentPage * episodesPerPage,
+  );
+
+  const paginationControl = (
+    <Pagination
+      showControls
+      page={currentPage}
+      total={totalPages}
+      onChange={(page) => setCurrentPage(page)}
+    />
+  );
+
   const episodePlayers = episodesReady ? (
     <div className="flex flex-col items-center justify-start gap-5">
-      {episodeIds.map((episodeId) => {
-        return <Player key={episodeId} episodeId={episodeId} />;
-      })}
+      {totalPages > 1 && paginationControl}
+      {displayedEpisodeIds.map((episodeId) => (
+        <Player key={episodeId} episodeId={episodeId} />
+      ))}
+      {totalPages > 1 && paginationControl}
     </div>
   ) : (
     <div className="flex flex-col items-center justify-start gap-5">
