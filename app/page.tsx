@@ -19,11 +19,11 @@ export default function Home() {
       <div className="inline-block max-w-lg justify-center text-center">
         <h1 className={title({ color: "blue" })}>{siteConfig.name}</h1>
         <h2 className={subtitle({ class: "mt-4" })}>{t("description")}</h2>
-        {/* <Card className="mb-8 mt-4 p-2" shadow="sm">
+        <Card className="mb-8 mt-4 p-2" shadow="sm">
           <CardBody>
             <p className="text-sm text-default-500">{t("error message")}</p>
           </CardBody>
-        </Card> */}
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
