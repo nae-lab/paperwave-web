@@ -1,1 +1,1 @@
- ERR_PNPM_MISSING_PACKAGE_INDEX_FILE  Failed to find package index file for app-root-path@3.1.0 (at /Users/yuchi/Library/pnpm/store/v3/v10/index/6e/23773f0076814b63698cbf8acad4dda356239c3e7c07ef1e44af08a7901b18-app-root-path@3.1.0.json), please consider running 'pnpm install'
+ ERR_PNPM_MISSING_PACKAGE_INDEX_FILE  Failed to find package index file for @ffmpeg-installer/ffmpeg@1.1.0 (at /Users/yuchi/Library/pnpm/store/v3/v10/index/52/ae2b9b091d1b121af40e8177f56aa986d3ef3aa1d46ad3e7fac5c02c0a33bd-@ffmpeg-installer+ffmpeg@1.1.0.json), please consider running 'pnpm install'
