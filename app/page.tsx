@@ -67,12 +67,22 @@ export default function Home() {
           videoid="5vmOaMdfNP8"
         />
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-          <Link href="http://arxiv.org/abs/2410.15023">
+          <Link href="https://doi.org/10.1145/3706599.3706664">
             <ActionCard
               className="h-full w-full"
               description="PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM"
-              icon="academicons:arxiv"
-              title={t("arXiv (accepted to CHI2025 Case Studies)")}
+              icon="hugeicons:presentation-online"
+              title={t("CHI2025")}
+            />
+          </Link>
+          <Link href="https://thingsofdesign.info/2025/Yahagi.pdf">
+            <ActionCard
+              className="h-full w-full"
+              description="Temporal Perspectives on Exploring PaperWave: a Document-to-Audio Adaptation System powered by LLMs"
+              icon="hugeicons:presentation-online"
+              title={t(
+                "Research Products and Time: When, For How Long, And Then What? (CHI2025 workshop)",
+              )}
             />
           </Link>
           <Link href="https://yuchi.jp/doc/hcgsympo2024-paperwave.pdf">
