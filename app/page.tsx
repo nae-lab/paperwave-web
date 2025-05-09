@@ -66,13 +66,13 @@ export default function Home() {
           style="width: 100%; height: 100%; display: block; margin: 0 auto; max-width: 480px;"
           videoid="5vmOaMdfNP8"
         />
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3">
           <Link href="https://doi.org/10.1145/3706599.3706664">
             <ActionCard
               className="h-full w-full"
               description="PaperWave: Listening to Research Papers as Conversational Podcasts Scripted by LLM"
               icon="hugeicons:presentation-online"
-              title={t("CHI2025")}
+              title="CHI2025 Case Studies"
             />
           </Link>
           <Link href="https://thingsofdesign.info/2025/Yahagi.pdf">
@@ -80,9 +80,7 @@ export default function Home() {
               className="h-full w-full"
               description="Temporal Perspectives on Exploring PaperWave: a Document-to-Audio Adaptation System powered by LLMs"
               icon="hugeicons:presentation-online"
-              title={t(
-                "Research Products and Time: When, For How Long, And Then What? (CHI2025 workshop)",
-              )}
+              title="Research Products and Time: When, For How Long, And Then What? Workshop in CHI2025"
             />
           </Link>
           <Link href="https://yuchi.jp/doc/hcgsympo2024-paperwave.pdf">
