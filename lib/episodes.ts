@@ -59,10 +59,10 @@ export class RecordingOptions implements DocumentSnapshotType {
       options.bgm ??
       "https://firebasestorage.googleapis.com/v0/b/paperwave.appspot.com/o/bgm%2Fpodcast-jazz-music.mp3?alt=media&token=0b890308-01aa-4f3c-b206-033f6f684d8e";
     this.bgmVolume = options.bgmVolume ?? 0.25;
-    this.llmModel = options.llmModel ?? "gpt-4o-mini";
+    this.llmModel = options.llmModel ?? "gpt-4.1";
     this.chatConcurrency = options.chatConcurrency ?? 10;
     this.assistantConcurrency = options.assistantConcurrency ?? 10;
-    this.ttsModel = options.ttsModel ?? "tts-1";
+    this.ttsModel = options.ttsModel ?? "gpt-4o-mini-tts";
     this.ttsConcurrency = options.ttsConcurrency ?? 20;
     this.retryCount = options.retryCount ?? 10;
     this.retryMaxDelay = options.retryMaxDelay ?? 150000;

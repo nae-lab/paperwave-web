@@ -73,7 +73,7 @@ export default function RecordingPage() {
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
   const [episodeLanguage, setEpisodeLanguage] = React.useState(locale);
-  const [llmModel, setLLMModel] = React.useState("gpt-4o");
+  const [llmModel, setLLMModel] = React.useState("gpt-4.1");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
   const [episodeCoverImageURL, setEpisodeCoverImageURL] = React.useState("");
@@ -181,7 +181,7 @@ export default function RecordingPage() {
       minute: parseInt(episodeDuration),
       language: language,
       llmModel: llmModel,
-      ttsConcurrency: 10,
+      ttsConcurrency: 100,
     });
 
     const papers = uploadedFiles.map((f) => {
@@ -411,9 +411,10 @@ export default function RecordingPage() {
               selectionMode="single"
               variant="flat"
               onSelectionChange={(selected) => {
-                setLLMModel(selected.currentKey || "gpt-4o-mini");
+                setLLMModel(selected.currentKey || "gpt-4.1");
               }}
             >
+              <DropdownItem key="gpt-4.1">{"gpt-4.1"}</DropdownItem>
               <DropdownItem key="gpt-4o">{"gpt-4o"}</DropdownItem>
               <DropdownItem key="gpt-4o-mini">{"gpt-4o-mini"}</DropdownItem>
             </DropdownMenu>
