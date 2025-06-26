@@ -25,6 +25,7 @@ import { auth } from "@/lib/firebase/clientApp";
 import { isUserAdmin as _isUserAdmin } from "@/lib/userInfo";
 import Player from "@/components/player";
 import { pageTitle, sectionTitle } from "@/components/primitives";
+import TranscriptViewer from "@/components/transcript-viewer";
 
 const infoTableStyle = tv({
   base: "w-[99%] px-0.5 py-2",
@@ -33,6 +34,7 @@ const infoTableStyle = tv({
 const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
   const router = useRouter();
   const t = useTranslations("Episode Details");
+  const tTranscript = useTranslations("Transcript");
   const user = auth.currentUser;
   const [isUserAdmin, setIsUserAdmin] = React.useState<boolean | null>(null);
 
@@ -40,7 +42,15 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
     undefined,
   );
 
+  // transcriptUrl更新用のstate
+  const [isUpdatingTranscript, setIsUpdatingTranscript] = React.useState(false);
+  const [transcriptUpdateAttempted, setTranscriptUpdateAttempted] =
+    React.useState(false);
+
   React.useEffect(() => {
+    // episodeIdが変わった時にtranscriptUpdateAttemptedをリセット
+    setTranscriptUpdateAttempted(false);
+
     getEpisode(params.episodeId).then((data) => {
       setEpisode(data);
     });
@@ -51,6 +61,54 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
 
     return unsubscribeSnapshot;
   }, [params.episodeId]);
+
+  // transcriptUrlが空、または有効期限切れの場合にAPI routeを呼び出す
+  React.useEffect(() => {
+    const isTranscriptExpired = (episode: Episode) => {
+      if (!episode.transcriptUrlExpiresAt) return false;
+      const expiresAt = new Date(episode.transcriptUrlExpiresAt);
+      return expiresAt < new Date();
+    };
+
+    if (
+      episode &&
+      episode.contentUrl &&
+      (!episode.transcriptUrl ||
+        episode.transcriptUrl.trim() === "" ||
+        isTranscriptExpired(episode)) &&
+      !isUpdatingTranscript &&
+      !transcriptUpdateAttempted
+    ) {
+      setIsUpdatingTranscript(true);
+      setTranscriptUpdateAttempted(true);
+
+      fetch(`/api/episodes/${params.episodeId}/update-transcript-url`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.transcriptUrl) {
+            console.debug("Transcript URL updated:", data.transcriptUrl);
+          } else if (data.error) {
+            console.warn("Failed to update transcript URL:", data.error);
+          }
+        })
+        .catch((error) => {
+          console.error("Error updating transcript URL:", error);
+        })
+        .finally(() => {
+          setIsUpdatingTranscript(false);
+        });
+    }
+  }, [
+    episode,
+    params.episodeId,
+    isUpdatingTranscript,
+    transcriptUpdateAttempted,
+  ]);
 
   React.useEffect(() => {
     if (episode === null) {
@@ -221,6 +279,16 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
         className="rounded-lg"
         isLoaded={episode !== null && episode !== undefined}
       >
+        {episode && (
+          <div className="my-4">
+            {episode.transcriptUrl && (
+              <>
+                <h3 className={sectionTitle()}>Transcript</h3>
+                <TranscriptViewer transcriptUrl={episode.transcriptUrl} />
+              </>
+            )}
+          </div>
+        )}
         <h2 className={sectionTitle()}>{t("Episode Information")}</h2>
         <Table
           hideHeader
@@ -261,6 +329,55 @@ const ProgramsPage = ({ params }: { params: { episodeId: string } }) => {
         <h2 className={sectionTitle()}>{t("Source Papers")}</h2>
         {papersInfo}
         {isUserAdmin === true ? debugInfo : null}
+        {episode && (
+          <div className="mt-4">
+            <h3 className={sectionTitle()}>URLs</h3>
+            <Table
+              hideHeader
+              aria-label="URLs Information"
+              className={infoTableStyle()}
+            >
+              <TableHeader>
+                <TableColumn>Key</TableColumn>
+                <TableColumn>Value</TableColumn>
+              </TableHeader>
+              <TableBody>
+                <TableRow key="content-url">
+                  <TableCell>Content URL</TableCell>
+                  <TableCell>
+                    <Link isExternal showAnchorIcon href={episode.contentUrl}>
+                      <p className="truncate text-sm">{episode.contentUrl}</p>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+                <TableRow key="transcript-url">
+                  <TableCell>Transcript URL</TableCell>
+                  <TableCell>
+                    {episode.transcriptUrl ? (
+                      <Link
+                        isExternal
+                        showAnchorIcon
+                        href={episode.transcriptUrl}
+                      >
+                        <p className="truncate text-sm">
+                          {episode.transcriptUrl}
+                        </p>
+                      </Link>
+                    ) : (
+                      <span className="text-sm text-default-400">
+                        {isUpdatingTranscript
+                          ? tTranscript("Loading")
+                          : transcriptUpdateAttempted
+                            ? tTranscript("Error")
+                            : "N/A"}
+                      </span>
+                    )}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        )}
       </Skeleton>
     </div>
   );

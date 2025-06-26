@@ -44,3 +44,6 @@ next-env.d.ts
 
 # editor
 .vscode
+.cursor/
+.specstory/
+cors.json

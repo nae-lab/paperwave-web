@@ -94,5 +94,13 @@
     "Acknowledgements": "謝辞",
     "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback": "本研究はJSPS科研費 JP22KJ1010と中山未来ファクトリーの助成を受けた．フィールド調査で示唆に富むフィードバックを提供してくださった研究協力者の皆様に感謝する．",
     "Open Source Libraries": "オープンソースライブラリ"
+  },
+  "Transcript": {
+    "Full Transcript": "トランスクリプト（全文）",
+    "Section": "章",
+    "Speaker": "話者",
+    "Loading": "読み込み中...",
+    "Error": "トランスクリプトの取得に失敗しました",
+    "NotAvailable": "トランスクリプトは利用できません"
   }
 }

@@ -152,6 +152,7 @@ export class Episode implements DocumentSnapshotType {
   contentDurationSeconds: number; // in seconds
   chapters: Chapter[];
   transcriptUrl: string;
+  transcriptUrlExpiresAt: string | null;
   playCount: number;
 
   constructor(
@@ -174,6 +175,7 @@ export class Episode implements DocumentSnapshotType {
     this.contentDurationSeconds = options.contentDurationSeconds ?? 0;
     this.chapters = options.chapters ?? [];
     this.transcriptUrl = options.transcriptUrl ?? "";
+    this.transcriptUrlExpiresAt = options.transcriptUrlExpiresAt ?? null;
     this.playCount = options.playCount ?? 0;
   }
 }
@@ -287,4 +289,23 @@ export async function setEpisode(episode: Episode) {
   console.debug("Episode document written with ID: ", docRef.id);
 
   return docRef.id;
+}
+
+// transcript URLを更新
+export async function updateEpisodeTranscriptUrl(
+  episodeId: string,
+  transcriptUrl: string,
+) {
+  const episodeRef = doc(db, COLLECTION_ID, episodeId);
+
+  await setDoc(
+    episodeRef,
+    {
+      transcriptUrl: transcriptUrl,
+      updatedAt: Timestamp.now(),
+    },
+    { merge: true },
+  );
+
+  console.debug("Episode transcript URL updated for ID: ", episodeId);
 }

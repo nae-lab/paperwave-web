@@ -94,5 +94,13 @@
     "Acknowledgements": "Acknowledgements",
     "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback": "This work was supported by JSPS KAKENHI Grant Number JP22KJ1010 and Nakayama Future Factory. We would like to thank the collaborators of the field study and the design workshop for their valuable insights and feedback.",
     "Open Source Libraries": "Open Source Libraries"
+  },
+  "Transcript": {
+    "Full Transcript": "Full Transcript",
+    "Section": "Section",
+    "Speaker": "Speaker",
+    "Loading": "Loading...",
+    "Error": "Failed to fetch transcript",
+    "NotAvailable": "Transcript is not available"
   }
 }
