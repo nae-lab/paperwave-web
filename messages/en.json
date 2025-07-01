@@ -16,7 +16,7 @@
   },
   "Home": {
     "description": "Voicing Papers, Bringing Research to Life.",
-    "error message": "Due to the update of the generative AI model, the recording feature has been unavailable since 6/14. We have fixed the problem and resumed the recording feature by 6/25.",
+    "error message": "The Azure OpenAI is experiencing an outage, causing frequent recording failures. PaperWave cannot fix this issue, so please try again later.",
     "Episodes": "My Episodes",
     "EpisodesDescription": "You can check the list of episodes you have recorded.",
     "Channels": "Channels",
