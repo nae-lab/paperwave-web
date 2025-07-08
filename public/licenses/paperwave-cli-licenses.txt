@@ -319,6 +319,18 @@
 │                                        │                                                                      │ Json Schema Type Builder with Static Type Resolution for TypeScript                            │
 │                                        │                                                                      │ https://github.com/sinclairzx81/typebox#readme                                                 │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @slack/logger                          │ MIT                                                                  │ Slack Technologies, LLC                                                                        │
+│                                        │                                                                      │ Logging utility used by Node Slack SDK                                                         │
+│                                        │                                                                      │ https://slack.dev/node-slack-sdk                                                               │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @slack/types                           │ MIT                                                                  │ Slack Technologies, LLC                                                                        │
+│                                        │                                                                      │ Shared type definitions for the Node Slack SDK                                                 │
+│                                        │                                                                      │ https://slack.dev/node-slack-sdk                                                               │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @slack/web-api                         │ MIT                                                                  │ Slack Technologies, LLC                                                                        │
+│                                        │                                                                      │ Official library for using the Slack Platform's Web API                                        │
+│                                        │                                                                      │ https://tools.slack.dev/node-slack-sdk/web-api                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @supercharge/promise-pool              │ MIT                                                                  │ Marcus Pöhls                                                                                   │
 │                                        │                                                                      │ Map-like, concurrent promise processing for Node.js                                            │
 │                                        │                                                                      │ https://github.com/superchargejs/promise-pool                                                  │
@@ -371,6 +383,9 @@
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @types/request                         │ MIT                                                                  │ TypeScript definitions for request                                                             │
 │                                        │                                                                      │ https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/request                   │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ @types/retry                           │ MIT                                                                  │ TypeScript definitions for retry                                                               │
+│                                        │                                                                      │ https://github.com/DefinitelyTyped/DefinitelyTyped#readme                                      │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ @types/send                            │ MIT                                                                  │ TypeScript definitions for send                                                                │
 │                                        │                                                                      │ https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/send                      │
@@ -442,6 +457,10 @@
 │ avvio                                  │ MIT                                                                  │ Matteo Collina                                                                                 │
 │                                        │                                                                      │ Asynchronous bootstrapping of Node applications                                                │
 │                                        │                                                                      │ https://github.com/fastify/avvio#readme                                                        │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ axios                                  │ MIT                                                                  │ Matt Zabriskie                                                                                 │
+│                                        │                                                                      │ Promise based HTTP client for the browser and node.js                                          │
+│                                        │                                                                      │ https://axios-http.com                                                                         │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ base64-js                              │ MIT                                                                  │ T. Jameson Little                                                                              │
 │                                        │                                                                      │ Base64 encoding/decoding in pure JS                                                            │
@@ -538,6 +557,11 @@
 │                                        │                                                                      │ An implementation of WHATWG EventTarget interface.                                             │
 │                                        │                                                                      │ https://github.com/mysticatea/event-target-shim                                                │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ eventemitter3                          │ MIT                                                                  │ Arnout Kazemier                                                                                │
+│                                        │                                                                      │ EventEmitter3 focuses on performance while maintaining a Node.js AND browser compatible        │
+│                                        │                                                                      │ interface.                                                                                     │
+│                                        │                                                                      │ https://github.com/primus/eventemitter3#readme                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ extend                                 │ MIT                                                                  │ Stefan Thomas                                                                                  │
 │                                        │                                                                      │ Port of jQuery.extend for node.js and the browser                                              │
 │                                        │                                                                      │ https://github.com/justmoon/node-extend#readme                                                 │
@@ -590,6 +614,10 @@
 │ fluent-ffmpeg                          │ MIT                                                                  │ Stefan Schaermeli                                                                              │
 │                                        │                                                                      │ A fluent API to FFMPEG (http://www.ffmpeg.org)                                                 │
 │                                        │                                                                      │ https://github.com/fluent-ffmpeg/node-fluent-ffmpeg#readme                                     │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ follow-redirects                       │ MIT                                                                  │ Ruben Verborgh                                                                                 │
+│                                        │                                                                      │ HTTP and HTTPS modules that follow redirects.                                                  │
+│                                        │                                                                      │ https://github.com/follow-redirects/follow-redirects                                           │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ form-data                              │ MIT                                                                  │ Felix Geisendörfer                                                                             │
 │                                        │                                                                      │ A library to create readable "multipart/form-data" streams. Can be used to submit forms and    │
@@ -675,6 +703,10 @@
 │ ipaddr.js                              │ MIT                                                                  │ whitequark                                                                                     │
 │                                        │                                                                      │ A library for manipulating IPv4 and IPv6 addresses in JavaScript.                              │
 │                                        │                                                                      │ https://github.com/whitequark/ipaddr.js#readme                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ is-electron                            │ MIT                                                                  │ Cheton Wu                                                                                      │
+│                                        │                                                                      │ Detect if running in Electron.                                                                 │
+│                                        │                                                                      │ https://github.com/cheton/is-electron                                                          │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ is-fullwidth-code-point                │ MIT                                                                  │ Sindre Sorhus                                                                                  │
 │                                        │                                                                      │ Check if the character represented by a given Unicode code point is fullwidth                  │
@@ -824,9 +856,24 @@
 │                                        │                                                                      │ Ensure a function is only called once                                                          │
 │                                        │                                                                      │ https://github.com/sindresorhus/onetime#readme                                                 │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ p-finally                              │ MIT                                                                  │ Sindre Sorhus                                                                                  │
+│                                        │                                                                      │ `Promise#finally()` ponyfill - Invoked when the promise is settled regardless of outcome       │
+│                                        │                                                                      │ https://github.com/sindresorhus/p-finally#readme                                               │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ p-limit                                │ MIT                                                                  │ Sindre Sorhus                                                                                  │
 │                                        │                                                                      │ Run multiple promise-returning & async functions with limited concurrency                      │
 │                                        │                                                                      │ https://github.com/sindresorhus/p-limit#readme                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ p-queue                                │ MIT                                                                  │ Promise queue with concurrency control                                                         │
+│                                        │                                                                      │ https://github.com/sindresorhus/p-queue#readme                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ p-retry                                │ MIT                                                                  │ Sindre Sorhus                                                                                  │
+│                                        │                                                                      │ Retry a promise-returning or async function                                                    │
+│                                        │                                                                      │ https://github.com/sindresorhus/p-retry#readme                                                 │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ p-timeout                              │ MIT                                                                  │ Sindre Sorhus                                                                                  │
+│                                        │                                                                      │ Timeout a promise after a specified amount of time                                             │
+│                                        │                                                                      │ https://github.com/sindresorhus/p-timeout#readme                                               │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ pino                                   │ MIT                                                                  │ Matteo Collina                                                                                 │
 │                                        │                                                                      │ super fast, all natural json logger                                                            │
@@ -847,6 +894,11 @@
 │ proxy-addr                             │ MIT                                                                  │ Douglas Christopher Wilson                                                                     │
 │                                        │                                                                      │ Determine address of proxied request                                                           │
 │                                        │                                                                      │ https://github.com/jshttp/proxy-addr#readme                                                    │
+├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ proxy-from-env                         │ MIT                                                                  │ Rob Wu                                                                                         │
+│                                        │                                                                      │ Offers getProxyForUrl to get the proxy URL for a URL, respecting the *_PROXY (e.g. HTTP_PROXY) │
+│                                        │                                                                      │ and NO_PROXY environment variables.                                                            │
+│                                        │                                                                      │ https://github.com/Rob--W/proxy-from-env#readme                                                │
 ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ quick-format-unescaped                 │ MIT                                                                  │ David Mark Clements                                                                            │
 │                                        │                                                                      │ Solves a problem with util.format                                                              │

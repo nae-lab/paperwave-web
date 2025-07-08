@@ -73,7 +73,7 @@ export default function RecordingPage() {
   const [episodeTitle, setEpisodeTitle] = React.useState("");
   const [episodeDuration, setEpisodeDuration] = React.useState("15");
   const [episodeLanguage, setEpisodeLanguage] = React.useState(locale);
-  const [llmModel, setLLMModel] = React.useState("o1");
+  const [llmModel, setLLMModel] = React.useState("gpt-4o");
   const [episodeDescription, setEpisodeDescription] = React.useState("");
   const [episodeKeywords, setEpisodeKeywords] = React.useState("");
   const [episodeCoverImageURL, setEpisodeCoverImageURL] = React.useState("");
@@ -411,7 +411,7 @@ export default function RecordingPage() {
               selectionMode="single"
               variant="flat"
               onSelectionChange={(selected) => {
-                setLLMModel(selected.currentKey || "o1");
+                setLLMModel(selected.currentKey || "gpt-4o");
               }}
             >
               <DropdownItem key="gpt-4.1">{"gpt-4.1"}</DropdownItem>
